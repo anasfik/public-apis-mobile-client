@@ -10,7 +10,7 @@ class AppPages {
 
   static const INITIAL = Routes.HOME;
 
-  static final routes = [
+  static final routes = <GetPage>[
     GetPage(
       name: _Paths.HOME,
       page: () => HomeView(),
