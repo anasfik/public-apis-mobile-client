@@ -1,20 +1,19 @@
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
 class HomeController extends GetxController {
-  //TODO: Implement HomeController
+  // Variables
+  String _url =
+      "https://raw.githubusercontent.com/anasfik/public-apis-json-api/main/result/apis.json";
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  Future<String?> getJsonData() async {
+    dynamic response = await http.get(
+      Uri.parse(_url),
+    );
+    if (response.statusCode == 200) {
+      return response.body;
+    }
+
+    // TODO: handle other exceptions
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {}
-  void increment() => count.value++;
 }
