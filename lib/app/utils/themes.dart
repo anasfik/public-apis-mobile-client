@@ -22,7 +22,12 @@ class AppThemes {
           color: Colors.white,
           fontSize: 18,
         ),
+      bodyText2: TextStyle(
+          color: Colors.white,
+          fontSize: 13,
+        ),
       ),
+      
       colorScheme: ColorScheme.light(
         primary: AppColors.purple,
       ));

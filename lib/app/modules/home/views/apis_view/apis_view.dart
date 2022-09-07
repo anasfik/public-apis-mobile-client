@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:public_apis_desktop_client/app/modules/home/views/apis_view/widgets/api_card.dart';
 
 import '../../../../data/models/AllApis.dart';
 import '../../controllers/apis_view_controller.dart';
@@ -23,20 +24,18 @@ class ApisView extends GetView<ApisViewController> {
         ),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-AutoSizeText(""),
-              
-              ...List.generate(
-                apis.length,
-                (index) => Text(
-                  apis[index].name,
-                  style: Theme.of(context).textTheme.headline5,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                ...List.generate(
+                  apis.length,
+                  (index) => ApiCard(apiInformation: apis[index]),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ));
   }
