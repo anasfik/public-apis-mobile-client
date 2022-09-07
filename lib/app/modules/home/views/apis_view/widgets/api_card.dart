@@ -1,7 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:public_apis_desktop_client/app/modules/home/views/apis_view/widgets/api_open_link_button.dart';
 
 import '../../../../../data/models/AllApis.dart';
+import 'apiChip.dart';
 
 class ApiCard extends StatelessWidget {
   const ApiCard({
@@ -33,17 +35,7 @@ class ApiCard extends StatelessWidget {
                     ),
                 maxLines: 1,
               ),
-              MaterialButton(
-                height: 30,
-                minWidth: 60,
-                color: Theme.of(context).primaryColor,
-                onPressed: () {},
-                splashColor: Colors.white,
-                child: Text(
-                  'Open',
-                  style: Theme.of(context).textTheme.bodyText2,
-                ),
-              ),
+              ApiButton(link: apiInformation.link),
             ],
           ),
           const SizedBox(
@@ -56,6 +48,43 @@ class ApiCard extends StatelessWidget {
                   fontWeight: FontWeight.w300,
                   letterSpacing: 1.2,
                 ),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              if (apiInformation.auth.toLowerCase() != "no") ...[
+                ApiChip(
+                  text: apiInformation.auth,
+                ),
+              ],
+              const SizedBox(
+                width: 5,
+              ),
+              if (apiInformation.https.toLowerCase() == "yes") ...[
+                const ApiChip(
+                  text: "https",
+                ),
+              ] else ...[
+                const ApiChip(
+                  text: "http",
+                ),
+              ],
+              const SizedBox(
+                width: 5,
+              ),
+              if (apiInformation.cors.toLowerCase() == "yes") ...[
+                const ApiChip(
+                  text: "cors",
+                ),
+              ] else if (apiInformation.cors.toLowerCase() == "unknown") ...[
+                const ApiChip(
+                  text: "unknown",
+                ),
+              ],
+            ],
           ),
         ],
       ),

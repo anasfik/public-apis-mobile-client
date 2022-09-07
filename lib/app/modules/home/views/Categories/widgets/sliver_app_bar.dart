@@ -11,7 +11,7 @@ class CustomSliverAppBar extends StatelessWidget {
     return SliverAppBar(
       pinned: true,
       backgroundColor: AppColors.purple,
-      
+      automaticallyImplyLeading: true,
       expandedHeight: 150,
       actions: [
         IconButton(

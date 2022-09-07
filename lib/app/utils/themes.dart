@@ -22,9 +22,10 @@ class AppThemes {
           color: Colors.white,
           fontSize: 18,
         ),
-      bodyText2: TextStyle(
+      bodyText2: const TextStyle(
           color: Colors.white,
           fontSize: 13,
+          
         ),
       ),
       
