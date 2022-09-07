@@ -19,10 +19,13 @@ class HomeCategoriesPage extends GetView<HomeController> {
           CustomSliverAppBar(),
           SliverToBoxAdapter(
             child: SizedBox(
-              height: 20,
+              height: 5,
             ),
           ),
-          CustomSliverGrid(),
+          SliverPadding(
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            sliver: CustomSliverGrid(),
+          ),
         ],
       ),
     );

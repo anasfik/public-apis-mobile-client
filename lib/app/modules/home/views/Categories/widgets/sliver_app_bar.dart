@@ -9,12 +9,10 @@ class CustomSliverAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      titleTextStyle: Theme.of(context).textTheme.headline2!.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
       pinned: true,
       backgroundColor: AppColors.purple,
-      expandedHeight: 120,
+      
+      expandedHeight: 150,
       actions: [
         IconButton(
           onPressed: () {},

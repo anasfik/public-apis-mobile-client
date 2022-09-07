@@ -8,9 +8,10 @@ import 'app/routes/app_pages.dart';
 void main() {
   runApp(
     GetMaterialApp(
+      useInheritedMediaQuery: true,
       debugShowCheckedModeBanner: false,
       title: "Application",
-      initialRoute: AppPages.homeCategoriesPage,
+      initialRoute: AppPages.homeCategoriesView,
       getPages: AppPages.routes,
       theme: AppThemes.lightTheme,
     ),

@@ -9,7 +9,7 @@ class RemoteService {
       "https://raw.githubusercontent.com/anasfik/public-apis-json-api/main/result/apis.json";
 
   // fetch Method
-  static getData() async {
+  static Future<List<CategoryApis>> getData() async {
     try {
       final response = await http.get(Uri.parse(_url));
       if (response.statusCode == 200) {
@@ -20,7 +20,8 @@ class RemoteService {
     }
     // TODO: handle other errors
     catch (e) {
-      print(e);
+      // print(e);
     }
+    return [];
   }
 }
