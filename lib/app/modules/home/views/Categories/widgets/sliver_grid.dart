@@ -1,8 +1,12 @@
+import 'dart:math';
+
+import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:public_apis_desktop_client/app/services/remote_service.dart';
 
 import '../../../../../data/models/AllApis.dart';
+import '../../../../../utils/delay_helper.dart';
 import '../../../controllers/home_controller.dart';
 import '../../widgets/nil.dart';
 import 'CategoryBox.dart';
@@ -20,7 +24,10 @@ class CustomSliverGrid extends GetView<HomeController> {
             child: Container(
               height: MediaQuery.of(context).size.height -
                   MediaQuery.of(context).padding.top -
-                  140,
+                  140 -
+                  5 -
+                  30 -
+                  50,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
@@ -34,7 +41,9 @@ class CustomSliverGrid extends GetView<HomeController> {
         }
 
         if (snapshot.hasError) {
-          return const SliverToBoxAdapter(child: Text("Error"));
+          return const SliverToBoxAdapter(
+            child: Text("Error"),
+          );
         }
 
         if (snapshot.hasData) {
@@ -57,12 +66,17 @@ class CustomSliverGrid extends GetView<HomeController> {
                 children: [
                   ...List.generate(
                     result2.length,
-                    (index) => CategoryBox(
-                      dataList: {
-                        "title": result2[index].title,
-                        "image": "assets/categoriesImages/animals.jpg",
-                      },
-                      apis: result2[index].apis,
+                    (index) => DelayedDisplay(
+                      delay: DurationDelayHelper.delay(
+                        delayDifference: 50 * Random().nextInt(15).floor(),
+                      ),
+                      child: CategoryBox(
+                        dataList: {
+                          "title": result2[index].title,
+                          "image": "assets/categoriesImages/animals.jpg",
+                        },
+                        apis: result2[index].apis,
+                      ),
                     ),
                   )
                 ],

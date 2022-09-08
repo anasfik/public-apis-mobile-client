@@ -79,7 +79,7 @@ class ApiCard extends GetWidget<FavoritesController> {
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(100),
                                   ),
-                                  duration: Duration(milliseconds: 200),
+                                  duration: const Duration(milliseconds: 50),
                                   height: isFavorite ? 30 : 0,
                                   width: isFavorite ? 30 : 0,
                                 ),
