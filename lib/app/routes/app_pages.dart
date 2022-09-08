@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
-import 'package:public_apis_desktop_client/app/modules/home/views/apis_view/apis_view.dart';
+import 'package:public_apis_desktop_client/app/modules/home/bindings/favorites_view_binding.dart';
+import 'package:public_apis_desktop_client/app/modules/home/views/favorites_view/favorites_view.dart';
 
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/Categories/home_categories_view.dart';
@@ -17,6 +18,10 @@ class AppPages {
       page: () => const HomeCategoriesPage(),
       binding: HomeCategoriesPageBinding(),
     ),
-     
+    GetPage(
+      name: _Paths.favoritesViewPath,
+      page: () => const FavoritesView(),
+      binding: FavoritesViewBinding(),
+    ),
   ];
 }

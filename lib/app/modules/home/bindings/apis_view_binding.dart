@@ -6,5 +6,6 @@ class ApisViewBinding implements Bindings {
   @override
   void dependencies() {
     Get.put<ApisViewController>(ApisViewController());
+    
   }
 }

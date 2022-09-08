@@ -32,7 +32,9 @@ class ApisView extends GetView<ApisViewController> {
               children: [
                 ...List.generate(
                   apis.length,
-                  (index) => ApiCard(apiInformation: apis[index]),
+                  (index) => ApiCard(
+                    apiInformation: apis[index],
+                  ),
                 ),
               ],
             ),

@@ -5,10 +5,12 @@ abstract class Routes {
   Routes._();
   static const homeCategoriesView = _Paths.homeCategoriesPagePath;
   static const apisView = _Paths.apisViewPath;
+  static const favoritesView = _Paths.favoritesViewPath;
 }
 
 abstract class _Paths {
   _Paths._();
   static const homeCategoriesPagePath = '/homeCategoriesPage';
   static const apisViewPath = '/apisViewPath';
+  static const favoritesViewPath = '/favorites';
 }

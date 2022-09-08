@@ -1,17 +1,21 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:public_apis_desktop_client/app/modules/home/controllers/favorites_controller.dart';
 import 'package:public_apis_desktop_client/app/modules/home/views/apis_view/widgets/api_open_link_button.dart';
 
 import '../../../../../data/models/AllApis.dart';
 import 'apiChip.dart';
 
-class ApiCard extends StatelessWidget {
-  const ApiCard({
+class ApiCard extends GetWidget<FavoritesController> {
+  ApiCard({
     Key? key,
     required this.apiInformation,
+    this.isFavorite = false,
   }) : super(key: key);
 
   final Api apiInformation;
+  bool isFavorite;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,7 +39,72 @@ class ApiCard extends StatelessWidget {
                     ),
                 maxLines: 1,
               ),
-              ApiButton(link: apiInformation.link),
+              Row(
+                children: [
+                  GetBuilder<FavoritesController>(
+                    init: FavoritesController(),
+                    global: false,
+                    id: apiInformation.name,
+                    builder: (controller) {
+                      return GestureDetector(
+                        onTap: () {
+                          isFavorite = !isFavorite;
+                          controller.toggleFavoriteStatus(
+                            isFavorite: isFavorite,
+                            name: apiInformation.name,
+                            category: "excat",
+                            description: apiInformation.description,
+                            auth: apiInformation.auth,
+                            https: apiInformation.https,
+                            cors: apiInformation.cors,
+                            link: apiInformation.link,
+                          );
+                          print(
+                            controller.writeBoxElementsTitle(),
+                          );
+                        },
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(100),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(200),
+                            ),
+                            height: 30,
+                            width: 30,
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                AnimatedContainer(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(100),
+                                  ),
+                                  duration: Duration(milliseconds: 200),
+                                  height: isFavorite ? 30 : 0,
+                                  width: isFavorite ? 30 : 0,
+                                ),
+                                Icon(
+                                  Icons.bookmark,
+                                  color: isFavorite
+                                      ? Theme.of(context).primaryColor
+                                      : Colors.grey,
+                                  size: 22,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  ApiButton(
+                    link: apiInformation.link,
+                  ),
+                ],
+              ),
             ],
           ),
           const SizedBox(
