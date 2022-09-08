@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:public_apis_desktop_client/app/modules/home/views/apis_view/apis_view.dart';
 
-import '../modules/home/bindings/apis_view_binding.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/Categories/home_categories_view.dart';
 
@@ -15,7 +14,7 @@ class AppPages {
   static final routes = <GetPage>[
     GetPage(
       name: _Paths.homeCategoriesPagePath,
-      page: () => HomeCategoriesPage(),
+      page: () => const HomeCategoriesPage(),
       binding: HomeCategoriesPageBinding(),
     ),
      

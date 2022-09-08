@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../../utils/colors/colors.dart';
 import '../../../../../utils/text_helper_methods.dart';
+import '../../../controllers/home_controller.dart';
+import 'search_bar.dart';
 
-class CustomSliverAppBar extends StatelessWidget {
+class CustomSliverAppBar extends GetView<HomeController> {
   const CustomSliverAppBar({super.key});
 
   @override
@@ -12,15 +15,22 @@ class CustomSliverAppBar extends StatelessWidget {
       pinned: true,
       backgroundColor: AppColors.purple,
       automaticallyImplyLeading: true,
-      expandedHeight: 150,
+      expandedHeight: 140,
       actions: [
         IconButton(
           onPressed: () {},
-          icon: const Icon(Icons.search),
+          icon: const Icon(
+            Icons.bookmarks,
+          ),
+        ),
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(
+            Icons.settings,
+          ),
         ),
       ],
       flexibleSpace: FlexibleSpaceBar(
-        centerTitle: true,
         titlePadding: const EdgeInsets.all(20),
         expandedTitleScale: 1.5,
         title: Text(

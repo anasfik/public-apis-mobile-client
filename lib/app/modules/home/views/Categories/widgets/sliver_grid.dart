@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:public_apis_desktop_client/app/services/remote_service.dart';
 
 import '../../../../../data/models/AllApis.dart';
+import '../../../controllers/home_controller.dart';
 import '../../widgets/nil.dart';
 import 'CategoryBox.dart';
 
-class CustomSliverGrid extends StatelessWidget {
+class CustomSliverGrid extends GetView<HomeController> {
   const CustomSliverGrid({super.key});
 
   @override
@@ -14,9 +16,19 @@ class CustomSliverGrid extends StatelessWidget {
       future: RemoteService.getData(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const SliverToBoxAdapter(
-            child: const Center(
-              child: CircularProgressIndicator(),
+          return SliverToBoxAdapter(
+            child: Container(
+              height: MediaQuery.of(context).size.height -
+                  MediaQuery.of(context).padding.top -
+                  140,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ],
+              ),
             ),
           );
         }
@@ -26,25 +38,36 @@ class CustomSliverGrid extends StatelessWidget {
         }
 
         if (snapshot.hasData) {
-          List<CategoryApis> result = snapshot.data;
+          List<CategoryApis> result = snapshot.data as List<CategoryApis>;
 
-          return SliverGrid.count(
-            crossAxisCount: 2,
-            childAspectRatio: 1.8,
-            crossAxisSpacing: 15,
-            mainAxisSpacing: 15,
-            children: [
-              ...List.generate(
-                result.length,
-                (index) => CategoryBox(
-                  dataList: {
-                    "title": result[index].title,
-                    "image": "assets/categoriesImages/animals.jpg",
-                  },
-                  apis: result[index].apis,
-                ),
-              )
-            ],
+          return GetBuilder<HomeController>(
+            builder: (controller) {
+              List<CategoryApis> result2 = result
+                  .where(
+                    (e) => e.title.toLowerCase().startsWith(
+                          controller.searchInputController.text.toLowerCase(),
+                        ),
+                  )
+                  .toList();
+              return SliverGrid.count(
+                crossAxisCount: 2,
+                childAspectRatio: 1.8,
+                crossAxisSpacing: 15,
+                mainAxisSpacing: 15,
+                children: [
+                  ...List.generate(
+                    result2.length,
+                    (index) => CategoryBox(
+                      dataList: {
+                        "title": result2[index].title,
+                        "image": "assets/categoriesImages/animals.jpg",
+                      },
+                      apis: result2[index].apis,
+                    ),
+                  )
+                ],
+              );
+            },
           );
         }
         return const SliverToBoxAdapter(child: Nil());

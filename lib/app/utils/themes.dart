@@ -22,14 +22,15 @@ class AppThemes {
           color: Colors.white,
           fontSize: 18,
         ),
-      bodyText2: const TextStyle(
+        bodyText2: const TextStyle(
           color: Colors.white,
           fontSize: 13,
-          
         ),
       ),
-      
       colorScheme: ColorScheme.light(
         primary: AppColors.purple,
-      ));
+        secondary: AppColors.purple,
+      ),
+
+      );
 }

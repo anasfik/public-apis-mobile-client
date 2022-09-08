@@ -4,7 +4,7 @@ part of 'app_pages.dart';
 abstract class Routes {
   Routes._();
   static const homeCategoriesView = _Paths.homeCategoriesPagePath;
-  static const apisView = _Paths.homeCategoriesPagePath;
+  static const apisView = _Paths.apisViewPath;
 }
 
 abstract class _Paths {
