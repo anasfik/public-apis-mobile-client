@@ -66,17 +66,12 @@ class CustomSliverGrid extends GetView<HomeController> {
                 children: [
                   ...List.generate(
                     result2.length,
-                    (index) => DelayedDisplay(
-                      delay: DurationDelayHelper.delay(
-                        delayDifference: 50 * Random().nextInt(15).floor(),
-                      ),
-                      child: CategoryBox(
-                        dataList: {
-                          "title": result2[index].title,
-                          "image": "assets/categoriesImages/animals.jpg",
-                        },
-                        apis: result2[index].apis,
-                      ),
+                    (index) => CategoryBox(
+                      dataList: {
+                        "title": result2[index].title,
+                        "image": "assets/categoriesImages/animals.jpg",
+                      },
+                      apis: result2[index].apis,
                     ),
                   )
                 ],

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:public_apis_desktop_client/app/data/models/favoriteApi.dart';
+import 'package:public_apis_desktop_client/app/modules/home/views/apis_view/widgets/api_card.dart';
 
 import '../../controllers/favorites_controller.dart';
+import 'widgets/favorite_api_card.dart';
 
 class FavoritesView extends GetView<FavoritesController> {
   const FavoritesView({super.key});
@@ -10,20 +14,30 @@ class FavoritesView extends GetView<FavoritesController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text("Bookmarks"),
+      ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              // ...List.generate(
-              //   apis.length,
-              //   (index) => FavoriteApi(),
-              // ),
-            ],
+          child: ValueListenableBuilder(
+            valueListenable: Hive.box("favorites").listenable(),
+            builder: (BuildContext context, Box box, child) {
+              List favoriteApis = box.values.toList();
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  ...List.generate(
+                    box.values.toList().length,
+                    (index) => FavoriteApiCard(
+                      apiInformation: favoriteApis[index],
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
         ),
       ),

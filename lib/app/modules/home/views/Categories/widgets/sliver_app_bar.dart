@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../../../../utils/colors/colors.dart';
 import '../../../../../utils/text_helper_methods.dart';
 import '../../../controllers/home_controller.dart';
+import 'bookmark_page_icon.dart';
 import 'search_bar.dart';
 
 class CustomSliverAppBar extends GetView<HomeController> {
@@ -17,12 +18,7 @@ class CustomSliverAppBar extends GetView<HomeController> {
       automaticallyImplyLeading: true,
       expandedHeight: 140,
       actions: [
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.bookmarks,
-          ),
-        ),
+        BookmarkPageIcon(),
         IconButton(
           onPressed: () {},
           icon: const Icon(

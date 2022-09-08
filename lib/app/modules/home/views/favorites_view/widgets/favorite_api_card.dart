@@ -1,20 +1,21 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:public_apis_desktop_client/app/data/models/favoriteApi.dart';
 import 'package:public_apis_desktop_client/app/modules/home/controllers/favorites_controller.dart';
 import 'package:public_apis_desktop_client/app/modules/home/views/apis_view/widgets/api_open_link_button.dart';
 
 import '../../../../../data/models/AllApis.dart';
-import 'apiChip.dart';
+import '../../apis_view/widgets/apiChip.dart';
 
-class ApiCard extends GetWidget<FavoritesController> {
-  ApiCard({
+class FavoriteApiCard extends GetWidget<FavoritesController> {
+  FavoriteApiCard({
     Key? key,
     required this.apiInformation,
     this.isFavorite = false,
   }) : super(key: key);
 
-  final Api apiInformation;
+  final FavoriteApi apiInformation;
   bool isFavorite;
   @override
   Widget build(BuildContext context) {
@@ -47,62 +48,6 @@ class ApiCard extends GetWidget<FavoritesController> {
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  GetBuilder<FavoritesController>(
-                    init: FavoritesController(),
-                    global: false,
-                    id: apiInformation.name,
-                    builder: (controller) {
-                      return GestureDetector(
-                        onTap: () {
-                          isFavorite = !isFavorite;
-                          controller.toggleFavoriteStatus(
-                            isFavorite: isFavorite,
-                            name: apiInformation.name,
-                            category: "excat",
-                            description: apiInformation.description,
-                            auth: apiInformation.auth,
-                            https: apiInformation.https,
-                            cors: apiInformation.cors,
-                            link: apiInformation.link,
-                          );
-                          print(
-                            controller.writeBoxElementsTitle(),
-                          );
-                        },
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(100),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(200),
-                            ),
-                            height: 30,
-                            width: 30,
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                AnimatedContainer(
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(100),
-                                  ),
-                                  duration: const Duration(milliseconds: 50),
-                                  height: isFavorite ? 30 : 0,
-                                  width: isFavorite ? 30 : 0,
-                                ),
-                                Icon(
-                                  Icons.bookmark,
-                                  color: isFavorite
-                                      ? Theme.of(context).primaryColor
-                                      : Colors.grey,
-                                  size: 22,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
                   const SizedBox(
                     width: 5,
                   ),
