@@ -44,10 +44,7 @@ class SettingsView extends GetView<SettingsController> {
                           settingOption: controller.settings[index],
                         );
                       },
-                      body: Container(
-                        color: Colors.blue,
-                        child: Text("fvf"),
-                      ),
+                      body: controller.settings[index].settingsWidget,
                       isExpanded: controller.isOpenedList[index],
                     ),
                   ),

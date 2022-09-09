@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:public_apis_desktop_client/app/data/models/setting_option_model.dart';
 
+import '../../views/settings_view/widgets/settings_widgets/toggle_categories_view.dart';
+
 class SettingsController extends GetxController {
   SettingsController() {
     settings = [
@@ -9,11 +11,13 @@ class SettingsController extends GetxController {
         title: "categories view",
         icon: Icons.grid_view,
         optionFunction: () {},
+        settingsWidget: ToggleCategoriesView(),
       ),
       SettingOptionModel(
         title: "categories view",
         icon: Icons.grid_view,
         optionFunction: () {},
+        settingsWidget: ToggleCategoriesView(),
       )
     ];
   }
