@@ -27,6 +27,7 @@ class CategoryBox extends GetView<HomeController> {
       openBuilder: (context, function) => ApisView(
         apis: apis,
         category: dataList["title"]!,
+      
       ),
       closedBuilder: (context, widgetFunction) => ClipRRect(
         borderRadius: BorderRadius.circular(10),

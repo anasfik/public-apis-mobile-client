@@ -5,7 +5,7 @@ import 'package:public_apis_desktop_client/app/modules/home/controllers/favorite
 import 'package:public_apis_desktop_client/app/modules/home/views/apis_view/widgets/api_open_link_button.dart';
 
 import '../../../../../data/models/AllApis.dart';
-import 'apiChip.dart';
+import 'api_chip.dart';
 
 class ApiCard extends GetWidget<FavoritesController> {
   ApiCard({

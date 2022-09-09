@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
+import 'package:public_apis_desktop_client/app/modules/home/bindings/apis_view_binding.dart';
 import 'package:public_apis_desktop_client/app/modules/home/bindings/favorites_view_binding.dart';
+import 'package:public_apis_desktop_client/app/modules/home/views/apis_view/apis_view.dart';
 import 'package:public_apis_desktop_client/app/modules/home/views/favorites_view/favorites_view.dart';
 
 import '../modules/home/bindings/home_binding.dart';
