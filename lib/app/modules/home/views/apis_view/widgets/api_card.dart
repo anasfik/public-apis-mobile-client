@@ -11,11 +11,13 @@ class ApiCard extends GetWidget<FavoritesController> {
   ApiCard({
     Key? key,
     required this.apiInformation,
+    required this.category,
     this.isFavorite = false,
   }) : super(key: key);
 
   final Api apiInformation;
   bool isFavorite;
+  final String category;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -58,7 +60,7 @@ class ApiCard extends GetWidget<FavoritesController> {
                           controller.toggleFavoriteStatus(
                             isFavorite: isFavorite,
                             name: apiInformation.name,
-                            category: "",
+                            category: category,
                             description: apiInformation.description,
                             auth: apiInformation.auth,
                             https: apiInformation.https,

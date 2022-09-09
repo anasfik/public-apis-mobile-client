@@ -34,6 +34,7 @@ class ApisView extends GetView<ApisViewController> {
                   apis.length,
                   (index) => ApiCard(
                     apiInformation: apis[index],
+                    category: category,
                   ),
                 ),
               ],
