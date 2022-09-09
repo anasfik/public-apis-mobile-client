@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:public_apis_desktop_client/app/modules/home/views/Categories/widgets/settings_page_icon.dart';
+import 'package:public_apis_desktop_client/app/modules/home/views/categories_view/widgets/settings_page_icon.dart';
 
 import '../../../../../utils/colors/colors.dart';
 import '../../../../../utils/text_helper_methods.dart';
 import '../../../controllers/home_controller.dart';
 import 'bookmark_page_icon.dart';
-import 'search_bar.dart';
 
 class CustomSliverAppBar extends GetView<HomeController> {
-  const CustomSliverAppBar({super.key});
+  const CustomSliverAppBar({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,27 +1,26 @@
-import 'dart:math';
-
-import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:public_apis_desktop_client/app/services/remote_service.dart';
 
 import '../../../../../data/models/AllApis.dart';
-import '../../../../../utils/delay_helper.dart';
 import '../../../controllers/home_controller.dart';
 import '../../widgets/nil.dart';
-import 'CategoryBox.dart';
+import 'category_box.dart';
 
 class CustomSliverGrid extends GetView<HomeController> {
-  const CustomSliverGrid({super.key});
+  const CustomSliverGrid({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: RemoteService.getData(),
+      key: const ValueKey("futureBuilder Key"),
+      future: controller.getAllApisData,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SliverToBoxAdapter(
-            child: Container(
+            child: SizedBox(
               height: MediaQuery.of(context).size.height -
                   MediaQuery.of(context).padding.top -
                   140 -

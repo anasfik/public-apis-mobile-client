@@ -3,7 +3,7 @@ import 'package:public_apis_desktop_client/app/modules/home/bindings/favorites_v
 import 'package:public_apis_desktop_client/app/modules/home/views/favorites_view/favorites_view.dart';
 
 import '../modules/home/bindings/home_binding.dart';
-import '../modules/home/views/Categories/home_categories_view.dart';
+import '../modules/home/views/categories_view/home_categories_view.dart';
 
 part 'app_routes.dart';
 

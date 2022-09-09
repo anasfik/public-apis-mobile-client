@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 
 class SettingsPageIcon extends StatelessWidget {
-  const SettingsPageIcon({super.key});
+  const SettingsPageIcon({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      onPressed: () {},
+      onPressed: () {
+        
+      },
       icon: const Icon(
         Icons.settings,
       ),
