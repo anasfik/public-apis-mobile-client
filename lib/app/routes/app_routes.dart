@@ -6,6 +6,7 @@ abstract class Routes {
   static const homeCategoriesView = _Paths.homeCategoriesPagePath;
   static const apisView = _Paths.apisViewPath;
   static const favoritesView = _Paths.favoritesViewPath;
+  static const settingsView = _Paths.settingsViewPath;
 }
 
 abstract class _Paths {
@@ -13,4 +14,5 @@ abstract class _Paths {
   static const homeCategoriesPagePath = '/home';
   static const apisViewPath = '/apis';
   static const favoritesViewPath = '/favorites';
+  static const settingsViewPath = '/settings';
 }

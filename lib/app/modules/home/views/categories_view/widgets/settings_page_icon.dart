@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SettingsPageIcon extends StatelessWidget {
   const SettingsPageIcon({
@@ -9,7 +10,7 @@ class SettingsPageIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () {
-        
+        Get.toNamed("/settings");
       },
       icon: const Icon(
         Icons.settings,
