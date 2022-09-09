@@ -58,15 +58,12 @@ class ApiCard extends GetWidget<FavoritesController> {
                           controller.toggleFavoriteStatus(
                             isFavorite: isFavorite,
                             name: apiInformation.name,
-                            category: "excat",
+                            category: "",
                             description: apiInformation.description,
                             auth: apiInformation.auth,
                             https: apiInformation.https,
                             cors: apiInformation.cors,
                             link: apiInformation.link,
-                          );
-                          print(
-                            controller.writeBoxElementsTitle(),
                           );
                         },
                         child: ClipRRect(

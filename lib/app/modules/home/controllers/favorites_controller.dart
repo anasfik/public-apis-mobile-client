@@ -4,18 +4,23 @@ import 'package:hive/hive.dart';
 import '../../../data/models/favoriteApi.dart';
 
 class FavoritesController extends GetxController {
+  // ! Variables
+
+  // Get favorites box
   Box favoritesBox = Hive.box("favorites");
 
-// !  Test
-  List<String> writeBoxElementsTitle() {
-    return favoritesBox.values
-        .map(
-          (e) => e.name.toString(),
-        )
-        .toList();
-  }
+// // !  Test
+// // TODO: remove on release
+//   List<String> writeBoxElementsTitle() {
+//     return favoritesBox.values
+//         .map(
+//           (e) => e.name.toString(),
+//         )
+//         .toList();
+//   }
 
-  toggleFavoriteStatus({
+  // Add/Remove favorite api from favorites box
+  void toggleFavoriteStatus({
     required bool isFavorite,
     required String name,
     required String category,
@@ -25,8 +30,9 @@ class FavoritesController extends GetxController {
     required String cors,
     required String link,
   }) {
+    // When api is found in the box (isFavorite = true)), then remove it and quit
     if (favoritesBox.get("$category$name") != null) {
-      removeFromFavorites(
+      _removeFromFavorites(
         isFavorite: isFavorite,
         category: category,
         name: name,
@@ -34,7 +40,8 @@ class FavoritesController extends GetxController {
       return;
     }
 
-    addToFavoritesList(
+    // else (isFavorite = false), then add it to the box
+    _addToFavoritesList(
       isFavorite: isFavorite,
       name: name,
       category: category,
@@ -46,7 +53,9 @@ class FavoritesController extends GetxController {
     );
   }
 
-  void addToFavoritesList({
+
+  // Add api to favoritesBox
+  void _addToFavoritesList({
     required bool isFavorite,
     required String name,
     required String category,
@@ -56,6 +65,7 @@ class FavoritesController extends GetxController {
     required String cors,
     required String link,
   }) {
+    
     if (favoritesBox.get("$category$name") == null) {
       favoritesBox.put(
         "$category$name",
@@ -71,10 +81,13 @@ class FavoritesController extends GetxController {
       );
       isFavorite = true;
     }
+    // update the GetBuilder of the widget with the name id
     update([name]);
   }
 
-  void removeFromFavorites({
+
+  // Remove api from favoritesBox
+  void _removeFromFavorites({
     required bool isFavorite,
     required String category,
     required String name,

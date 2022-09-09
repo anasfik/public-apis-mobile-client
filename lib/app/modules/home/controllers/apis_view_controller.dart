@@ -3,14 +3,14 @@ import 'package:url_launcher/url_launcher.dart';
 
 
 class ApisViewController extends GetxController {
-  // launch links method
+  // Launch links method
   Future<void> launchLink(String link) async {
-    // get parsed link
+    // Get parsed link
     final Uri parsedLink = Uri.parse(link);
 
-    // check if link is valid
+    // Check if link is valid
     if (await canLaunchUrl(parsedLink)) {
-      // then launch
+      // Then launch
       await launchUrl(
         parsedLink,
         mode: LaunchMode.externalApplication,
