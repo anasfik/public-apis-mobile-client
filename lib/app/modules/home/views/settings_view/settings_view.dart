@@ -27,6 +27,14 @@ class SettingsView extends GetView<SettingsController> {
                 dividerColor: Colors.transparent,
                 elevation: 0,
                 expansionCallback: (int index, bool isExpanded) {
+                  controller.settings[index].optionFunction();
+
+                  if (controller.settings[index].title
+                      .toLowerCase()
+                      .contains("reset")) {
+                    return;
+                  }
+
                   controller.toggleExpansionTile(
                     index: index,
                     isExpanded: isExpanded,

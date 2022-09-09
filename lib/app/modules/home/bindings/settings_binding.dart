@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 import '../controllers/settings_controllers/settings_controller.dart';
 import '../controllers/settings_controllers/sub_settings/category_box__setting_controller.dart';
+import '../controllers/settings_controllers/sub_settings/reset_favorites_setting.dart';
 
 class SettingsBinding implements Bindings {
   @override
@@ -10,5 +11,8 @@ class SettingsBinding implements Bindings {
       SettingsController(),
     );
     Get.lazyPut<ToggleCategoriesController>(() => ToggleCategoriesController());
+    Get.lazyPut<ResetFavoritesController>(() => ResetFavoritesController(
+          context: Get.overlayContext,
+        ));
   }
 }
