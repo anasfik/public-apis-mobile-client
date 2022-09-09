@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:public_apis_desktop_client/app/modules/home/views/Categories/widgets/settings_page_icon.dart';
 
 import '../../../../../utils/colors/colors.dart';
 import '../../../../../utils/text_helper_methods.dart';
@@ -17,14 +18,9 @@ class CustomSliverAppBar extends GetView<HomeController> {
       backgroundColor: AppColors.purple,
       automaticallyImplyLeading: true,
       expandedHeight: 140,
-      actions: [
+      actions: const <Widget>[
         BookmarkPageIcon(),
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.settings,
-          ),
-        ),
+        SettingsPageIcon(),
       ],
       flexibleSpace: FlexibleSpaceBar(
         titlePadding: const EdgeInsets.all(20),
