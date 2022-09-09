@@ -6,6 +6,7 @@ import '../../../../../utils/colors/colors.dart';
 import '../../../../../utils/text_helper_methods.dart';
 import '../../../controllers/home_controller.dart';
 import 'bookmark_page_icon.dart';
+import "dart:convert";
 
 class CustomSliverAppBar extends GetView<HomeController> {
   const CustomSliverAppBar({
