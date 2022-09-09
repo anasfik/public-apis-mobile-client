@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:public_apis_desktop_client/app/modules/home/controllers/home_controller.dart';
 import 'package:public_apis_desktop_client/app/modules/home/views/apis_view/apis_view.dart';
+import 'package:public_apis_desktop_client/app/utils/text_helper_methods.dart';
 
 import '../../../../../data/models/AllApis.dart';
 
@@ -18,7 +19,6 @@ class CategoryBox extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return OpenContainer(
-
       middleColor: Theme.of(context).scaffoldBackgroundColor,
       transitionDuration: const Duration(seconds: 2),
       transitionType: ContainerTransitionType.fadeThrough,
@@ -50,8 +50,9 @@ class CategoryBox extends GetView<HomeController> {
                 dataList["title"]!,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.headline3!.copyWith(
-                      fontSize:
-                          controller.handleFontSizeValue(dataList["title"]!),
+                      fontSize: TextHelperMethods.handleFontSizeValue(
+                        dataList["title"]!,
+                      ),
                     ),
                 maxLines: 3,
               ),
