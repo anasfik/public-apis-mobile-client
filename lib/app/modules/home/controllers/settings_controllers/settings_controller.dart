@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:public_apis_desktop_client/app/data/models/setting_option_model.dart';
-import 'package:public_apis_desktop_client/app/modules/home/views/widgets/nil.dart';
 
 import '../../../../utils/text_helper_methods.dart';
+import '../../views/settings_view/widgets/settings_widgets/themes_buttons_view.dart';
 import '../../views/settings_view/widgets/settings_widgets/toggle_categories_view.dart';
-import 'sub_settings/reset_favorites_setting.dart';
+import 'sub_settings/reset_favorites_setting_controller.dart';
 
 class SettingsController extends GetxController {
   SettingsController() {
@@ -15,6 +15,13 @@ class SettingsController extends GetxController {
         icon: Icons.grid_view,
         optionFunction: () {},
         settingsWidget: ToggleCategoriesView(),
+      ),
+      SettingOptionModel(
+        title: TextHelperMethods.firstLettersToCapital("Themes"),
+        icon: Icons.grid_view,
+        optionFunction: () {
+        },
+        settingsWidget: ThemesButtons(),
       ),
       SettingOptionModel(
         title: TextHelperMethods.firstLettersToCapital("reset favorites"),

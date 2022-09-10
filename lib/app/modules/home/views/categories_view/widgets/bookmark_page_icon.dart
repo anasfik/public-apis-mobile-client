@@ -26,18 +26,17 @@ class BookmarkPageIcon extends GetView<HomeController> {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              Obx(
-                () => Positioned(
-                  child: Container(
-                    width: 15,
-                    height: 15,
-                    decoration: BoxDecoration(
-                      color: controller.badgeBackgroundColor.value,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
+              Positioned(
+                  child: Obx(
+                () => Container(
+                  width: 15,
+                  height: 15,
+                  decoration: BoxDecoration(
+                    color: controller.badgeBackgroundColor.value,
+                    borderRadius: BorderRadius.circular(50),
                   ),
                 ),
-              ),
+              )),
               Center(
                 child: Text(
                   Hive.box("favorites").values.toList().length.toString(),
