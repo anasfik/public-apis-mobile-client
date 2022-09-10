@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:public_apis_desktop_client/app/data/models/favoriteApi.dart';
-import 'package:public_apis_desktop_client/app/modules/home/controllers/settings_controllers/sub_settings/themes_buttons_setting_controller.dart';
 import 'package:public_apis_desktop_client/app/utils/themes.dart';
 
+import 'app/modules/controllers/settings_controllers/sub_settings/themes_buttons_setting_controller.dart';
 import 'app/routes/app_pages.dart';
 
 Future<void> main() async {
