@@ -2,7 +2,8 @@ import 'package:get/get.dart';
 
 class PrivacyController extends GetxController {
   static const String privacyContent = """
-**Privacy Policy**
+
+
 
 Gwhyyy ( Developer ) built the GNotifier app as an Open Source app. This SERVICE is provided by me (Gwhyyy) at no cost and is intended for use as is.à
 This page is used to inform visitors regarding my policies with the collection,

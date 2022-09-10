@@ -10,9 +10,14 @@ class PrivacyView extends GetView<PrivacyController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text(TextHelperMethods.firstLettersToCapital("privacy"))),
-      body: const MarkdownBody(
+          title:
+              Text(TextHelperMethods.firstLettersToCapital("privacy Policy"))),
+      body: Markdown(
         data: PrivacyController.privacyContent,
+        selectable: true,
+        styleSheet: MarkdownStyleSheet(
+          textScaleFactor: 1.25,
+        ),
       ),
     );
   }
