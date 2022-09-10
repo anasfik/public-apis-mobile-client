@@ -19,42 +19,36 @@ class HomeCategoriesPage extends GetView<HomeController> {
           focusNode.dispose();
         }
       },
-      child: GestureDetector(
-        onTap: () {
-          Color color = Color(0xff1181810);
-       
-        },
-        child: Scaffold(
-          body: CustomScrollView(
-            controller: controller.scrollController,
-            slivers: <Widget>[
-              const CustomSliverAppBar(),
-              const SliverToBoxAdapter(
-                child: SizedBox(
-                  height: 5,
+      child: Scaffold(
+        body: CustomScrollView(
+          controller: controller.scrollController,
+          slivers: <Widget>[
+            const CustomSliverAppBar(),
+            const SliverToBoxAdapter(
+              child: SizedBox(
+                height: 5,
+              ),
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              sliver: SliverToBoxAdapter(
+                child: CustomTextField(
+                  hintText: "Ex: Blockchain, Anime, News...",
+                  inputController: controller.searchInputController,
+                  labelText: "Search",
                 ),
               ),
-              SliverPadding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                sliver: SliverToBoxAdapter(
-                  child: CustomTextField(
-                    hintText: "Ex: Blockchain, Anime, News...",
-                    inputController: controller.searchInputController,
-                    labelText: "Search",
-                  ),
-                ),
+            ),
+            const SliverToBoxAdapter(
+              child: SizedBox(
+                height: 30,
               ),
-              const SliverToBoxAdapter(
-                child: SizedBox(
-                  height: 30,
-                ),
-              ),
-              const SliverPadding(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                sliver: CustomSliverGrid(),
-              ),
-            ],
-          ),
+            ),
+            const SliverPadding(
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              sliver: CustomSliverGrid(),
+            ),
+          ],
         ),
       ),
     );
