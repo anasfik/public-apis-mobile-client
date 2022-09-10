@@ -5,6 +5,7 @@ import 'package:hive/hive.dart';
 
 import '../../../../../utils/colors/colors.dart';
 import '../../../../../utils/themes.dart';
+import '../../home_controller.dart';
 
 class ThemesButtonsSettingController extends GetxController {
   // locals box
@@ -51,5 +52,8 @@ class ThemesButtonsSettingController extends GetxController {
 
     // and save that color
     localsBox.put("lastSavedThemeColorValue", color.value);
+
+    // don't forget to update the badge bg since it's getted from a separate controller
+    Get.find<HomeController>().badgeBackgroundColor.value = color;
   }
 }

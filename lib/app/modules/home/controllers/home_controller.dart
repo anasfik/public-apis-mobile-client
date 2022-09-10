@@ -10,20 +10,22 @@ class HomeController extends GetxController {
   BuildContext? context;
   HomeController({this.context}) {
     _context = context;
+    badgeBackgroundColor = Theme.of(_context!).primaryColor.obs;
   }
   // localsBox
   Box localsBox = Hive.box("locals");
 
+  // color observable
+  late Rx<Color?> badgeBackgroundColor;
+
   // badge background color tween
-  final badgeBackgroundColorTween = ColorTween(
-    begin: Theme.of(_context!).primaryColor,
+  late final badgeBackgroundColorTween = ColorTween(
+    begin: badgeBackgroundColor.value,
     end: Theme.of(_context!).scaffoldBackgroundColor,
   );
 
   // expanded height for sliver app bar
   int expandedHeight = 140;
-  // color observable
-  Rx<Color?> badgeBackgroundColor = Theme.of(_context!).primaryColor.obs;
   @override
   void onInit() {
     // Declare textEditingController
@@ -42,7 +44,8 @@ class HomeController extends GetxController {
     scrollController.addListener(() {
       if (scrollController.position.hasPixels &&
           scrollController.position.pixels != double.infinity &&
-          scrollController.position.pixels > 0) {
+          scrollController.position.pixels > 0 &&
+          scrollController.position.pixels < 140) {
         badgeBackgroundColor.value = badgeBackgroundColorTween.lerp(
               scrollController.position.pixels /
                   (expandedHeight - kToolbarHeight),
