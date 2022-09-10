@@ -15,43 +15,47 @@ class CustomTextField extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 50,
-      child: TextField(
-        autofocus: false,
-        controller: inputController,
-        onChanged: (value) {
-          controller.update();
-        },
-        keyboardType: TextInputType.name,
-        decoration: InputDecoration(
-          suffixIcon: Icon(
-            Icons.search,
-            color: Theme.of(context).primaryColor,
-          ),
-          labelText: labelText,
-          labelStyle: TextStyle(
-            color: Colors.grey.withOpacity(.75),
-            fontSize: 14,
-          ),
-          filled: true,
-          hintText: hintText,
-          hintStyle: TextStyle(
-            color: Colors.grey.withOpacity(.75),
-          ),
-          fillColor: Colors.grey.withOpacity(.1),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(
+    return FocusScope(
+      autofocus: false,
+      canRequestFocus: true,
+      child: SizedBox(
+        height: 50,
+        child: TextField(
+          autofocus: false,
+          controller: inputController,
+          onChanged: (value) {
+            controller.update();
+          },
+          keyboardType: TextInputType.name,
+          decoration: InputDecoration(
+            suffixIcon: Icon(
+              Icons.search,
               color: Theme.of(context).primaryColor,
-              width: .75,
             ),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(
-              color: Theme.of(context).primaryColor,
-              width: .75,
+            labelText: labelText,
+            labelStyle: TextStyle(
+              color: Colors.grey.withOpacity(.75),
+              fontSize: 14,
+            ),
+            filled: true,
+            hintText: hintText,
+            hintStyle: TextStyle(
+              color: Colors.grey.withOpacity(.75),
+            ),
+            fillColor: Colors.grey.withOpacity(.1),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(
+                color: Theme.of(context).primaryColor,
+                width: .75,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(
+                color: Theme.of(context).primaryColor,
+                width: .75,
+              ),
             ),
           ),
         ),

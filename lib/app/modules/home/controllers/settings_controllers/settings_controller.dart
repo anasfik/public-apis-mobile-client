@@ -23,7 +23,7 @@ class SettingsController extends GetxController {
           Get.find<ResetFavoritesController>()
               .openConfirmDialogToDeleteFavorites();
         },
-        settingsWidget: SizedBox(),
+        settingsWidget: const SizedBox(),
       )
     ];
   }

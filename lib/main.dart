@@ -12,8 +12,12 @@ Future<void> main() async {
   await Hive.initFlutter();
 
   Hive.registerAdapter(FavoriteApiAdapter());
+
+  // favorites box
   Box favoritesBox = await Hive.openBox("favorites");
 
+  // locals box
+  await Hive.openBox("locals");
   await favoritesBox.clear();
 
   runApp(
