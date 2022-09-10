@@ -21,6 +21,7 @@ class HomeCategoriesPage extends GetView<HomeController> {
       },
       child: Scaffold(
         body: CustomScrollView(
+          controller: controller.scrollController,
           slivers: <Widget>[
             const CustomSliverAppBar(),
             const SliverToBoxAdapter(

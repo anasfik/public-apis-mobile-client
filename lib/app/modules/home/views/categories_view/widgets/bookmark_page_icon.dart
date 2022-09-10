@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:public_apis_desktop_client/app/modules/home/controllers/home_controller.dart';
 
-class BookmarkPageIcon extends StatelessWidget {
+class BookmarkPageIcon extends GetView<HomeController> {
   const BookmarkPageIcon({
     Key? key,
   }) : super(key: key);
@@ -25,13 +26,15 @@ class BookmarkPageIcon extends StatelessWidget {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              Positioned(
-                child: Container(
-                  width: 15,
-                  height: 15,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
-                    borderRadius: BorderRadius.circular(50),
+              Obx(
+                () => Positioned(
+                  child: Container(
+                    width: 15,
+                    height: 15,
+                    decoration: BoxDecoration(
+                      color: controller.badgeBackgroundColor.value,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
                   ),
                 ),
               ),

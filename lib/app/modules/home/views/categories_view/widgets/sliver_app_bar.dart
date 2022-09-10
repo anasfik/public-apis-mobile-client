@@ -19,7 +19,7 @@ class CustomSliverAppBar extends GetView<HomeController> {
       pinned: true,
       backgroundColor: AppColors.purple,
       automaticallyImplyLeading: true,
-      expandedHeight: 140,
+      expandedHeight: controller.expandedHeight.toDouble(),
       actions: const <Widget>[
         BookmarkPageIcon(),
         SettingsPageIcon(),
