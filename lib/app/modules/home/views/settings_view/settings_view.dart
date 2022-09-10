@@ -23,6 +23,7 @@ class SettingsView extends GetView<SettingsController> {
           child: GetBuilder<SettingsController>(
             builder: (controller) {
               return ExpansionPanelList(
+                
                 expandedHeaderPadding: EdgeInsets.zero,
                 dividerColor: Colors.transparent,
                 elevation: 0,

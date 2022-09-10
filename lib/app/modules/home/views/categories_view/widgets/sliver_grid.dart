@@ -59,9 +59,10 @@ class CustomSliverGrid extends GetView<HomeController> {
                   .toList();
               return SliverGrid.count(
                 crossAxisCount: controller.crossAxisCount,
-                childAspectRatio: 1.8,
+                childAspectRatio: controller.crossAxisCount == 2 ? 1.75 : 3,
                 crossAxisSpacing: 15,
-                mainAxisSpacing: 15,
+                mainAxisSpacing:
+                    15 * ((controller.crossAxisCount.toDouble() % 2) + 1),
                 children: [
                   ...List.generate(
                     result2.length,
