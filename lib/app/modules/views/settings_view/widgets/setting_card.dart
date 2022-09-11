@@ -13,8 +13,12 @@ class SettingsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 30),
+      margin: const EdgeInsets.only(
+        bottom: 15,
+        top: 15,
+      ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           ClipRRect(
             borderRadius: BorderRadius.circular(50),
@@ -38,14 +42,10 @@ class SettingsCard extends StatelessWidget {
           Text(
             TextHelperMethods.firstLettersToCapital(settingOption.title),
             style: Theme.of(context).textTheme.headline5!.copyWith(
-                  fontSize: 16,
+                  fontSize: 18,
                 ),
           ),
-          // const Spacer(),
-          // Icon(
-          //   Icons.keyboard_arrow_down,
-          //   color: Colors.white.withOpacity(.8),
-          // ),
+          const Spacer(),
         ],
       ),
     );

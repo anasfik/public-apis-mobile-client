@@ -16,52 +16,57 @@ class SettingsView extends GetView<SettingsController> {
           TextHelperMethods.firstLettersToCapital("settings"),
         ),
       ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-          child: GetBuilder<SettingsController>(
-            builder: (controller) {
-              return ExpansionPanelList(
-                expandedHeaderPadding: EdgeInsets.zero,
-                dividerColor: Colors.transparent,
-                elevation: 0,
-                expansionCallback: (int index, bool isExpanded) {
-                  controller.settings[index].optionFunction();
+      body: Center(
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: GetBuilder<SettingsController>(
+              builder: (controller) {
+                return ExpansionPanelList(
+                  expandedHeaderPadding: EdgeInsets.zero,
+                  dividerColor: Colors.transparent,
+                  elevation: 0,
+                  expansionCallback: (int index, bool isExpanded) {
+                    controller.settings[index].optionFunction();
 
-                  if (controller.settings[index].title
-                          .toLowerCase()
-                          .contains("reset") ||
-                      controller.settings[index].title
-                          .toLowerCase()
-                          .contains("privacy")) {
-                    return;
-                  }
+                    if (controller.settings[index].title
+                            .toLowerCase()
+                            .contains("reset") ||
+                        controller.settings[index].title
+                            .toLowerCase()
+                            .contains("privacy") ||
+                        controller.settings[index].title
+                            .toLowerCase()
+                            .contains("share")) {
+                      return;
+                    }
 
-                  controller.toggleExpansionTile(
-                    index: index,
-                    isExpanded: isExpanded,
-                  );
-                },
-                children: [
-                  ...List.generate(
-                    controller.settings.length,
-                    (index) => ExpansionPanel(
-                      canTapOnHeader: true,
-                      backgroundColor:
-                          Theme.of(context).scaffoldBackgroundColor,
-                      headerBuilder: (context, isExpanded) {
-                        return SettingsCard(
-                          settingOption: controller.settings[index],
-                        );
-                      },
-                      body: controller.settings[index].settingsWidget,
-                      isExpanded: controller.isOpenedList[index],
+                    controller.toggleExpansionTile(
+                      index: index,
+                      isExpanded: isExpanded,
+                    );
+                  },
+                  children: [
+                    ...List.generate(
+                      controller.settings.length,
+                      (index) => ExpansionPanel(
+                        canTapOnHeader: true,
+                        backgroundColor:
+                            Theme.of(context).scaffoldBackgroundColor,
+                        headerBuilder: (context, isExpanded) {
+                          return SettingsCard(
+                            settingOption: controller.settings[index],
+                          );
+                        },
+                        body: controller.settings[index].settingsWidget,
+                        isExpanded: controller.isOpenedList[index],
+                      ),
                     ),
-                  ),
-                ],
-              );
-            },
+                  ],
+                );
+              },
+            ),
           ),
         ),
       ),

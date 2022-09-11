@@ -22,6 +22,7 @@ dependencies:
   build_runner: ^2.2.0
   delayed_display: ^2.0.0
   flutter_markdown: ^0.6.10+5
+  share_plus: ^4.1.0
 
 dev_dependencies:
   flutter_lints: ^2.0.0

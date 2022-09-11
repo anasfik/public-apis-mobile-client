@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:public_apis_desktop_client/app/data/models/setting_option_model.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../utils/text_helper_methods.dart';
 import '../../views/settings_view/widgets/settings_widgets/themes_buttons_view.dart';
@@ -14,13 +15,13 @@ class SettingsController extends GetxController {
         title: TextHelperMethods.firstLettersToCapital("change Themes"),
         icon: Icons.palette_outlined,
         optionFunction: () {},
-        settingsWidget: ThemesButtons(),
+        settingsWidget: const ThemesButtons(),
       ),
       SettingOptionModel(
         title: TextHelperMethods.firstLettersToCapital("categories view"),
         icon: Icons.grid_view_outlined,
         optionFunction: () {},
-        settingsWidget: ToggleCategoriesView(),
+        settingsWidget: const ToggleCategoriesView(),
       ),
       SettingOptionModel(
         title: TextHelperMethods.firstLettersToCapital("reset favorites"),
@@ -32,18 +33,36 @@ class SettingsController extends GetxController {
         settingsWidget: const SizedBox(),
       ),
       SettingOptionModel(
-        title: TextHelperMethods.firstLettersToCapital("Privacy"),
+        title: TextHelperMethods.firstLettersToCapital("privacy"),
         icon: Icons.shield_outlined,
         optionFunction: () {
           Get.toNamed("/privacy");
         },
         settingsWidget: const SizedBox(),
+      ),
+      SettingOptionModel(
+        title: TextHelperMethods.firstLettersToCapital("share"),
+        icon: Icons.share_outlined,
+        optionFunction: () async {
+          // TODO: add share link
+          ShareResult share = await Share.shareWithResult(
+            r'Discover over than 1400+ free api to use, ${add link here}',
+          );
+
+          print(share.status.name);
+        },
+        settingsWidget: const SizedBox(),
       )
     ];
   }
+
+  // Settings list
   late List<SettingOptionModel> settings;
+
+  // bool list responsible to toggle expansion panels
   late List<bool> isOpenedList = List.filled(settings.length, false);
 
+  // toggle expansion panels method
   void toggleExpansionTile({
     required int index,
     required bool isExpanded,
