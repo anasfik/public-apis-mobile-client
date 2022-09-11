@@ -5,8 +5,6 @@ import 'package:hive/hive.dart';
 import '../../data/models/AllApis.dart';
 import '../../services/remote_service.dart';
 
-
-
 class HomeController extends GetxController {
   static BuildContext? _context = Get.context;
   BuildContext? context;
@@ -21,10 +19,10 @@ class HomeController extends GetxController {
   late Rx<Color?> badgeBackgroundColor;
 
   // badge background color tween
-  late final badgeBackgroundColorTween = ColorTween(
+  late Rx<ColorTween> badgeBackgroundColorTween = ColorTween(
     begin: badgeBackgroundColor.value,
     end: Theme.of(_context!).scaffoldBackgroundColor,
-  );
+  ).obs;
 
   // expanded height for sliver app bar
   int expandedHeight = 140;
@@ -48,15 +46,20 @@ class HomeController extends GetxController {
           scrollController.position.pixels != double.infinity &&
           scrollController.position.pixels > 0 &&
           scrollController.position.pixels < 140) {
-        badgeBackgroundColor.value = badgeBackgroundColorTween.lerp(
+        badgeBackgroundColor.value = badgeBackgroundColorTween.value.lerp(
               scrollController.position.pixels /
                   (expandedHeight - kToolbarHeight),
             ) ??
             Theme.of(_context!).primaryColor;
       }
     });
+    ever(badgeBackgroundColorTween, updateColor);
 
     super.onInit();
+  }
+
+  updateColor(clr) {
+    badgeBackgroundColor.value = badgeBackgroundColorTween.value.begin;
   }
 
   // Future variables to get data once and use it in the app

@@ -33,8 +33,8 @@ class BookmarkPageIcon extends GetView<HomeController> {
                   width: 15,
                   height: 15,
                   decoration: BoxDecoration(
-                    color: controller.badgeBackgroundColor.value ??
-                        Theme.of(context).primaryColor,
+                    color:
+                        controller.badgeBackgroundColor.value,
                     borderRadius: BorderRadius.circular(50),
                   ),
                 ),

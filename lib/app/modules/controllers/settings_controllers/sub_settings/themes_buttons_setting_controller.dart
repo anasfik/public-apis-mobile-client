@@ -3,7 +3,6 @@ import 'package:flutter/painting.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
-
 import '../../../../utils/colors/colors.dart';
 import '../../../../utils/themes.dart';
 import '../../home_controller.dart';
@@ -26,7 +25,7 @@ class ThemesButtonsSettingController extends GetxController {
           false,
         ];
 
-        // the colors list
+    // the colors list
     colors = [
       AppColors.purple,
       AppColors.brown,
@@ -57,6 +56,9 @@ class ThemesButtonsSettingController extends GetxController {
     localsBox.put("lastSavedThemeColorValue", color.value);
 
     // don't forget to update the badge bg since it's getted from a separate controller
+    Get.find<HomeController>().badgeBackgroundColorTween.value.begin = color;
     Get.find<HomeController>().badgeBackgroundColor.value = color;
+
+//
   }
 }
