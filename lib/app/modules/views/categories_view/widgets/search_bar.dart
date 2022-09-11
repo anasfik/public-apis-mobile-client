@@ -22,6 +22,10 @@ class CustomTextField extends GetView<HomeController> {
       child: SizedBox(
         height: 50,
         child: TextField(
+          style: Theme.of(context).textTheme.headline3!.copyWith(
+                color: Colors.white,
+                fontSize: 14,
+              ),
           autofocus: false,
           controller: inputController,
           onChanged: (value) {
@@ -41,7 +45,7 @@ class CustomTextField extends GetView<HomeController> {
             filled: true,
             hintText: hintText,
             hintStyle: TextStyle(
-              color: Colors.grey.withOpacity(.75),
+              color: Colors.grey.withOpacity(.5),
             ),
             fillColor: Colors.grey.withOpacity(.1),
             border: OutlineInputBorder(
