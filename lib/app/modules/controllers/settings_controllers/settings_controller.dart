@@ -52,7 +52,7 @@ class SettingsController extends GetxController {
           print(share.status.name);
         },
         settingsWidget: const SizedBox(),
-      )
+      ),
     ];
   }
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import '../../../data/models/favoriteApi.dart';
 import '../../controllers/favorites_controller.dart';
 import 'widgets/favorite_api_card.dart';
 
@@ -19,7 +20,7 @@ class FavoritesView extends GetView<FavoritesController> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: ValueListenableBuilder(
-            valueListenable: Hive.box("favorites").listenable(),
+            valueListenable: Hive.box<FavoriteApi>("favorites").listenable(),
             builder: (BuildContext context, Box box, child) {
               List favoriteApis = box.values.toList();
               return Column(

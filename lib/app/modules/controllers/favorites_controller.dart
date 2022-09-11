@@ -3,12 +3,11 @@ import 'package:hive/hive.dart';
 
 import '../../data/models/favoriteApi.dart';
 
-
 class FavoritesController extends GetxController {
   // ! Variables
 
   // Get favorites box
-  Box favoritesBox = Hive.box("favorites");
+  Box favoritesBox = Hive.box<FavoriteApi>("favorites");
 
 // // !  Test
 // // TODO: remove on release
@@ -54,7 +53,6 @@ class FavoritesController extends GetxController {
     );
   }
 
-
   // Add api to favoritesBox
   void _addToFavoritesList({
     required bool isFavorite,
@@ -66,7 +64,6 @@ class FavoritesController extends GetxController {
     required String cors,
     required String link,
   }) {
-    
     if (favoritesBox.get("$category$name") == null) {
       favoritesBox.put(
         "$category$name",
@@ -85,7 +82,6 @@ class FavoritesController extends GetxController {
     // update the GetBuilder of the widget with the name id
     update([name]);
   }
-
 
   // Remove api from favoritesBox
   void _removeFromFavorites({

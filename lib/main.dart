@@ -18,7 +18,7 @@ Future<void> main() async {
   );
 
   // favorites box
-  Box favoritesBox = await Hive.openBox("favorites");
+  Box favoritesBox = await Hive.openBox<FavoriteApi>("favorites");
 
   // locals box
   Box localsBox = await Hive.openBox("locals");
