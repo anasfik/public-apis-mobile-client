@@ -8,8 +8,6 @@ import '../../../../data/models/AllApis.dart';
 import '../../../controllers/home_controller.dart';
 import '../../apis_view/apis_view.dart';
 
-
-
 class CategoryBox extends GetView<HomeController> {
   const CategoryBox({
     Key? key,
@@ -29,7 +27,6 @@ class CategoryBox extends GetView<HomeController> {
       openBuilder: (context, function) => ApisView(
         apis: apis,
         category: dataList["title"]!,
-      
       ),
       closedBuilder: (context, widgetFunction) => ClipRRect(
         borderRadius: BorderRadius.circular(10),

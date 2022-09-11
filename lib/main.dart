@@ -13,7 +13,9 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
 
-  Hive.registerAdapter(FavoriteApiAdapter());
+  Hive.registerAdapter(
+    FavoriteApiAdapter(),
+  );
 
   // favorites box
   Box favoritesBox = await Hive.openBox("favorites");

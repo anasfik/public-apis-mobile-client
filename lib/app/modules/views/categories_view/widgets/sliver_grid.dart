@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:public_apis_desktop_client/app/services/remote_service.dart';
 
 import '../../../../data/models/AllApis.dart';
+import '../../../../utils/text_helper_methods.dart';
 import '../../../controllers/home_controller.dart';
 import '../../widgets/nil.dart';
 import 'category_box.dart';
@@ -69,7 +70,10 @@ class CustomSliverGrid extends GetView<HomeController> {
                     (index) => CategoryBox(
                       dataList: {
                         "title": result2[index].title,
-                        "image": "assets/categoriesImages/animals.jpg",
+                        "image":
+                            "assets/categoriesImages/${TextHelperMethods.getFirstWordOfTitle(
+                          title: result2[index].title,
+                        )}.jpg",
                       },
                       apis: result2[index].apis,
                     ),

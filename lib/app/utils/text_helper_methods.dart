@@ -34,4 +34,8 @@ class TextHelperMethods {
     }
     return 20;
   }
+
+  static String getFirstWordOfTitle({required String title}) {
+    return title.split(' ').first.toLowerCase();
+  }
 }
