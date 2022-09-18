@@ -81,7 +81,7 @@ class ApiCard extends GetWidget<FavoritesController> {
                               children: [
                                 AnimatedContainer(
                                   decoration: BoxDecoration(
-                                    color: Colors.white,
+                                    color: Colors.white.withOpacity(.7),
                                     borderRadius: BorderRadius.circular(100),
                                   ),
                                   duration: const Duration(milliseconds: 50),

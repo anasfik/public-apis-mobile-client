@@ -18,6 +18,8 @@ class ThemesButtonsSettingController extends GetxController {
   void onInit() {
     // init the categoriesViewBool list
     themesViewBool = localsBox.get("themesViewBool") ??
+
+        // each version will have a new theme color
         [
           true,
           false,
