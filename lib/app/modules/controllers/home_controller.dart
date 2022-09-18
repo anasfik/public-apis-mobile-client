@@ -26,6 +26,8 @@ class HomeController extends GetxController {
 
   // expanded height for sliver app bar
   int expandedHeight = 140;
+  double sizedBoxHeight = 5;
+  double searchBarHeight = 50;
   @override
   void onInit() {
     // Declare textEditingController

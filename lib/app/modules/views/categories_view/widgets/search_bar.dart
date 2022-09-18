@@ -20,7 +20,7 @@ class CustomTextField extends GetView<HomeController> {
       autofocus: false,
       canRequestFocus: true,
       child: SizedBox(
-        height: 50,
+        height: controller.searchBarHeight,
         child: TextField(
           style: Theme.of(context).textTheme.headline3!.copyWith(
                 color: Colors.white,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 
-import 'colors/Colors_helper.dart';
+import 'colors/colors_helper.dart';
 import 'colors/colors.dart';
 
 class AppThemes {
@@ -47,6 +47,7 @@ class AppThemes {
         primary: color,
         secondary: color,
       ),
+      dialogBackgroundColor: hex("#ecf0f1"),
     );
 
     return theme;

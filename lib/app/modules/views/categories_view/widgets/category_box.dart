@@ -20,7 +20,7 @@ class CategoryBox extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return OpenContainer(
       middleColor: Theme.of(context).scaffoldBackgroundColor,
-      transitionDuration: const Duration(seconds: 2),
+      transitionDuration: const Duration(milliseconds: 200),
       transitionType: ContainerTransitionType.fadeThrough,
       closedColor: Theme.of(context).scaffoldBackgroundColor,
       openColor: Theme.of(context).scaffoldBackgroundColor,

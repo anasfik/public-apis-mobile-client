@@ -13,6 +13,7 @@ class HomeCategoriesPage extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        // this will remove scope whenever we click outside the text field
         FocusScope.of(context).requestFocus(focusNode);
         if (focusNode.hasListeners && focusNode.hasPrimaryFocus) {
           focusNode.dispose();
@@ -23,9 +24,9 @@ class HomeCategoriesPage extends GetView<HomeController> {
           controller: controller.scrollController,
           slivers: <Widget>[
             const CustomSliverAppBar(),
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: SizedBox(
-                height: 5,
+                height: controller.sizedBoxHeight,
               ),
             ),
             SliverPadding(
@@ -38,9 +39,9 @@ class HomeCategoriesPage extends GetView<HomeController> {
                 ),
               ),
             ),
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: SizedBox(
-                height: 30,
+                height: controller.sizedBoxHeight * 6,
               ),
             ),
             const SliverPadding(

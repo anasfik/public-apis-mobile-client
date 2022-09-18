@@ -24,8 +24,8 @@ Future<void> main() async {
   Box localsBox = await Hive.openBox("locals");
 
   if (kDebugMode) {
-    // await favoritesBox.clear();
-    // await localsBox.clear();
+    await favoritesBox.clear();
+    await localsBox.clear();
   }
 
   runApp(
