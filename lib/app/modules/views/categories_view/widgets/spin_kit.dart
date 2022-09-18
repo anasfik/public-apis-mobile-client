@@ -33,6 +33,13 @@ class _SpinKitState extends State<SpinKit> with SingleTickerProviderStateMixin {
   }
 
   @override
+  void dispose() {
+    _animationController.dispose();
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: _animation,
