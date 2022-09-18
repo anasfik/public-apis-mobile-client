@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
 import '../../data/models/AllApis.dart';
-import '../../services/remote_service.dart';
+import '../../services/fetch_api/remote_service.dart';
 
 class HomeController extends GetxController {
   static BuildContext? _context = Get.context;

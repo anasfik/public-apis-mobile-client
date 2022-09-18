@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import "package:http/http.dart" as http;
-import '../data/models/AllApis.dart';
+import '../../data/models/AllApis.dart';
 import 'failure.dart';
 
 class RemoteService {

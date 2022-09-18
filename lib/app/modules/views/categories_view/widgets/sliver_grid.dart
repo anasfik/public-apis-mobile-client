@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
-import 'package:public_apis_desktop_client/app/services/failure.dart';
-import 'package:public_apis_desktop_client/app/services/remote_service.dart';
 import 'package:public_apis_desktop_client/app/utils/dialog_helper.dart';
 
 import '../../../../data/models/AllApis.dart';
+import '../../../../services/fetch_api/failure.dart';
+import '../../../../services/fetch_api/remote_service.dart';
 import '../../../../utils/text_helper_methods.dart';
 import '../../../controllers/home_controller.dart';
 import '../../widgets/nil.dart';
@@ -22,7 +22,7 @@ class CustomSliverGrid extends GetView<HomeController> {
     return GetBuilder<HomeController>(builder: (controller) {
       return FutureBuilder(
         key: const ValueKey("futureBuilder Key"),
-        future: RemoteService.getData(),
+        future: controller.getAllApisData,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return SliverToBoxAdapter(

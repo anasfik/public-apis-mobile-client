@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "74408620937",
+    "project_id": "public-apis-gwhyy",
+    "storage_bucket": "public-apis-gwhyy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:74408620937:android:d1115ff39dde8c68ece758",
+        "android_client_info": {
+          "package_name": "com.example.public_apis_desktop_client"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "74408620937-5gr9akkb8du0mei1rumiof8ffn85h8fs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVR1WWT6U_FawbTsrNUl_klzIG_ZM9hcg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "74408620937-5gr9akkb8du0mei1rumiof8ffn85h8fs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
