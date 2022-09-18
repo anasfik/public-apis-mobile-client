@@ -35,7 +35,7 @@ class CustomSliverGrid extends GetView<HomeController> {
                     controller.sizedBoxHeight -
                     (controller.sizedBoxHeight * 6) -
                     controller.searchBarHeight,
-                child: Center(
+                child: const Center(
                   child: SpinKit(),
                 ),
               ),

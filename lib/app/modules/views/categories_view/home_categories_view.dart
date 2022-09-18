@@ -44,9 +44,10 @@ class HomeCategoriesPage extends GetView<HomeController> {
                 height: controller.sizedBoxHeight * 6,
               ),
             ),
-            const SliverPadding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              sliver: CustomSliverGrid(),
+            SliverPadding(
+              padding: const EdgeInsets.symmetric(horizontal: 15) +
+                  EdgeInsets.only(bottom: 10),
+              sliver: const CustomSliverGrid(),
             ),
           ],
         ),
