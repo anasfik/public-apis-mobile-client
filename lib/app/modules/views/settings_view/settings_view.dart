@@ -51,6 +51,7 @@ class SettingsView extends GetView<SettingsController> {
                     ...List.generate(
                       controller.settings.length,
                       (index) => ExpansionPanel(
+                      
                         canTapOnHeader: true,
                         backgroundColor:
                             Theme.of(context).scaffoldBackgroundColor,

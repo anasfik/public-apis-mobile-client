@@ -57,7 +57,15 @@ class CustomSliverGrid extends GetView<HomeController> {
             );
 
             return SliverToBoxAdapter(
-              child: Center(
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height -
+                    MediaQuery.of(context).padding.top -
+                    MediaQuery.of(context).padding.top -
+                    // this is sum of the widgets height plus the status bar height
+                    controller.expandedHeight -
+                    controller.sizedBoxHeight -
+                    (controller.sizedBoxHeight * 6) -
+                    controller.searchBarHeight,
                 child: Column(
                   children: [
                     IconButton(
