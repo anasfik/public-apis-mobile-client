@@ -25,23 +25,18 @@ class CustomSliverGrid extends GetView<HomeController> {
         future: RemoteService.getData(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            
             return SliverToBoxAdapter(
               child: SizedBox(
                 height: MediaQuery.of(context).size.height -
+                    MediaQuery.of(context).padding.top -
                     MediaQuery.of(context).padding.top -
                     // this is sum of the widgets height plus the status bar height
                     controller.expandedHeight -
                     controller.sizedBoxHeight -
                     (controller.sizedBoxHeight * 6) -
                     controller.searchBarHeight,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Center(
-                      child: SpinKit(),
-                    ),
-                  ],
+                child: Center(
+                  child: SpinKit(),
                 ),
               ),
             );

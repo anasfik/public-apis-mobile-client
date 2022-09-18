@@ -40,8 +40,8 @@ class _SpinKitState extends State<SpinKit> with SingleTickerProviderStateMixin {
         return Transform.scale(
           scale: _animation.value,
           child: Container(
-            width: 50,
-            height: 50,
+            width: 45,
+            height: 45,
             decoration: BoxDecoration(
               color: Colors.white.withOpacity(1 - _animation.value),
               borderRadius: BorderRadius.circular(50),

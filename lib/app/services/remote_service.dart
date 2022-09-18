@@ -11,7 +11,7 @@ class RemoteService {
 
   // fetch Method
   static Future<List<CategoryApis>> getData() async {
-    await Future.delayed(const Duration(seconds: 10));
+    await Future.delayed(const Duration(seconds: 1));
 
     try {
       final response = await http.get(
