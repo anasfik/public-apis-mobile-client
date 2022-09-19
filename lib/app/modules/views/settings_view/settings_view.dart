@@ -7,7 +7,8 @@ import 'widgets/setting_card.dart';
 
 class SettingsView extends GetView<SettingsController> {
   const SettingsView({Key? key}) : super(key: key);
-
+// ! NOTE
+// ! I REMOVED THE INK EFFECT AND REMOVED THE EXPANSION PANEL FROM THE SOURCE CODE OF MY VERSION OF FLUTTER FRAMEWORK SOURCE CODE, BECAUSE THERE IS NO OPTION IN THE PROPERTIES TO DO IT.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +52,6 @@ class SettingsView extends GetView<SettingsController> {
                     ...List.generate(
                       controller.settings.length,
                       (index) => ExpansionPanel(
-                      
                         canTapOnHeader: true,
                         backgroundColor:
                             Theme.of(context).scaffoldBackgroundColor,

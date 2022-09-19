@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart';
 import 'package:public_apis_desktop_client/app/utils/dialog_helper.dart';
 
 import '../../../../data/models/AllApis.dart';
@@ -44,16 +45,15 @@ class CustomSliverGrid extends GetView<HomeController> {
 
           /// we gonna handle error from remote service class
           if (snapshot.hasError) {
-            Failure error = snapshot.error as Failure;
-
             DialogHelper.showInfoDialog(
-              title: error.title,
+              title: (snapshot.error as Failure).title,
               context: context,
               retryButtonMethod: () async {
                 Get.back();
+                controller.getAllApisData = RemoteService.getData();
                 controller.update();
               },
-              content: error.content,
+              content: (snapshot.error as Failure).content,
             );
 
             return SliverToBoxAdapter(
@@ -66,17 +66,24 @@ class CustomSliverGrid extends GetView<HomeController> {
                     controller.sizedBoxHeight -
                     (controller.sizedBoxHeight * 6) -
                     controller.searchBarHeight,
-                child: Column(
-                  children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.replay,
-                        color: Theme.of(context).colorScheme.primary,
+                child: GestureDetector(
+                  onTap: () {
+                    controller.update();
+                    print("aaa");
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        onPressed: null,
+                        icon: Icon(
+                          Icons.replay,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
                       ),
-                    ),
-                    const Text("Retry"),
-                  ],
+                      const Text("Retry"),
+                    ],
+                  ),
                 ),
               ),
             );

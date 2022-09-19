@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:public_apis_desktop_client/app/data/models/favoriteApi.dart';
-import 'package:public_apis_desktop_client/app/services/crashlytics/crashlyrics.dart';
+import 'package:public_apis_desktop_client/app/services/crashlytics/crashlytics.dart';
 import 'package:public_apis_desktop_client/app/utils/themes.dart';
 import 'firebase_options.dart';
 

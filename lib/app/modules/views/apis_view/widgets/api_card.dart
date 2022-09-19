@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:public_apis_desktop_client/app/services/crashlytics/crashlyrics.dart';
+import 'package:public_apis_desktop_client/app/services/crashlytics/crashlytics.dart';
 
 import '../../../../data/models/AllApis.dart';
 import '../../../controllers/favorites_controller.dart';

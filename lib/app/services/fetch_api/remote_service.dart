@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import "package:http/http.dart" as http;
+import 'package:public_apis_desktop_client/app/services/crashlytics/crashlytics.dart';
 import '../../data/models/AllApis.dart';
 import 'failure.dart';
 
@@ -28,8 +29,9 @@ class RemoteService {
       throw Failure("Invalid Response Format",
           "we're working on this issue, please try again later");
     } catch (e) {
+      Crashlytics().crashlyticsInstance.recordError(e, StackTrace.current);
       throw Failure("unknown error",
           "we're trying to fix this issue, please try again later");
-    }
+    } finally {}
   }
 }

@@ -5,10 +5,16 @@
 import 'dart:convert';
 
 List<CategoryApis> categoriesApisFromJson(String str) =>
-    List<CategoryApis>.from(json.decode(str).map((x) => CategoryApis.fromJson(x)));
+    List<CategoryApis>.from(
+        json.decode(str).map((x) => CategoryApis.fromJson(x)));
 
-String categoriesApisToJson(List<CategoryApis> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String categoriesApisToJson(List<CategoryApis> data) => json.encode(
+      List<dynamic>.from(
+        data.map(
+          (x) => x.toJson(),
+        ),
+      ),
+    );
 
 class CategoryApis {
   CategoryApis({
