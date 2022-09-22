@@ -41,8 +41,6 @@ class ResetFavoritesController extends GetxController {
     try {
       favoritesBox.clear();
       Get.back();
-    } catch (e) {
-      print("something went wrong");
-    }
+    } catch (e) {}
   }
 }

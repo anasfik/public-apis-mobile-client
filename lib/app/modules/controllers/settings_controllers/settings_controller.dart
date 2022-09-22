@@ -46,10 +46,9 @@ class SettingsController extends GetxController {
         optionFunction: () async {
           // TODO: add share link
           ShareResult share = await Share.shareWithResult(
-            r'Discover over than 1400+ free api to use, ${add link here}',
+            r'Discover over than 1400+ free api to use, Public Apis',
           );
 
-          print(share.status.name);
         },
         settingsWidget: const SizedBox(),
       ),

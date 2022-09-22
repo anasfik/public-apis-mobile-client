@@ -69,7 +69,6 @@ class CustomSliverGrid extends GetView<HomeController> {
                 child: GestureDetector(
                   onTap: () {
                     controller.update();
-                    print("aaa");
                   },
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,

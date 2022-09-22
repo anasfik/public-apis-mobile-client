@@ -46,7 +46,7 @@ Future<void> main() async {
         },
       ),
       debugShowCheckedModeBanner: false,
-      title: "Application",
+      title: "Public Apis",
       initialRoute: AppPages.homeCategoriesView,
       getPages: AppPages.routes,
       theme: AppThemes.lightTheme,

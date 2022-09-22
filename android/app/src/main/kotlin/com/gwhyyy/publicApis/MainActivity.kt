@@ -1,4 +1,4 @@
-package com.example.public_apis_desktop_client
+package com.gwhyyy.publicApis
 
 import io.flutter.embedding.android.FlutterActivity
 

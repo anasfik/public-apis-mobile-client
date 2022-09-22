@@ -6,6 +6,8 @@ import 'package:public_apis_desktop_client/app/utils/text_helper_methods.dart';
 import '../../controllers/privacy_controller.dart';
 
 class PrivacyView extends GetView<PrivacyController> {
+  const PrivacyView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

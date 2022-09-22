@@ -21,152 +21,147 @@ class ApiCard extends GetWidget<FavoritesController> {
   final String category;
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Crashlytics().crashApp();
-      },
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 10),
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        decoration: BoxDecoration(
-          color: Theme.of(context).primaryColor.withOpacity(.15),
-          borderRadius: BorderRadius.circular(5),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Expanded(
-                  child: AutoSizeText(
-                    apiInformation.name,
-                    style: Theme.of(context).textTheme.headline3!.copyWith(
-                          fontSize: 20,
-                        ),
-                    minFontSize: 20,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                    wrapWords: false,
-                  ),
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      decoration: BoxDecoration(
+        color: Theme.of(context).primaryColor.withOpacity(.15),
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Expanded(
+                child: AutoSizeText(
+                  apiInformation.name,
+                  style: Theme.of(context).textTheme.headline3!.copyWith(
+                        fontSize: 20,
+                      ),
+                  minFontSize: 20,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  wrapWords: false,
                 ),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    GetBuilder<FavoritesController>(
-                      init: FavoritesController(),
-                      global: false,
-                      id: apiInformation.name,
-                      builder: (controller) {
-                        return GestureDetector(
-                          onTap: () {
-                            isFavorite = !isFavorite;
-                            controller.toggleFavoriteStatus(
-                              isFavorite: isFavorite,
-                              name: apiInformation.name,
-                              category: category,
-                              description: apiInformation.description,
-                              auth: apiInformation.auth,
-                              https: apiInformation.https,
-                              cors: apiInformation.cors,
-                              link: apiInformation.link,
-                            );
-                          },
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(100),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(200),
-                              ),
-                              height: 30,
-                              width: 30,
-                              child: Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  AnimatedContainer(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white.withOpacity(.7),
-                                      borderRadius: BorderRadius.circular(100),
-                                    ),
-                                    duration: const Duration(milliseconds: 50),
-                                    height: isFavorite ? 30 : 0,
-                                    width: isFavorite ? 30 : 0,
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  GetBuilder<FavoritesController>(
+                    init: FavoritesController(),
+                    global: false,
+                    id: apiInformation.name,
+                    builder: (controller) {
+                      return GestureDetector(
+                        onTap: () {
+                          isFavorite = !isFavorite;
+                          controller.toggleFavoriteStatus(
+                            isFavorite: isFavorite,
+                            name: apiInformation.name,
+                            category: category,
+                            description: apiInformation.description,
+                            auth: apiInformation.auth,
+                            https: apiInformation.https,
+                            cors: apiInformation.cors,
+                            link: apiInformation.link,
+                          );
+                        },
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(100),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(200),
+                            ),
+                            height: 30,
+                            width: 30,
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                AnimatedContainer(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(.7),
+                                    borderRadius: BorderRadius.circular(100),
                                   ),
-                                  Icon(
-                                    Icons.bookmark,
-                                    color: isFavorite
-                                        ? Theme.of(context).primaryColor
-                                        : Colors.grey,
-                                    size: 22,
-                                  ),
-                                ],
-                              ),
+                                  duration: const Duration(milliseconds: 50),
+                                  height: isFavorite ? 30 : 0,
+                                  width: isFavorite ? 30 : 0,
+                                ),
+                                Icon(
+                                  Icons.bookmark,
+                                  color: isFavorite
+                                      ? Theme.of(context).primaryColor
+                                      : Colors.grey,
+                                  size: 22,
+                                ),
+                              ],
                             ),
                           ),
-                        );
-                      },
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    ApiButton(
-                      link: apiInformation.link,
-                    ),
-                  ],
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  ApiButton(
+                    link: apiInformation.link,
+                  ),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Text(
+            apiInformation.description,
+            style: Theme.of(context).textTheme.headline3!.copyWith(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w300,
+                  letterSpacing: 1.2,
+                ),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              if (apiInformation.auth.toLowerCase() != "no") ...[
+                ApiChip(
+                  text: apiInformation.auth,
                 ),
               ],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              apiInformation.description,
-              style: Theme.of(context).textTheme.headline3!.copyWith(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w300,
-                    letterSpacing: 1.2,
-                  ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                if (apiInformation.auth.toLowerCase() != "no") ...[
-                  ApiChip(
-                    text: apiInformation.auth,
-                  ),
-                ],
-                const SizedBox(
-                  width: 5,
+              const SizedBox(
+                width: 5,
+              ),
+              if (apiInformation.https.toLowerCase() == "yes") ...[
+                const ApiChip(
+                  text: "https",
                 ),
-                if (apiInformation.https.toLowerCase() == "yes") ...[
-                  const ApiChip(
-                    text: "https",
-                  ),
-                ] else ...[
-                  const ApiChip(
-                    text: "http",
-                  ),
-                ],
-                const SizedBox(
-                  width: 5,
+              ] else ...[
+                const ApiChip(
+                  text: "http",
                 ),
-                if (apiInformation.cors.toLowerCase() == "yes") ...[
-                  const ApiChip(
-                    text: "cors",
-                  ),
-                ] else if (apiInformation.cors.toLowerCase() == "unknown") ...[
-                  const ApiChip(
-                    text: "unknown",
-                  ),
-                ],
               ],
-            ),
-          ],
-        ),
+              const SizedBox(
+                width: 5,
+              ),
+              if (apiInformation.cors.toLowerCase() == "yes") ...[
+                const ApiChip(
+                  text: "cors",
+                ),
+              ] else if (apiInformation.cors.toLowerCase() == "unknown") ...[
+                const ApiChip(
+                  text: "unknown",
+                ),
+              ],
+            ],
+          ),
+        ],
       ),
     );
   }
