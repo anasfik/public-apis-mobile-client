@@ -1,16 +1,10 @@
-# public_apis_desktop_client
+# Public APIs mobile app
+Your assistant app that will help you discover and pick the next API for your next development project
 
-A new Flutter project.
 
-## Getting Started
+<a href="https://play.google.com/store/apps/details?id=com.gwhyyy.publicApis"><img src="assets/google_play.png" width='250' /></a>
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## What it contains, you said?
+Public Apis contains more than 1400+ free public APIs organized by 50+ categories where you can Navigate, Search, and Bookmark APIs to check them later and work on it with your projects.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
