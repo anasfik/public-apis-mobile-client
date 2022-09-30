@@ -1,7 +1,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.gwhyyy.publicApis">
      <uses-permission android:name="android.permission.INTERNET" />
+// queries
+<queries>
 
+    <intent>
+  <action android:name="android.intent.action.VIEW" />
+  <category android:name="android.intent.category.BROWSABLE" />
+  <data android:scheme="https" />
+</intent>
+
+</queries>
    <application
         android:label="Public Apis"
         android:name="${applicationName}"
@@ -15,6 +24,15 @@
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
             android:windowSoftInputMode="adjustResize">
+                <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <!-- Include the host attribute if you want your app to respond
+             only to URLs with your app's domain. -->
+        <data android:scheme="http" android:host="www.example.com" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <!-- The BROWSABLE category is required to get links from web pages. -->
+        <category android:name="android.intent.category.BROWSABLE" />
+    </intent-filter>
             <!-- Specifies an Android theme to apply to this Activity as soon as
                  the Android process has started. This theme is visible to the user
                  while the Flutter UI initializes. After that, this theme continues

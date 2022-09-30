@@ -19,8 +19,8 @@ class ApiButton extends GetView<ApisViewController> {
       height: 30,
       minWidth: 60,
       color: Theme.of(context).primaryColor.withOpacity(.45),
-      onPressed: () {
-        controller.launchLink(link);
+      onPressed: () async {
+        await controller.handleLaunchLink(link, context);
       },
       splashColor: Colors.white.withOpacity(.2),
       child: Text(
