@@ -44,19 +44,14 @@ class BookmarkPageIcon extends GetView<HomeController> {
                       builder: (BuildContext context, Box favoritesBox,
                           Widget? child) {
                         return Center(
-                          child: Container(
-                            width: 6,
-                            child: Text(
-                              favoritesBox.length.toString(),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline3!
-                                  .copyWith(
-                                      color: Colors.white,
-                                      fontSize: 9,
-                                      fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.center,
-                            ),
+                          child: Text(
+                            favoritesBox.length.toString(),
+                            style: const TextStyle(
+                                fontFamily: "Roboto",
+                                color: Colors.white,
+                                fontSize: 9,
+                                fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.center,
                           ),
                         );
                       }),
