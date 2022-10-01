@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:public_apis_desktop_client/app/services/crashlytics/crashlytics.dart';
+import 'package:public_apis_desktop_client/app/utils/extensions/api_model_extension.dart';
 
 import '../../../../data/models/AllApis.dart';
 import '../../../controllers/favorites_controller.dart';
@@ -130,7 +131,7 @@ class ApiCard extends GetWidget<FavoritesController> {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-              if (apiInformation.auth.toLowerCase() != "no") ...[
+              if (apiInformation.hasAuth()) ...[
                 ApiChip(
                   text: apiInformation.auth,
                 ),
@@ -138,11 +139,11 @@ class ApiCard extends GetWidget<FavoritesController> {
               const SizedBox(
                 width: 5,
               ),
-              if (apiInformation.https.toLowerCase() == "yes") ...[
+              if (apiInformation.isHttps()) ...[
                 const ApiChip(
                   text: "https",
                 ),
-              ] else ...[
+              ] else if (apiInformation.isHttp()) ...[
                 const ApiChip(
                   text: "http",
                 ),
@@ -150,11 +151,11 @@ class ApiCard extends GetWidget<FavoritesController> {
               const SizedBox(
                 width: 5,
               ),
-              if (apiInformation.cors.toLowerCase() == "yes") ...[
+              if (apiInformation.hasCors()) ...[
                 const ApiChip(
                   text: "cors",
                 ),
-              ] else if (apiInformation.cors.toLowerCase() == "unknown") ...[
+              ] else if (apiInformation.hasUnknownCors()) ...[
                 const ApiChip(
                   text: "unknown",
                 ),
@@ -166,3 +167,4 @@ class ApiCard extends GetWidget<FavoritesController> {
     );
   }
 }
+

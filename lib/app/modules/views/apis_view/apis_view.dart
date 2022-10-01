@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:public_apis_desktop_client/app/modules/controllers/apis_view_controller/extensions/filter_apis_view_extension.dart';
 import 'package:public_apis_desktop_client/app/modules/views/apis_view/widgets/api_card.dart';
 
 import '../../../data/models/AllApis.dart';
@@ -10,11 +11,10 @@ import 'widgets/apis_view_app_bar.dart';
 
 class ApisView extends StatelessWidget {
   ApisView({
-    Key? key,
+    super.key,
     required this.category,
     required this.apis,
-  }) : super(key: key);
-
+  });
   final ApisViewController controller = Get.put(ApisViewController());
 
   final List<Api> apis;
@@ -24,7 +24,7 @@ class ApisView extends StatelessWidget {
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
-          child: ApisViewWidget(
+          child: ApisViewAppBar(
             title: category,
           ),
         ),
@@ -33,12 +33,8 @@ class ApisView extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: GetBuilder<ApisViewController>(
-              id: controller.apisViewId,
               builder: (controller) {
-                List<Api> processedApis =
-                    //  controller.filteredApis() ??
-
-                    apis;
+                List<Api> processedApis = controller.filteredApis(apis) ?? apis;
 
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,

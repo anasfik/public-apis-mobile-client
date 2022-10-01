@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'filter_alert_dialog.dart';
 
-class ApisViewWidget extends StatelessWidget {
-  const ApisViewWidget({
+class ApisViewAppBar extends StatelessWidget {
+  const ApisViewAppBar({
     super.key,
     required this.title,
   });
@@ -22,10 +22,11 @@ class ApisViewWidget extends StatelessWidget {
           child: IconButton(
             onPressed: () {
               showDialog(
-                  context: context,
-                  builder: (context) {
-                    return FilterAlertDialog();
-                  });
+                context: context,
+                builder: (context) {
+                  return FilterAlertDialog(text: title,);
+                },
+              );
             },
             icon: const Icon(
               Icons.filter_list,

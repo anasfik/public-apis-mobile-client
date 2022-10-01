@@ -9,21 +9,19 @@ class ApisViewController extends GetxController {
   Crashlytics crashlytics = Crashlytics();
   List<FilterChoiceOption> filterOptions = [
     FilterChoiceOption(
-      optionText: "Auth",
-      isSelected: false,
+      optionText: "auth",
+      apiRelatedValueToCompareWith: "no",
     ),
     FilterChoiceOption(
-      optionText: "HTTPS",
-      isSelected: false,
+      optionText: "https",
+      apiRelatedValueToCompareWith: "no",
+   
     ),
     FilterChoiceOption(
-      optionText: "Cors",
-      isSelected: false,
-    ),
-    FilterChoiceOption(
-      optionText: "apikey",
-      isSelected: false,
+      optionText: "cors",
+      apiRelatedValueToCompareWith: "no",
     ),
   ];
+
   String apisViewId = "ApisView";
 }
