@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/apis_view_controller/apis_view_controller.dart';
+import 'package:public_apis_desktop_client/app/modules/controllers/apis_view_controller/extensions/try_multiple_launch_methods_extension.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../services/crashlytics/crashlytics.dart';
