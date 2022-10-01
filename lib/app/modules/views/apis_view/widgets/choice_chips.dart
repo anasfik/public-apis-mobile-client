@@ -10,14 +10,32 @@ class FilterChoiceChips extends GetView<ApisViewController> {
   @override
   Widget build(BuildContext context) {
     return Wrap(
+      alignment: WrapAlignment.start,
+      spacing: 5,
       children: <Widget>[
         ...List.generate(
           controller.filterOptions.length,
           (index) => GetBuilder<ApisViewController>(
               id: controller.idBasedOnIndex(index),
-              builder: (context) {
-                return ChoiceChip(
-                  label: Text(controller.filterOptions[index].optionText),
+              builder: (controller) {
+                return FilterChip(
+                  checkmarkColor: Theme.of(context).primaryColor,
+                  selectedColor:
+                      Theme.of(context).primaryColor.withOpacity(.25),
+                  surfaceTintColor: Colors.green,
+                  visualDensity: VisualDensity.compact,
+                  labelPadding: const EdgeInsets.symmetric(
+                    horizontal: 7.5,
+                    vertical: .5,
+                  ),
+                  label: Text(
+                    controller.filterOptions[index].optionText,
+                    style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                          color: controller.filterOptions[index].isSelected
+                              ? Theme.of(context).primaryColor
+                              : Colors.black,
+                        ),
+                  ),
                   selected: controller.filterOptions[index].isSelected,
                   onSelected: (bool newIsSelected) {
                     dynamic currentChoiceChip = controller.filterOptions[index];
@@ -26,8 +44,6 @@ class FilterChoiceChips extends GetView<ApisViewController> {
                       newIsSelected,
                       index,
                     );
-
-                    
                   },
                 );
               }),
