@@ -15,7 +15,7 @@ class BookmarkPageIcon extends GetView<HomeController> {
     return Stack(
       children: [
         IconButton(
-          onPressed: () {
+          onPressed: () { 
             Get.toNamed("/favorites");
           },
           icon: const Icon(

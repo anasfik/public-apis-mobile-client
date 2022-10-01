@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:public_apis_desktop_client/app/utils/text_helper_methods.dart';
 
-import '../../../controllers/apis_view_controller.dart';
+import '../../../controllers/apis_view_controller/apis_view_controller.dart';
 
 class ApiButton extends GetView<ApisViewController> {
   const ApiButton({
