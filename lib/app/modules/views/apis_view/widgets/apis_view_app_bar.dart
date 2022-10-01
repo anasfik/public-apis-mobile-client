@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'filter_alert_dialog.dart';
+
 class ApisViewWidget extends StatelessWidget {
   const ApisViewWidget({
     super.key,
@@ -18,7 +20,13 @@ class ApisViewWidget extends StatelessWidget {
         Tooltip(
           message: 'Filter',
           child: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return FilterAlertDialog();
+                  });
+            },
             icon: const Icon(
               Icons.filter_list,
             ),
