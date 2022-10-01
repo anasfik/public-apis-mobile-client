@@ -11,7 +11,7 @@ class FilterAlertDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: AutoSizeText("filter".firstLettersToCapital()),
-      content: FilterChoiveChips(),
+      content: const FilterChoiceChips(),
     );
   }
 }
