@@ -1,3 +1,5 @@
+import 'package:public_apis_desktop_client/app/utils/extensions/api_model_extension.dart';
+
 import '../../../../data/models/AllApis.dart';
 import '../../../../data/models/filter_choice_option.dart';
 import '../apis_view_controller.dart';
@@ -22,18 +24,15 @@ extension FilterApisViewExtension on ApisViewController {
       bool isApiValid = true;
       for (FilterChoiceOption selectedChoiceOption in selectedChoiceOptions) {
         if (selectedChoiceOption.optionText == "auth") {
-          if (api.auth.toLowerCase() ==
-              selectedChoiceOption.apiRelatedValueToCompareWith) {
+          if (!api.hasAuth()) {
             isApiValid = false;
           }
         } else if (selectedChoiceOption.optionText == "https") {
-          if (api.https.toLowerCase() ==
-              selectedChoiceOption.apiRelatedValueToCompareWith) {
+          if (!api.isHttps()) {
             isApiValid = false;
           }
         } else if (selectedChoiceOption.optionText == "cors") {
-          if (api.cors.toLowerCase() ==
-              selectedChoiceOption.apiRelatedValueToCompareWith) {
+          if (!api.hasCors() || api.hasUnknownCors()) {
             isApiValid = false;
           }
         }
