@@ -12,7 +12,7 @@ class FilterChoiceChips extends GetView<ApisViewController> {
   Widget build(BuildContext context) {
     return Wrap(
       alignment: WrapAlignment.start,
-      spacing: 5,
+      spacing: 7.5,
       direction: Axis.horizontal,
       children: <Widget>[
         ...List.generate(

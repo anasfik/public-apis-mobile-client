@@ -12,6 +12,16 @@ class FilterAlertDialog extends StatelessWidget {
     return AlertDialog(
       title: AutoSizeText("filter".firstLettersToCapital()),
       content: const FilterChoiceChips(),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () {},
+          child: Text("cancel".firstLettersToCapital()),
+        ),
+        TextButton(
+          onPressed: () {},
+          child: Text("ok".firstLettersToCapital()),
+        ),
+      ],
     );
   }
 }
