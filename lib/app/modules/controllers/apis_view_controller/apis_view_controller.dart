@@ -8,43 +8,9 @@ import '../../../services/analytics/firebas_analytics.dart';
 class ApisViewController extends GetxController {
   Analytics analytics = Analytics();
   Crashlytics crashlytics = Crashlytics();
-  // Launch link method
-  Future<void> handleLaunchLink(String link, context) async {
-    // Get parsed link
-    final Uri parsedLink = Uri.parse(
-      link,
-    );
-    final bool canLaunch = await canLaunchUrl(parsedLink);
 
-    // Check if link is valid
-    if (canLaunch) {
-      // Then launch
-      await tryMultipleLaunchModes(parsedLink);
+  String apisViewId = "ApisView";
 
-      analytics.analyticsInstance
-          .logEvent(name: "links_opened_to_users_successfully", parameters: {
-        "link": link,
-      });
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content:
-              Text("could not open the API link, we are working to fix it"),
-        ),
-      );
-      analytics.analyticsInstance.logEvent(
-        name: "links_not_opened_to_users",
-        parameters: {
-          "link": link,
-        },
-      );
-
-      Crashlytics().crashlyticsInstance.recordError(
-            Exception("Link not opened / valid"),
-            StackTrace.current,
-          );
-    }
-  }
 
   // Try multiple launch modes
   Future<void> tryMultipleLaunchModes(Uri parsedLink) async {

@@ -6,6 +6,7 @@ import 'package:public_apis_desktop_client/app/modules/views/apis_view/widgets/a
 import '../../../data/models/AllApis.dart';
 import '../../../data/models/favoriteApi.dart';
 import '../../controllers/apis_view_controller/apis_view_controller.dart';
+import 'widgets/apis_view_app_bar.dart';
 
 class ApisView extends StatelessWidget {
   ApisView({
@@ -21,51 +22,45 @@ class ApisView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).primaryColor,
-          title: Text(category),
-          actions: <Widget>[
-            const SizedBox(
-              width: 10,
-            ),
-            Tooltip(
-              message: 'Filter',
-              child: IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.filter_list,
-                ),
-              ),
-            )
-          ],
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(60),
+          child: ApisViewWidget(
+            title: category,
+          ),
         ),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: GetBuilder<ApisViewController>(
-              
-              // id: controller.apisViewId
+              id: controller.apisViewId,
               builder: (controller) {
+                List<Api> processedApis =
+                    //  controller.filteredApis() ??
+
+                    apis;
+
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     ...List.generate(
-                      apis.length,
+                      processedApis.length,
                       (index) => ApiCard(
-                        apiInformation: apis[index],
+                        apiInformation: processedApis[index],
                         category: category,
                         isFavorite: Hive.box<FavoriteApi>("favorites")
                             .values
                             .toList()
-                            .any((favoriteApi) =>
-                                favoriteApi.name == apis[index].name),
+                            .any(
+                              (favoriteApi) =>
+                                  favoriteApi.name == processedApis[index].name,
+                            ),
                       ),
                     ),
                   ],
                 );
-              }
+              },
             ),
           ),
         ));
