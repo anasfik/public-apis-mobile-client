@@ -11,10 +11,16 @@ extension ReAssignIsSelectedValueExtension on ApisViewController {
     required bool isSelected,
     required int withIndexOf,
   }) {
-    choiceChip.isSelected = isSelected;
+    assignNewIsSelectedTo(choiceChip, isSelected);
 
     update([withIdOf]);
     updateSelectedFilterOptionsList();
   }
 }
 
+extension a on ApisViewController {
+  void assignNewIsSelectedTo(
+      FilterChoiceOption choiceChip, bool newIsSelected) {
+    choiceChip.isSelected = newIsSelected;
+  }
+}
