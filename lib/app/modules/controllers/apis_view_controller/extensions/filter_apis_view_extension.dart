@@ -16,7 +16,7 @@ Future<List<Api>> runFilteredApisMethodOnSeparateIsolate(
     [
       receivePort.sendPort,
       categoryApis,
-      Get.find<ApisViewController>().filterOptions,
+      Get.find<ApisViewController>().selectedFilterOptions,
     ],
   );
 
@@ -27,12 +27,8 @@ Future<List<Api>> runFilteredApisMethodOnSeparateIsolate(
 void filteredApis(List<dynamic> arguments) async {
   SendPort sendPort = arguments[0];
   List<Api> categoryApis = arguments[1];
-  List<FilterChoiceOption> passedFilterOptions = arguments[2];
-  List<FilterChoiceOption> selectedChoiceOptions = passedFilterOptions
-      .where(
-        (choiceChip) => choiceChip.isSelected,
-      )
-      .toList();
+  List<FilterChoiceOption> selectedChoiceOptions = arguments[2];
+
 
   List<Api> result = [];
 

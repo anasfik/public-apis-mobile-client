@@ -29,6 +29,6 @@ class ApisViewController extends GetxController {
       apiRelatedValueToCompareWith: "no",
     ),
   ];
-
+  List<FilterChoiceOption> selectedFilterOptions = [];
   String apisViewId = "ApisView";
 }
