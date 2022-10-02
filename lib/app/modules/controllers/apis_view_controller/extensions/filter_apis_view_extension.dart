@@ -7,6 +7,7 @@ import '../../../../data/models/AllApis.dart';
 import '../../../../data/models/filter_choice_option.dart';
 import '../apis_view_controller.dart';
 
+final controller = Get.find<ApisViewController>();
 Future<List<Api>> runFilteredApisMethodOnSeparateIsolate(
   List<Api> categoryApis,
 ) async {
@@ -16,19 +17,30 @@ Future<List<Api>> runFilteredApisMethodOnSeparateIsolate(
     [
       receivePort.sendPort,
       categoryApis,
-      Get.find<ApisViewController>().selectedFilterOptions,
+      controller.selectedFilterOptions,
     ],
   );
 
   List<Api> finalResult = await receivePort.first;
-  return finalResult;
+  return controller.shouldApisListReverse
+      ? finalResult
+      : finalResult.reversed.toList();
 }
 
 void filteredApis(List<dynamic> arguments) async {
-  SendPort sendPort = arguments[0];
-  List<Api> categoryApis = arguments[1];
-  List<FilterChoiceOption> selectedChoiceOptions = arguments[2];
+  // ! here it's strict to avoid types problems
 
+  assert(arguments[0] is SendPort,
+      "please assign the SendPort object as first argument");
+  SendPort sendPort = arguments[0];
+
+  assert(arguments[1] is List<Api>,
+      "please assign the List<Api> object as second argument");
+  List<Api> categoryApis = arguments[1];
+
+  assert(arguments[2] is List<FilterChoiceOption>,
+      "please assign the List<FilterChoiceOption> object as third argument");
+  List<FilterChoiceOption> selectedChoiceOptions = arguments[2];
 
   List<Api> result = [];
 
