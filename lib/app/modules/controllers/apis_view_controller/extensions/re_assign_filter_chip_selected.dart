@@ -5,10 +5,14 @@ import '../../../../data/models/filter_choice_option.dart';
 
 extension ReAssignIsSelectedValueExtension on ApisViewController {
   void reAssignIsSelectedValueOf(
-      FilterChoiceOption choiceChip, bool newIsSelected, int index) {
-    choiceChip.isSelected = newIsSelected;
+    FilterChoiceOption choiceChip, {
+    required String idPrefix,
+    required bool isSelected,
+    required int withIndexOf,
+  }) {
+    choiceChip.isSelected = isSelected;
 
-    String choiceId = idBasedOnIndex(index);
+    String choiceId = idBasedOnIndex(withIndexOf, idPrefix);
     update([choiceId]);
   }
 }

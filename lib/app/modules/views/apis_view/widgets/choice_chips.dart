@@ -8,8 +8,9 @@ import 'package:public_apis_desktop_client/app/utils/text_helper_methods.dart';
 import '../../../../data/models/filter_choice_option.dart';
 
 class FilterChoiceChips extends GetView<ApisViewController> {
-  const FilterChoiceChips({super.key});
+  const FilterChoiceChips({super.key, required this.prefixFilterId});
 
+  final String prefixFilterId;
   @override
   Widget build(BuildContext context) {
     return Wrap(
@@ -20,7 +21,7 @@ class FilterChoiceChips extends GetView<ApisViewController> {
         ...List.generate(
           controller.filterOptions.length,
           (index) => GetBuilder<ApisViewController>(
-              id: controller.idBasedOnIndex(index),
+              id: controller.idBasedOnIndex(index, prefixFilterId),
               builder: (controller) {
                 return Theme(
                   data: ThemeData(
@@ -53,8 +54,9 @@ class FilterChoiceChips extends GetView<ApisViewController> {
                           controller.filterOptions[index];
                       controller.reAssignIsSelectedValueOf(
                         currentChoiceChip,
-                        newIsSelected,
-                        index,
+                        withIndexOf: index,
+                        idPrefix: prefixFilterId,
+                        isSelected: newIsSelected,
                       );
                     },
                   ),

@@ -17,7 +17,7 @@ class FilterAlertDialog extends GetView<ApisViewController> {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: AutoSizeText("filter :".firstLettersToCapital()),
-      content: const FilterChoiceChips(),
+      content: FilterChoiceChips(prefixFilterId: category),
       actions: <Widget>[
         TextButton(
           onPressed: () {
