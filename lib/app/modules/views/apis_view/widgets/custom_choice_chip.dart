@@ -50,7 +50,6 @@ class FilterChoiceChip extends StatelessWidget {
             ),
             selected: controller.filterOptions[index].isSelected,
             onSelected: (bool newIsSelected) {
-              print(newIsSelected);
               FilterChoiceOption currentChoiceChip =
                   controller.filterOptions[index];
               controller.reAssignIsSelectedValueOf(

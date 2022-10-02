@@ -22,46 +22,61 @@ class ApisView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
-          child: ApisViewAppBar(
-            title: category,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(60),
+        child: ApisViewAppBar(
+          title: category,
+        ),
+      ),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: GetBuilder<ApisViewController>(
+            id: category,
+            builder: (controller) {
+              print("get builder new build");
+              return FutureBuilder(
+                future: runFilteredApisMethodOnSeparateIsolate(apis),
+                builder: ((context, AsyncSnapshot<List<Api>> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return CircularProgressIndicator();
+                  }
+                  if (snapshot.hasData) {
+                    List<Api> processedApis = snapshot.data!;
+
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ...List.generate(
+                          processedApis.length,
+                          (index) => ApiCard(
+                            key: ValueKey(
+                              "${processedApis[index].name} $index",
+                            ),
+                            apiInformation: processedApis[index],
+                            category: category,
+                            isFavorite: Hive.box<FavoriteApi>("favorites")
+                                .values
+                                .toList()
+                                .any(
+                                  (favoriteApi) =>
+                                      favoriteApi.name ==
+                                      processedApis[index].name,
+                                ),
+                          ),
+                        ),
+                      ],
+                    );
+                  }
+                  return Text("zzz");
+                }),
+              );
+            },
           ),
         ),
-        body: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: GetBuilder<ApisViewController>(
-              id: category,
-              builder: (controller) {
-                List<Api> processedApis = controller.filteredApis(apis);
-
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    ...List.generate(
-                      processedApis.length,
-                      (index) => ApiCard(
-                        key: ValueKey(
-                            processedApis[index].name + index.toString()),
-                        apiInformation: processedApis[index],
-                        category: category,
-                        isFavorite: Hive.box<FavoriteApi>("favorites")
-                            .values
-                            .toList()
-                            .any(
-                              (favoriteApi) =>
-                                  favoriteApi.name == processedApis[index].name,
-                            ),
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
-          ),
-        ));
+      ),
+    );
   }
 }

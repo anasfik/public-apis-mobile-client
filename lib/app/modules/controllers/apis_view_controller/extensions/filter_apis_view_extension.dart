@@ -1,70 +1,90 @@
+import 'dart:isolate';
+
+import 'package:get/get.dart';
 import 'package:public_apis_desktop_client/app/utils/extensions/api_model_extension.dart';
 
 import '../../../../data/models/AllApis.dart';
 import '../../../../data/models/filter_choice_option.dart';
 import '../apis_view_controller.dart';
 
-extension FilterApisViewExtension on ApisViewController {
-  List<Api> filteredApis(List<Api> categoryApis) {
-    List<FilterChoiceOption> selectedChoiceOptions = filterOptions
-        .where(
-          (choiceChip) => choiceChip.isSelected,
-        )
-        .toList();
-    print("categories: ${categoryApis.length}");
+Future<List<Api>> runFilteredApisMethodOnSeparateIsolate(
+  List<Api> categoryApis,
+) async {
+  ReceivePort receivePort = ReceivePort();
+  await Isolate.spawn(
+    filteredApis,
+    [
+      receivePort.sendPort,
+      categoryApis,
+      Get.find<ApisViewController>().filterOptions,
+    ],
+  );
 
-    List<Api> result = [];
+  List<Api> finalResult = await receivePort.first;
+  return finalResult;
+}
 
-    if (selectedChoiceOptions.isEmpty) {
-      return categoryApis;
-    }
+void filteredApis(List<dynamic> arguments) async {
+  SendPort sendPort = arguments[0];
+  List<Api> categoryApis = arguments[1];
+  List<FilterChoiceOption> passedFilterOptions = arguments[2];
+  List<FilterChoiceOption> selectedChoiceOptions = passedFilterOptions
+      .where(
+        (choiceChip) => choiceChip.isSelected,
+      )
+      .toList();
 
-    result = categoryApis.where((api) {
-      bool isApiValid = false;
+  List<Api> result = [];
 
-      for (FilterChoiceOption selectedChoiceOption in selectedChoiceOptions) {
-        if (selectedChoiceOption.optionText == "auth") {
-          if (api.hasAuth()) {
-            isApiValid = true;
-          } else {
-            return false;
-          }
-        }
-        if (selectedChoiceOption.optionText.toLowerCase() == "apikey") {
-          if (api.hasAuthWithApiKey()) {
-            isApiValid = true;
-          } else {
-            return false;
-          }
-        }
-        if (selectedChoiceOption.optionText == "https") {
-          if (api.isHttps()) {
-            isApiValid = true;
-          } else {
-            return false;
-          }
-        }
-        if (selectedChoiceOption.optionText == "http") {
-          if (api.isHttp()) {
-            isApiValid = true;
-          } else {
-            return false;
-          }
-        }
-        if (selectedChoiceOption.optionText == "cors") {
-          if (api.hasCors() && !api.hasUnknownCors()) {
-            isApiValid = true;
-          } else {
-            return false;
-          }
+  if (selectedChoiceOptions.isEmpty) {
+    Isolate.exit(sendPort, categoryApis);
+  }
+
+  result = categoryApis.where((api) {
+    bool isApiValid = false;
+
+    for (FilterChoiceOption selectedChoiceOption in selectedChoiceOptions) {
+      if (selectedChoiceOption.optionText == "auth") {
+        if (api.hasAuth()) {
+          isApiValid = true;
+        } else {
+          return false;
         }
       }
-      print("name: ${api.name} isApiValid: $isApiValid");
-      print("result: ${result.length}");
-      print("${api.name} isApiValid: $isApiValid");
-      return isApiValid;
-    }).toList();
-
-    return result;
-  }
+      if (selectedChoiceOption.optionText.toLowerCase() == "apikey") {
+        if (api.hasAuthWithApiKey()) {
+          isApiValid = true;
+        } else {
+          return false;
+        }
+      }
+      if (selectedChoiceOption.optionText == "https") {
+        if (api.isHttps()) {
+          isApiValid = true;
+        } else {
+          return false;
+        }
+      }
+      if (selectedChoiceOption.optionText == "http") {
+        if (api.isHttp()) {
+          isApiValid = true;
+        } else {
+          return false;
+        }
+      }
+      if (selectedChoiceOption.optionText == "cors") {
+        if (api.hasCors() && !api.hasUnknownCors()) {
+          isApiValid = true;
+        } else {
+          return false;
+        }
+      }
+    }
+    // print("name: ${api.name} isApiValid: $isApiValid");
+    // print("result: ${result.length}");
+    // print("${api.name} isApiValid: $isApiValid");
+    return isApiValid;
+  }).toList();
+  // await Future.delayed(const Duration(milliseconds: 500));
+  Isolate.exit(sendPort, result);
 }
