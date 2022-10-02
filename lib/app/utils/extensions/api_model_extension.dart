@@ -20,4 +20,8 @@ extension ApiBoolExtension on Api {
   bool hasUnknownCors() {
     return cors.toLowerCase() == "unknown";
   }
+
+  bool hasAuthWithApiKey() {
+    return auth.toLowerCase() == "apikey";
+  }
 }

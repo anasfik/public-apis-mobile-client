@@ -13,12 +13,19 @@ class ApisViewController extends GetxController {
       apiRelatedValueToCompareWith: "no",
     ),
     FilterChoiceOption(
+      optionText: "apiKey",
+      apiRelatedValueToCompareWith: "no",
+    ),
+    FilterChoiceOption(
       optionText: "https",
       apiRelatedValueToCompareWith: "no",
-   
     ),
     FilterChoiceOption(
       optionText: "cors",
+      apiRelatedValueToCompareWith: "no",
+    ),
+    FilterChoiceOption(
+      optionText: "http",
       apiRelatedValueToCompareWith: "no",
     ),
   ];

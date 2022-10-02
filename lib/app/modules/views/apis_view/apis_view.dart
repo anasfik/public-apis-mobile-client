@@ -33,8 +33,9 @@ class ApisView extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: GetBuilder<ApisViewController>(
+              id: category,
               builder: (controller) {
-                List<Api> processedApis = controller.filteredApis(apis) ?? apis;
+                List<Api> processedApis = controller.filteredApis(apis);
 
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -43,6 +44,8 @@ class ApisView extends StatelessWidget {
                     ...List.generate(
                       processedApis.length,
                       (index) => ApiCard(
+                        key: ValueKey(
+                            processedApis[index].name + index.toString()),
                         apiInformation: processedApis[index],
                         category: category,
                         isFavorite: Hive.box<FavoriteApi>("favorites")

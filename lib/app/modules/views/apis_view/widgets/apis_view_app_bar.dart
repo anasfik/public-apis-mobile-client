@@ -24,7 +24,9 @@ class ApisViewAppBar extends StatelessWidget {
               showDialog(
                 context: context,
                 builder: (context) {
-                  return FilterAlertDialog(text: title,);
+                  return FilterAlertDialog(
+                    category: title,
+                  );
                 },
               );
             },

@@ -131,9 +131,13 @@ class ApiCard extends GetWidget<FavoritesController> {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-              if (apiInformation.hasAuth()) ...[
-                ApiChip(
-                  text: apiInformation.auth,
+              if (apiInformation.hasAuthWithApiKey()) ...[
+                const ApiChip(
+                  text: "apiKey",
+                ),
+              ] else if (apiInformation.hasAuth()) ...[
+                const ApiChip(
+                  text: "auth",
                 ),
               ],
               const SizedBox(
@@ -143,7 +147,8 @@ class ApiCard extends GetWidget<FavoritesController> {
                 const ApiChip(
                   text: "https",
                 ),
-              ] else if (apiInformation.isHttp()) ...[
+              ],
+              if (apiInformation.isHttp()) ...[
                 const ApiChip(
                   text: "http",
                 ),
@@ -151,15 +156,12 @@ class ApiCard extends GetWidget<FavoritesController> {
               const SizedBox(
                 width: 5,
               ),
-              if (apiInformation.hasCors()) ...[
+              if (apiInformation.hasCors() ||
+                  apiInformation.hasUnknownCors()) ...[
                 const ApiChip(
                   text: "cors",
                 ),
-              ] else if (apiInformation.hasUnknownCors()) ...[
-                const ApiChip(
-                  text: "unknown",
-                ),
-              ],
+              ]
             ],
           ),
         ],
@@ -167,4 +169,3 @@ class ApiCard extends GetWidget<FavoritesController> {
     );
   }
 }
-

@@ -5,6 +5,8 @@ import 'package:public_apis_desktop_client/app/modules/controllers/apis_view_con
 import 'package:public_apis_desktop_client/app/modules/controllers/apis_view_controller/extensions/re_assign_filter_chip_selected.dart';
 import 'package:public_apis_desktop_client/app/utils/text_helper_methods.dart';
 
+import '../../../../data/models/filter_choice_option.dart';
+
 class FilterChoiceChips extends GetView<ApisViewController> {
   const FilterChoiceChips({super.key});
 
@@ -46,7 +48,8 @@ class FilterChoiceChips extends GetView<ApisViewController> {
                     ),
                     selected: controller.filterOptions[index].isSelected,
                     onSelected: (bool newIsSelected) {
-                      dynamic currentChoiceChip =
+                      print(newIsSelected);
+                      FilterChoiceOption currentChoiceChip =
                           controller.filterOptions[index];
                       controller.reAssignIsSelectedValueOf(
                         currentChoiceChip,

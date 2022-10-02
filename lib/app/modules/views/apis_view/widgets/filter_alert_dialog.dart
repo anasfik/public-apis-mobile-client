@@ -9,10 +9,10 @@ import 'choice_chips.dart';
 class FilterAlertDialog extends GetView<ApisViewController> {
   const FilterAlertDialog({
     super.key,
-    required this.text,
+    required this.category,
   });
 
-  final String text;
+  final String category;
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -27,9 +27,8 @@ class FilterAlertDialog extends GetView<ApisViewController> {
         ),
         TextButton(
           onPressed: () {
-            print(text);
             Navigator.of(context).pop();
-            controller.update();
+            controller.update([category]);
           },
           child: Text("ok".firstLettersToCapital()),
         ),

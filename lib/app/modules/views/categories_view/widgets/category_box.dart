@@ -2,6 +2,7 @@ import 'package:animations/animations.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:public_apis_desktop_client/app/modules/controllers/apis_view_controller/apis_view_controller.dart';
 import 'package:public_apis_desktop_client/app/utils/text_helper_methods.dart';
 
 import '../../../../data/models/AllApis.dart';
@@ -24,6 +25,9 @@ class CategoryBox extends GetView<HomeController> {
       transitionType: ContainerTransitionType.fadeThrough,
       closedColor: Theme.of(context).scaffoldBackgroundColor,
       openColor: Theme.of(context).scaffoldBackgroundColor,
+      onClosed: (value) {
+        Get.delete<ApisViewController>();
+      },
       openBuilder: (context, function) => ApisView(
         apis: apis,
         category: dataList["title"]!,

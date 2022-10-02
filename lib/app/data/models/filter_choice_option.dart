@@ -6,6 +6,6 @@ class FilterChoiceOption {
   FilterChoiceOption({
     required this.apiRelatedValueToCompareWith,
     required this.optionText,
-    this.isSelected = true,
+    this.isSelected = false,
   });
 }
