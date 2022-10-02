@@ -3,12 +3,16 @@ import 'package:get/get.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/apis_view_controller/apis_view_controller.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/apis_view_controller/extensions/generate_id_based_on_index.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/apis_view_controller/extensions/re_assign_filter_chip_selected.dart';
+import 'package:public_apis_desktop_client/app/modules/views/apis_view/widgets/custom_choice_chip.dart';
 import 'package:public_apis_desktop_client/app/utils/text_helper_methods.dart';
 
 import '../../../../data/models/filter_choice_option.dart';
 
 class FilterChoiceChips extends GetView<ApisViewController> {
-  const FilterChoiceChips({super.key, required this.prefixFilterId});
+  const FilterChoiceChips({
+    super.key,
+    required this.prefixFilterId,
+  });
 
   final String prefixFilterId;
   @override
@@ -20,48 +24,13 @@ class FilterChoiceChips extends GetView<ApisViewController> {
       children: <Widget>[
         ...List.generate(
           controller.filterOptions.length,
-          (index) => GetBuilder<ApisViewController>(
-              id: controller.idBasedOnIndex(index, prefixFilterId),
-              builder: (controller) {
-                return Theme(
-                  data: ThemeData(
-                    splashColor:
-                        Theme.of(context).primaryColor.withOpacity(.15),
-                  ),
-                  child: FilterChip(
-                    checkmarkColor: Theme.of(context).primaryColor,
-                    selectedColor:
-                        Theme.of(context).primaryColor.withOpacity(.25),
-                    surfaceTintColor: Colors.green,
-                    visualDensity: VisualDensity.compact,
-                    labelPadding: const EdgeInsets.symmetric(
-                      horizontal: 7.5,
-                      vertical: .5,
-                    ),
-                    label: Text(
-                      controller.filterOptions[index].optionText
-                          .firstLettersToCapital(),
-                      style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                            color: controller.filterOptions[index].isSelected
-                                ? Theme.of(context).primaryColor
-                                : Colors.black,
-                          ),
-                    ),
-                    selected: controller.filterOptions[index].isSelected,
-                    onSelected: (bool newIsSelected) {
-                      print(newIsSelected);
-                      FilterChoiceOption currentChoiceChip =
-                          controller.filterOptions[index];
-                      controller.reAssignIsSelectedValueOf(
-                        currentChoiceChip,
-                        withIndexOf: index,
-                        idPrefix: prefixFilterId,
-                        isSelected: newIsSelected,
-                      );
-                    },
-                  ),
-                );
-              }),
+          (index) {
+            return FilterChoiceChip(
+              index: index,
+              prefixFilterId: prefixFilterId,
+              controller: controller,
+            );
+          },
         ),
       ],
     );
