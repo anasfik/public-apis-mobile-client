@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/apis_view_controller/extensions/filter_apis_view_extension.dart';
 import 'package:public_apis_desktop_client/app/modules/views/apis_view/widgets/api_card.dart';
+import 'package:public_apis_desktop_client/app/utils/text_helper_methods.dart';
 
 import '../../../data/models/AllApis.dart';
 import '../../../data/models/favoriteApi.dart';
@@ -30,22 +31,25 @@ class ApisView extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: GetBuilder<ApisViewController>(
-            id: category,
-            builder: (controller) {
-              print("get builder new build");
-              return FutureBuilder(
-                future: runFilteredApisMethodOnSeparateIsolate(apis),
-                builder: ((context, AsyncSnapshot<List<Api>> snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return CircularProgressIndicator();
-                  }
-                  if (snapshot.hasData) {
-                    List<Api> processedApis = snapshot.data!;
+        child: GetBuilder<ApisViewController>(
+          id: category,
+          builder: (controller) {
+            print("get builder new build");
+            return FutureBuilder(
+              future: runFilteredApisMethodOnSeparateIsolate(apis),
+              builder: ((context, AsyncSnapshot<List<Api>> snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return LinearProgressIndicator(
+                    minHeight: 3,
+                    backgroundColor: Colors.white.withOpacity(.4),
+                  );
+                }
+                if (snapshot.hasData) {
+                  List<Api> processedApis = snapshot.data!;
 
-                    return Column(
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -68,13 +72,28 @@ class ApisView extends StatelessWidget {
                           ),
                         ),
                       ],
-                    );
-                  }
-                  return Text("zzz");
-                }),
-              );
-            },
-          ),
+                    ),
+                  );
+                }
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 15,
+                    vertical: 10,
+                  ),
+                  child: Center(
+                    child: Text(
+                      "something wrong happened \ntry again"
+                          .firstLettersToCapital(),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline4!
+                          .copyWith(color: Colors.white),
+                    ),
+                  ),
+                );
+              }),
+            );
+          },
         ),
       ),
     );
