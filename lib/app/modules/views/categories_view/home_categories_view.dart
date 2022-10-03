@@ -5,10 +5,11 @@ import 'widgets/search_bar.dart';
 import 'widgets/sliver_app_bar.dart';
 import 'widgets/sliver_grid.dart';
 
+final focusNode = FocusNode();
+
 class HomeCategoriesPage extends GetView<HomeController> {
   const HomeCategoriesPage({Key? key}) : super(key: key);
 
-  static final focusNode = FocusNode();
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -46,7 +47,7 @@ class HomeCategoriesPage extends GetView<HomeController> {
             ),
             SliverPadding(
               padding: const EdgeInsets.symmetric(horizontal: 15) +
-                  EdgeInsets.only(bottom: 10),
+                  const EdgeInsets.only(bottom: 10),
               sliver: const CustomSliverGrid(),
             ),
           ],

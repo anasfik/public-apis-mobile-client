@@ -1,3 +1,4 @@
 {
-  "editor.acceptSuggestionOnEnter": "off"
+  "editor.acceptSuggestionOnEnter": "off",
+  "cSpell.words": ["tappable"]
 }

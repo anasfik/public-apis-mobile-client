@@ -58,8 +58,9 @@ class ThemesButtonsSettingController extends GetxController {
     localsBox.put("lastSavedThemeColorValue", color.value);
 
     // don't forget to update the badge bg since it's getted from a separate controller
-    Get.find<HomeController>().badgeBackgroundColorTween.value.begin = color;
-    Get.find<HomeController>().badgeBackgroundColor.value = color;
+    HomeController homeController = Get.find<HomeController>();
+    homeController.badgeBackgroundColorTween.value.begin = color;
+    homeController.badgeBackgroundColor.value = color;
 
 //
   }

@@ -11,17 +11,17 @@ import '../../controllers/apis_view_controller/apis_view_controller.dart';
 import 'widgets/apis_view_app_bar.dart';
 
 class ApisView extends StatelessWidget {
-  ApisView({
+  const ApisView({
     super.key,
     required this.category,
     required this.apis,
   });
-  final ApisViewController controller = Get.put(ApisViewController());
 
   final List<Api> apis;
   final String category;
   @override
   Widget build(BuildContext context) {
+    print("new build");
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),

@@ -38,13 +38,8 @@ Future<void> main() async {
 
   runApp(
     GetMaterialApp(
-      initialBinding: BindingsBuilder(
-        () {
-          Get.put(
-            ThemesButtonsSettingController(),
-          );
-        },
-      ),
+      initialBinding:
+          BindingsBuilder.put(() => ThemesButtonsSettingController()),
       debugShowCheckedModeBanner: false,
       title: "Public Apis",
       initialRoute: AppPages.homeCategoriesView,

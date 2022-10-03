@@ -18,7 +18,7 @@ class AppPages {
 
   static final routes = <GetPage>[
     GetPage(
-      name: _Paths.homeCategoriesPagePath,
+      name: Routes.homeCategoriesView,
       page: () => const HomeCategoriesPage(),
       binding: HomeCategoriesPageBinding(),
     ),
