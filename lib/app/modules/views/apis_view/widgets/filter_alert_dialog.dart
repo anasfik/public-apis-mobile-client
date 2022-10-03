@@ -5,6 +5,7 @@ import 'package:public_apis_desktop_client/app/modules/controllers/apis_view_con
 import 'package:public_apis_desktop_client/app/utils/text_helper_methods.dart';
 
 import 'choice_chips.dart';
+import 'order_by_letters_toggle.dart';
 
 class FilterAlertDialog extends GetView<ApisViewController> {
   const FilterAlertDialog({
@@ -17,7 +18,13 @@ class FilterAlertDialog extends GetView<ApisViewController> {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: AutoSizeText("filter :".firstLettersToCapital()),
-      content: FilterChoiceChips(prefixFilterId: category),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          OrderByLettersToggle(),
+          FilterChoiceChips(prefixFilterId: category),
+        ],
+      ),
       actions: <Widget>[
         TextButton(
           onPressed: () {

@@ -8,5 +8,4 @@ class ApisViewController extends GetxController
     with FilterOptionsListsInitMixin, AnalyticsMixin, CrashlyticsMixin {
   String apisViewId = "ApisView";
   bool shouldApisListReverse = false;
-
 }
