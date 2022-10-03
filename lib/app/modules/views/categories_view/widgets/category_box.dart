@@ -29,11 +29,9 @@ class CategoryBox extends GetView<HomeController> {
       closedColor: Theme.of(context).scaffoldBackgroundColor,
       openColor: Theme.of(context).scaffoldBackgroundColor,
       onClosed: (value) {
-        Get.delete<FavoritesController>();
         Get.delete<ApisViewController>();
       },
       openBuilder: (context, function) {
-        Get.put<FavoritesController>(FavoritesController());
         Get.put<ApisViewController>(ApisViewController());
         return ApisView(
           apis: apis,

@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 
+import '../controllers/favorites_controller.dart';
 import '../controllers/home_controller.dart';
 
 class HomeCategoriesPageBinding extends Bindings {
@@ -9,6 +10,9 @@ class HomeCategoriesPageBinding extends Bindings {
       HomeController(
         context: Get.context,
       ),
+    );
+    Get.put<FavoritesController>(
+      FavoritesController(),
     );
   }
 }
