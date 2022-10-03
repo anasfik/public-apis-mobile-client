@@ -7,8 +7,9 @@ import '../apis_view_controller.dart';
 extension UpdateOrderByLettersExtension on ApisViewController {
   static bool _previousIsAscending = true;
   static const String _orderLettersId = "OrderByLettersToggleId";
-  String get orderLettersToggleId => _orderLettersId;
-static final HashMap orderByLettersBoolValuesHashMap = HashMap<String, bool>(
+
+  /// hashMap where we store bool values
+  static final HashMap orderByLettersBoolValuesHashMap = HashMap<String, bool>(
     equals: (a, b) => a == b,
     hashCode: (a) => a.hashCode,
   )..addAll(
@@ -17,10 +18,11 @@ static final HashMap orderByLettersBoolValuesHashMap = HashMap<String, bool>(
         "Z-A": false,
       },
     );
-    HashMap get orderByLettersBoolHashMap => orderByLettersBoolValuesHashMap;
+  HashMap get orderByLettersBoolHashMap => orderByLettersBoolValuesHashMap;
 
+  /// id which is used to update the toggle button
+  String get orderLettersToggleId => _orderLettersId;
 
-    
   /// Update the order by letters status
   void updateOrderByLettersStatus(bool isAscendingStatus) {
     if (_shouldExecuteAndReBuildWidgets(isAscendingStatus)) {
@@ -58,9 +60,11 @@ static final HashMap orderByLettersBoolValuesHashMap = HashMap<String, bool>(
 
   /// this is the responsible method to toggle the value of the map values in the controller to change the color of the icons
   void _toggleMapValues(bool isAscendingStatus) {
-    orderByLettersBoolValuesHashMap.forEach((key, value) {
-      orderByLettersBoolValuesHashMap[key] =
-          !orderByLettersBoolValuesHashMap[key];
-    });
+    orderByLettersBoolValuesHashMap.forEach(
+      (key, value) {
+        orderByLettersBoolValuesHashMap[key] =
+            !orderByLettersBoolValuesHashMap[key];
+      },
+    );
   }
 }
