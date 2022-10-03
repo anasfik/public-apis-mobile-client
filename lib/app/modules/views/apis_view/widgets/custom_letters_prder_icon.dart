@@ -26,36 +26,62 @@ class CustomLettersOrderIcon extends GetWidget<ApisViewController> {
           onTap: () {
             controller.updateOrderByLettersStatus(isAscending);
           },
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    isAscending ? "Z" : "A",
-                    style: Theme.of(context).textTheme.labelMedium,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              height: 45,
+              color: controller
+                      .colorBasedOnIsAscendingStatue(context, isAscending)
+                      ?.withOpacity(.25) ??
+                  Colors.transparent,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          isAscending ? "A" : "Z",
+                          style: Theme.of(context)
+                              .textTheme
+                              .labelMedium!
+                              .copyWith(
+                                color: controller.colorBasedOnIsAscendingStatue(
+                                    context, isAscending),
+                              ),
+                        ),
+                        Text(
+                          isAscending ? "Z" : "A",
+                          style: Theme.of(context)
+                              .textTheme
+                              .labelMedium!
+                              .copyWith(
+                                color: controller.colorBasedOnIsAscendingStatue(
+                                    context, isAscending),
+                              ),
+                        ),
+                      ],
+                    ),
                   ),
-                  Text(
-                    isAscending ? "A" : "Z",
-                    style: Theme.of(context).textTheme.labelMedium,
+                  Transform.rotate(
+                    angle: math.pi,
+                    child: Icon(
+                      Icons.straight,
+                      size: 29,
+                      color: controller.colorBasedOnIsAscendingStatue(
+                            context,
+                            isAscending,
+                          ) ??
+                          Colors.black,
+                    ),
                   ),
                 ],
               ),
-              Transform.rotate(
-                angle: math.pi,
-                child: Icon(
-                  Icons.straight,
-                  size: 29,
-                  color: controller.colorBasedOnIsAscendingStatue(
-                        context,
-                        isAscending,
-                      ) ??
-                      Colors.black,
-                ),
-              ),
-            ],
+            ),
           ),
         );
       },

@@ -19,7 +19,6 @@ class OrderByLettersToggle extends GetView<ApisViewController> {
         ),
         CustomLettersOrderIcon(
           orderByLetters: OrderByLetters.ZtoA,
-        
         ),
       ],
     );

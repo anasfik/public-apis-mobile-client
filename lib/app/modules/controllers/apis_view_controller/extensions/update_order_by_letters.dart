@@ -51,7 +51,7 @@ extension UpdateOrderByLettersExtension on ApisViewController {
 
   void _customUpdateOrderByLetters(bool isAscendingStatus) {
     _shouldRebuildWidgets = isAscendingStatus != _previousIsAscending;
-    if ((_shouldRebuildWidgets)) {
+    if (_shouldRebuildWidgets) {
       devLog("widgets rebuilt");
       update(
         List.from(
