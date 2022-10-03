@@ -11,10 +11,9 @@ class OrderByLettersToggle extends GetView<ApisViewController> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ApisViewController>(
+      id: controller.orderLettersToggleId,
       builder: (controller) {
-
         return Row(
-          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             ColoredBox(

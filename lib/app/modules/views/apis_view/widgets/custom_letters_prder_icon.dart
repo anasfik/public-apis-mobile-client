@@ -14,6 +14,7 @@ class CustomLettersOrderIcon extends GetView<ApisViewController> {
     required this.orderByLetters,
     required this.boolValue,
   });
+
   // final controller = Get.find<ApisViewController>();
   final bool boolValue;
   final OrderByLetters orderByLetters;
@@ -22,12 +23,14 @@ class CustomLettersOrderIcon extends GetView<ApisViewController> {
     assert(OrderByLetters.values.length == 2);
     return GestureDetector(
       onTap: () {
-        controller.updateOrderByLettersStatus(boolValue);
+        controller.updateOrderByLettersStatus(
+          orderByLetters == OrderByLetters.ZtoA,
+        );
       },
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(12),
-        child: Container(
-          // duration: const Duration(milliseconds: 200),
+        borderRadius: BorderRadius.circular(6),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
           height: 45,
           color: controller
                   .colorBasedOnIsAscendingStatue(context, boolValue)
