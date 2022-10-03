@@ -6,7 +6,9 @@ import 'package:public_apis_desktop_client/app/utils/extensions/getx_controller_
 import '../apis_view_controller.dart';
 
 extension UpdateOrderByLettersExtension on ApisViewController {
-  static late bool shouldRebuildWidgets;
+  static bool _shouldRebuildWidgets = false;
+  static bool _previousIsAscending = true;
+
   static HashMap orderByLettersBoolValuesHashMap = HashMap(
     hashCode: (p0) => p0.hashCode,
     equals: (p0, p1) => p0 == p1,
@@ -48,17 +50,17 @@ extension UpdateOrderByLettersExtension on ApisViewController {
   }
 
   void _customUpdateOrderByLetters(bool isAscendingStatus) {
-    if (shouldRebuildWidgets == isAscendingStatus) {
-      return;
-    }
-    devLog("widgets rebuilt");
-
-    update(
-      List.from(
-        orderByLettersBoolValuesHashMap.values.map(
-          (e) => e.toString(),
+    _shouldRebuildWidgets = isAscendingStatus != _previousIsAscending;
+    if ((_shouldRebuildWidgets)) {
+      devLog("widgets rebuilt");
+      update(
+        List.from(
+          orderByLettersBoolValuesHashMap.values.map(
+            (boolValue) => boolValue.toString(),
+          ),
         ),
-      ),
-    );
+      );
+      _previousIsAscending = isAscendingStatus;
+    }
   }
 }

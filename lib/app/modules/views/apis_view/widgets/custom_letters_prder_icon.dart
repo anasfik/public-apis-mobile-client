@@ -10,15 +10,13 @@ enum OrderByLetters { AtoZ, ZtoA }
 class CustomLettersOrderIcon extends GetWidget<ApisViewController> {
   const CustomLettersOrderIcon({
     super.key,
-    required this.isAscending,
     required this.orderByLetters,
   });
 
-  final bool isAscending;
   final OrderByLetters orderByLetters;
-
   @override
   Widget build(BuildContext context) {
+    bool isAscending = orderByLetters == OrderByLetters.AtoZ;
     return GetBuilder<ApisViewController>(
       global: true,
       id: isAscending.toString(),
@@ -35,11 +33,11 @@ class CustomLettersOrderIcon extends GetWidget<ApisViewController> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    orderByLetters == OrderByLetters.AtoZ ? "Z" : "A",
+                    isAscending ? "Z" : "A",
                     style: Theme.of(context).textTheme.labelMedium,
                   ),
                   Text(
-                    orderByLetters == OrderByLetters.AtoZ ? "A" : "Z",
+                    isAscending ? "A" : "Z",
                     style: Theme.of(context).textTheme.labelMedium,
                   ),
                 ],
