@@ -15,12 +15,10 @@ class OrderByLettersToggle extends GetView<ApisViewController> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: const <Widget>[
         CustomLettersOrderIcon(
-          isAscending: true,
-          iconColor: Colors.black,
+          isAscending: false,
         ),
         CustomLettersOrderIcon(
-          isAscending: false,
-          iconColor: Colors.black,
+          isAscending: true,
         ),
       ],
     );

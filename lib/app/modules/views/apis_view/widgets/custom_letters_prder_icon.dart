@@ -9,11 +9,9 @@ class CustomLettersOrderIcon extends GetWidget<ApisViewController> {
   const CustomLettersOrderIcon({
     super.key,
     required this.isAscending,
-    required this.iconColor,
   });
 
   final bool isAscending;
-  final Color iconColor;
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ApisViewController>(
@@ -31,9 +29,9 @@ class CustomLettersOrderIcon extends GetWidget<ApisViewController> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Text(isAscending ? "A" : "Z",
-                      style: Theme.of(context).textTheme.labelMedium),
                   Text(isAscending ? "Z" : "A",
+                      style: Theme.of(context).textTheme.labelMedium),
+                  Text(isAscending ? "A" : "Z",
                       style: Theme.of(context).textTheme.labelMedium),
                 ],
               ),
@@ -42,7 +40,10 @@ class CustomLettersOrderIcon extends GetWidget<ApisViewController> {
                 child: Icon(
                   Icons.straight,
                   size: 29,
-                  color: controller.colorBasedOnIsAscendingStatue(context, isAscending),
+                  color: controller.colorBasedOnIsAscendingStatue(
+                    context,
+                    isAscending,
+                  ),
                 ),
               ),
             ],

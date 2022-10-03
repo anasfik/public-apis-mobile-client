@@ -23,8 +23,8 @@ Future<List<Api>> runFilteredApisMethodOnSeparateIsolate(
 
   List<Api> finalResult = await receivePort.first;
   return controller.shouldApisListReverse
-      ? finalResult
-      : finalResult.reversed.toList();
+      ? finalResult.reversed.toList()
+      : finalResult;
 }
 
 void filteredApis(List<dynamic> arguments) async {
