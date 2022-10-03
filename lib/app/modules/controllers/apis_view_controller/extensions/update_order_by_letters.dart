@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 
 import '../apis_view_controller.dart';
@@ -6,7 +8,19 @@ extension UpdateOrderByLettersExtension on ApisViewController {
   static bool _previousIsAscending = true;
   static const String _orderLettersId = "OrderByLettersToggleId";
   String get orderLettersToggleId => _orderLettersId;
+static final HashMap orderByLettersBoolValuesHashMap = HashMap<String, bool>(
+    equals: (a, b) => a == b,
+    hashCode: (a) => a.hashCode,
+  )..addAll(
+      {
+        "A-Z": true,
+        "Z-A": false,
+      },
+    );
+    HashMap get orderByLettersBoolHashMap => orderByLettersBoolValuesHashMap;
 
+
+    
   /// Update the order by letters status
   void updateOrderByLettersStatus(bool isAscendingStatus) {
     if (_shouldExecuteAndReBuildWidgets(isAscendingStatus)) {

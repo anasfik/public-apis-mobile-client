@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/apis_view_controller/extensions/update_order_by_letters.dart';
 
-import '../../../../utils/extensions/getx_controller_extension.dart';
 import '../../../controllers/apis_view_controller/apis_view_controller.dart';
 import "dart:math" as math;
 
@@ -30,7 +29,7 @@ class CustomLettersOrderIcon extends GetView<ApisViewController> {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(6),
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
+          duration: const Duration(milliseconds: 100),
           height: 45,
           color: controller
                   .colorBasedOnIsAscendingStatue(context, boolValue)
@@ -49,14 +48,18 @@ class CustomLettersOrderIcon extends GetView<ApisViewController> {
                       orderByLetters == OrderByLetters.AtoZ ? "A" : "Z",
                       style: Theme.of(context).textTheme.labelMedium!.copyWith(
                             color: controller.colorBasedOnIsAscendingStatue(
-                                context, boolValue),
+                              context,
+                              boolValue,
+                            ),
                           ),
                     ),
                     Text(
                       orderByLetters == OrderByLetters.AtoZ ? "Z" : "A",
                       style: Theme.of(context).textTheme.labelMedium!.copyWith(
                             color: controller.colorBasedOnIsAscendingStatue(
-                                context, boolValue),
+                              context,
+                              boolValue,
+                            ),
                           ),
                     ),
                   ],

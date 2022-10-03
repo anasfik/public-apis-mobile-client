@@ -17,11 +17,38 @@ class FilterAlertDialog extends GetView<ApisViewController> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: AutoSizeText("filter :".firstLettersToCapital()),
+      title: AutoSizeText(
+        "filter :".firstLettersToCapital(),
+        style: const TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 22,
+        ),
+      ),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          OrderByLettersToggle(),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              "order :".firstLettersToCapital(),
+              style: const TextStyle(
+                fontSize: 15,
+              ),
+            ),
+          ),
+          const OrderByLettersToggle(),
+          const SizedBox(
+            height: 30,
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              "Tags :".firstLettersToCapital(),
+              style: const TextStyle(
+                fontSize: 15,
+              ),
+            ),
+          ),
           FilterChoiceChips(prefixFilterId: category),
         ],
       ),

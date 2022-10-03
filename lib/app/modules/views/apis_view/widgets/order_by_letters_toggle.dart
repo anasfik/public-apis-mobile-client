@@ -10,28 +10,33 @@ class OrderByLettersToggle extends GetView<ApisViewController> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ApisViewController>(
-      id: controller.orderLettersToggleId,
-      builder: (controller) {
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            ColoredBox(
-              color: Colors.transparent,
-              child: CustomLettersOrderIcon(
-                orderByLetters: OrderByLetters.AtoZ,
-                boolValue:
-                    controller.orderByLettersBoolValuesHashMap["A-Z"] as bool,
-              ),
+    return LayoutBuilder(builder: (context, constrains) {
+      return GetBuilder<ApisViewController>(
+        id: controller.orderLettersToggleId,
+        builder: (controller) {
+          return SizedBox(
+            width: constrains.maxWidth * .75,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                ColoredBox(
+                  color: Colors.transparent,
+                  child: CustomLettersOrderIcon(
+                    orderByLetters: OrderByLetters.AtoZ,
+                    boolValue:
+                        controller.orderByLettersBoolHashMap["A-Z"] as bool,
+                  ),
+                ),
+                CustomLettersOrderIcon(
+                  boolValue:
+                      controller.orderByLettersBoolHashMap["Z-A"] as bool,
+                  orderByLetters: OrderByLetters.ZtoA,
+                ),
+              ],
             ),
-            CustomLettersOrderIcon(
-              boolValue:
-                  controller.orderByLettersBoolValuesHashMap["Z-A"] as bool,
-              orderByLetters: OrderByLetters.ZtoA,
-            ),
-          ],
-        );
-      },
-    );
+          );
+        },
+      );
+    });
   }
 }
