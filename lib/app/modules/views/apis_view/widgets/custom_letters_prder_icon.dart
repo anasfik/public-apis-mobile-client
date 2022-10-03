@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/apis_view_controller/extensions/update_order_by_letters.dart';
 
 import '../../../controllers/apis_view_controller/apis_view_controller.dart';
-import "dart:math" as Math;
+import "dart:math" as math;
 
 enum OrderByLetters { AtoZ, ZtoA }
 
@@ -17,6 +17,7 @@ class CustomLettersOrderIcon extends GetWidget<ApisViewController> {
   @override
   Widget build(BuildContext context) {
     bool isAscending = orderByLetters == OrderByLetters.AtoZ;
+    assert(OrderByLetters.values.length == 2);
     return GetBuilder<ApisViewController>(
       global: true,
       id: isAscending.toString(),
@@ -43,14 +44,15 @@ class CustomLettersOrderIcon extends GetWidget<ApisViewController> {
                 ],
               ),
               Transform.rotate(
-                angle: Math.pi,
+                angle: math.pi,
                 child: Icon(
                   Icons.straight,
                   size: 29,
                   color: controller.colorBasedOnIsAscendingStatue(
-                    context,
-                    isAscending,
-                  ),
+                        context,
+                        isAscending,
+                      ) ??
+                      Colors.black,
                 ),
               ),
             ],

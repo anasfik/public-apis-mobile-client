@@ -9,9 +9,9 @@ extension UpdateOrderByLettersExtension on ApisViewController {
   static bool _shouldRebuildWidgets = false;
   static bool _previousIsAscending = true;
 
-  static HashMap orderByLettersBoolValuesHashMap = HashMap(
-    hashCode: (p0) => p0.hashCode,
-    equals: (p0, p1) => p0 == p1,
+  static final HashMap _orderByLettersBoolValuesHashMap = HashMap(
+    hashCode: (key) => key.hashCode,
+    equals: (a, b) => a == b,
   )
     ..putIfAbsent(
       "A-Z",
@@ -26,25 +26,25 @@ extension UpdateOrderByLettersExtension on ApisViewController {
   void updateOrderByLettersStatus(bool isAscendingStatus) {
     _changeShouldApisListReverseTo(isAscendingStatus);
     _customUpdateOrderByLetters(isAscendingStatus);
-    _toggleMapValue();
+    _toggleMapValues();
   }
 
   /// return the color based on the isAscending status
-  Color colorBasedOnIsAscendingStatue(
+  Color? colorBasedOnIsAscendingStatue(
     BuildContext context,
     bool isAscendingStatus,
   ) {
     return shouldApisListReverse == isAscendingStatus
         ? Theme.of(context).primaryColor
-        : Colors.black;
+        : null;
   }
 
   _changeShouldApisListReverseTo(bool value) {
     shouldApisListReverse = value;
   }
 
-  void _toggleMapValue() {
-    orderByLettersBoolValuesHashMap.map(
+  void _toggleMapValues() {
+    _orderByLettersBoolValuesHashMap.map(
       (key, value) => MapEntry(key, !value),
     );
   }
@@ -55,7 +55,7 @@ extension UpdateOrderByLettersExtension on ApisViewController {
       devLog("widgets rebuilt");
       update(
         List.from(
-          orderByLettersBoolValuesHashMap.values.map(
+          _orderByLettersBoolValuesHashMap.values.map(
             (boolValue) => boolValue.toString(),
           ),
         ),
