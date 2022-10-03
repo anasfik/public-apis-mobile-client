@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:public_apis_desktop_client/app/utils/extensions/getx_controller_extension.dart';
 
 import '../apis_view_controller.dart';
 
@@ -50,7 +51,7 @@ extension UpdateOrderByLettersExtension on ApisViewController {
     if (shouldRebuildWidgets == isAscendingStatus) {
       return;
     }
-
+    devLog("widgets rebuilt");
 
     update(
       List.from(
@@ -61,5 +62,3 @@ extension UpdateOrderByLettersExtension on ApisViewController {
     );
   }
 }
-
-
