@@ -5,15 +5,24 @@ import 'package:flutter/material.dart';
 import '../apis_view_controller.dart';
 
 extension UpdateOrderByLettersExtension on ApisViewController {
-  static Map a = {
-    "1": true,
-    "2": false,
-  };
+  static late bool shouldRebuildWidgets;
+  static HashMap orderByLettersBoolValuesHashMap = HashMap(
+    hashCode: (p0) => p0.hashCode,
+    equals: (p0, p1) => p0 == p1,
+  )
+    ..putIfAbsent(
+      "A-Z",
+      () => true,
+    )
+    ..putIfAbsent(
+      "Z-A",
+      () => false,
+    );
 
   /// Update the order by letters status
   void updateOrderByLettersStatus(bool isAscendingStatus) {
     _changeShouldApisListReverseTo(isAscendingStatus);
-    _customUpdateOrderByLetters();
+    _customUpdateOrderByLetters(isAscendingStatus);
     _toggleMapValue();
   }
 
@@ -32,18 +41,25 @@ extension UpdateOrderByLettersExtension on ApisViewController {
   }
 
   void _toggleMapValue() {
-    a.map(
+    orderByLettersBoolValuesHashMap.map(
       (key, value) => MapEntry(key, !value),
     );
   }
 
-  void _customUpdateOrderByLetters() {
+  void _customUpdateOrderByLetters(bool isAscendingStatus) {
+    if (shouldRebuildWidgets == isAscendingStatus) {
+      return;
+    }
+
+
     update(
       List.from(
-        a.values.map(
+        orderByLettersBoolValuesHashMap.values.map(
           (e) => e.toString(),
         ),
       ),
     );
   }
 }
+
+
