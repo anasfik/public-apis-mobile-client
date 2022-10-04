@@ -24,4 +24,7 @@ extension ApiBoolExtension on Api {
   bool hasAuthWithApiKey() {
     return auth.toLowerCase() == "apikey";
   }
+  bool isOpenSource() {
+    return link.toLowerCase().contains("github");
+  }
 }

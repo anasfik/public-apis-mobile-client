@@ -96,6 +96,13 @@ void filteredApis(List<dynamic> arguments) async {
           return false;
         }
       }
+       if (selectedChoiceOption.optionText == "open source") {
+        if (api.isOpenSource()) {
+          isApiValid = true;
+        } else {
+          return false;
+        }
+      }
     }
     // print("name: ${api.name} isApiValid: $isApiValid");
     // print("result: ${result.length}");

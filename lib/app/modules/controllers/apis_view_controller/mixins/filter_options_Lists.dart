@@ -21,6 +21,10 @@ mixin FilterOptionsListsInitMixin {
       apiRelatedValueToCompareWith: "no",
     ),
     FilterChoiceOption(
+      optionText: "open source",
+      apiRelatedValueToCompareWith: "no",
+    ),
+    FilterChoiceOption(
       optionText: "http",
       apiRelatedValueToCompareWith: "no",
     ),
