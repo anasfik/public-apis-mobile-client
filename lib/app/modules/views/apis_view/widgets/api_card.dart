@@ -9,7 +9,7 @@ import '../../../controllers/favorites_controller.dart';
 import 'api_chip.dart';
 import 'api_open_link_button.dart';
 
-class ApiCard extends GetWidget<FavoritesController> {
+class ApiCard extends GetView<FavoritesController> {
   ApiCard({
     Key? key,
     required this.apiInformation,

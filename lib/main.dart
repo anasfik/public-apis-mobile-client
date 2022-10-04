@@ -12,30 +12,46 @@ import 'firebase_options.dart';
 import 'app/modules/controllers/settings_controllers/sub_settings/themes_buttons_setting_controller.dart';
 import 'app/routes/app_pages.dart';
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  FlutterError.onError = Crashlytics().crashlyticsInstance.recordFlutterError;
+Future<void> initAppServices() async {
+  await Future.wait([
+    Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    ),
+    Hive.initFlutter(),
+  ]);
+}
 
-  await Hive.initFlutter();
+Future<void> opnHiveBoxes() async {
+  await Future.wait([
+    Hive.openBox<FavoriteApi>("favorites"),
+    Hive.openBox("locals"),
+  ]);
+}
 
-  Hive.registerAdapter(
-    FavoriteApiAdapter(),
-  );
-
+Future<void> clearHiveBoxesInDebugMode() async {
   // favorites box
-  Box favoritesBox = await Hive.openBox<FavoriteApi>("favorites");
-
+  Box favoritesBox = Hive.box<FavoriteApi>("favorites");
   // locals box
-  Box localsBox = await Hive.openBox("locals");
+  Box localsBox = Hive.box("locals");
 
   if (kDebugMode) {
     await favoritesBox.clear();
     await localsBox.clear();
   }
+}
 
+Future<void> mainInit() async {
+  await initAppServices();
+  Hive.registerAdapter(FavoriteApiAdapter());
+  await opnHiveBoxes();
+
+  await clearHiveBoxesInDebugMode();
+}
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await mainInit();
+  FlutterError.onError = Crashlytics().crashlyticsInstance.recordFlutterError;
   runApp(
     GetMaterialApp(
       initialBinding:

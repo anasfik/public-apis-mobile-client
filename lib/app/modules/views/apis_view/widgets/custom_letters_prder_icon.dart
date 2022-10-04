@@ -27,9 +27,10 @@ class CustomLettersOrderIcon extends GetView<ApisViewController> {
         );
       },
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(6),
+        borderRadius: BorderRadius.circular(5),
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 100),
+          duration: const Duration(milliseconds: 150),
+          curve: Curves.easeInOutExpo,
           height: 45,
           color: controller
                   .colorBasedOnIsAscendingStatue(context, boolValue)

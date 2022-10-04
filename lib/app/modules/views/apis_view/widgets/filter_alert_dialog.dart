@@ -17,40 +17,48 @@ class FilterAlertDialog extends GetView<ApisViewController> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: AutoSizeText(
+      title: Text(
         "filter :".firstLettersToCapital(),
         style: const TextStyle(
           fontWeight: FontWeight.bold,
-          fontSize: 22,
+          fontSize: 25,
         ),
       ),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              "order :".firstLettersToCapital(),
-              style: const TextStyle(
-                fontSize: 15,
+      content: Container(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "order :".firstLettersToCapital(),
+                style: const TextStyle(
+                  fontSize: 15,
+                ),
               ),
             ),
-          ),
-          const OrderByLettersToggle(),
-          const SizedBox(
-            height: 30,
-          ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              "Tags :".firstLettersToCapital(),
-              style: const TextStyle(
-                fontSize: 15,
+            const SizedBox(
+              height: 5,
+            ),
+            const OrderByLettersToggle(),
+            const SizedBox(
+              height: 30,
+            ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "Tags :".firstLettersToCapital(),
+                style: const TextStyle(
+                  fontSize: 15,
+                ),
               ),
             ),
-          ),
-          FilterChoiceChips(prefixFilterId: category),
-        ],
+            const SizedBox(
+              height: 5,
+            ),
+            FilterChoiceChips(prefixFilterId: category),
+          ],
+        ),
       ),
       actions: <Widget>[
         TextButton(

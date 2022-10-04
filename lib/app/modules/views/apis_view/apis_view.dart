@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/apis_view_controller/extensions/filter_apis_view_extension.dart';
 import 'package:public_apis_desktop_client/app/modules/views/apis_view/widgets/api_card.dart';
-import 'package:public_apis_desktop_client/app/utils/extensions/getx_controller_extension.dart';
 import 'package:public_apis_desktop_client/app/utils/text_helper_methods.dart';
 
 import '../../../data/models/AllApis.dart';
@@ -22,7 +21,6 @@ class ApisView extends StatelessWidget {
   final String category;
   @override
   Widget build(BuildContext context) {
-    print("new build");
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
@@ -35,7 +33,6 @@ class ApisView extends StatelessWidget {
         child: GetBuilder<ApisViewController>(
           id: category,
           builder: (controller) {
-            devLog("get builder new build");
             return FutureBuilder(
               future: runAndGetFilteredApisMethodOnSeparateIsolate(apis),
               builder: ((
@@ -88,9 +85,10 @@ class ApisView extends StatelessWidget {
                     child: Text(
                       "something wrong happened \ntry again"
                           .firstLettersToCapital(),
+                      textAlign: TextAlign.center,
                       style: Theme.of(context)
                           .textTheme
-                          .headline4!
+                          .headline5!
                           .copyWith(color: Colors.white),
                     ),
                   ),
