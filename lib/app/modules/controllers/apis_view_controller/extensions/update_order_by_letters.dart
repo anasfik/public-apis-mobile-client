@@ -5,24 +5,7 @@ import 'package:flutter/material.dart';
 import '../apis_view_controller.dart';
 
 extension UpdateOrderByLettersExtension on ApisViewController {
-  static bool _previousIsAscending = true;
-  static const String _orderLettersId = "OrderByLettersToggleId";
-
-  /// hashMap where we store bool values
-  static final HashMap orderByLettersBoolValuesHashMap = HashMap<String, bool>(
-    equals: (a, b) => a == b,
-    hashCode: (a) => a.hashCode,
-  )..addAll(
-      {
-        "A-Z": true,
-        "Z-A": false,
-      },
-    );
-  HashMap get orderByLettersBoolHashMap => orderByLettersBoolValuesHashMap;
-
-  /// id which is used to update the toggle button
-  String get orderLettersToggleId => _orderLettersId;
-
+  
   /// Update the order by letters status
   void updateOrderByLettersStatus(bool isAscendingStatus) {
     if (_shouldExecuteAndReBuildWidgets(isAscendingStatus)) {
@@ -36,12 +19,12 @@ extension UpdateOrderByLettersExtension on ApisViewController {
   /// the _previousIsAscending value will be used to check if the user has clicked something different than last time, to avoid unnecessary change and unnecessary work
   // ! Note: I wrapped all under a condition so even the rebuild of widget will not be done, so if there is a weird behavior, the user will not expect change in the reverse order.
   void _saveCurrentValueToAvoidUnnecessaryWork(bool boolValue) {
-    _previousIsAscending = !boolValue;
+    previousIsAscending = !boolValue;
   }
 
   /// this what we used to check the unnecessary work
   bool _shouldExecuteAndReBuildWidgets(bool boolValue) {
-    return boolValue == _previousIsAscending;
+    return boolValue == previousIsAscending;
   }
 
   /// return the primaryColor or a null value based on the isAscending status

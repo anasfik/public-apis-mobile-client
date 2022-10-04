@@ -7,29 +7,40 @@ import '../../../../data/models/AllApis.dart';
 import '../../../../data/models/filter_choice_option.dart';
 import '../apis_view_controller.dart';
 
-final controller = Get.find<ApisViewController>();
-Future<List<Api>> runFilteredApisMethodOnSeparateIsolate(
+// ! Please: this code is shitty, I know, You should refactor it, it's my first time using isolate so I don't know how to do it better
+
+Future<List<Api>> runAndGetFilteredApisMethodOnSeparateIsolate(
   List<Api> categoryApis,
 ) async {
+  /// new controller will be injected every time to re init the values
+  final ApisViewController newController =
+      Get.put<ApisViewController>(ApisViewController());
+
+  /// the receive port for the isolate
   ReceivePort receivePort = ReceivePort();
+
+  /// we sent the receive port to the function in the isolate with other necessary data that will work with
   await Isolate.spawn(
     filteredApis,
     [
       receivePort.sendPort,
       categoryApis,
-      controller.selectedFilterOptions,
+      newController.selectedFilterOptions,
     ],
   );
 
+  /// the ReceivePort.first will return the first message that is sent to the isolate,
+// ! see docs ( it implements Stream )
   List<Api> finalResult = await receivePort.first;
-  return controller.shouldApisListReverse
+
+  /// returns the final result
+  return newController.shouldApisListReverse
       ? finalResult.reversed.toList()
       : finalResult;
 }
 
 void filteredApis(List<dynamic> arguments) async {
-  // ! here it's strict to avoid types problems
-
+  // ! Here it's strict checks to avoid types problems in future
   assert(arguments[0] is SendPort,
       "please assign the SendPort object as first argument");
   SendPort sendPort = arguments[0];
@@ -42,13 +53,11 @@ void filteredApis(List<dynamic> arguments) async {
       "please assign the List<FilterChoiceOption> object as third argument");
   List<FilterChoiceOption> selectedChoiceOptions = arguments[2];
 
-  List<Api> result = [];
-
   if (selectedChoiceOptions.isEmpty) {
     Isolate.exit(sendPort, categoryApis);
   }
 
-  result = categoryApis.where((api) {
+  List<Api> result = categoryApis.where((api) {
     bool isApiValid = false;
 
     for (FilterChoiceOption selectedChoiceOption in selectedChoiceOptions) {
@@ -93,6 +102,6 @@ void filteredApis(List<dynamic> arguments) async {
     // print("${api.name} isApiValid: $isApiValid");
     return isApiValid;
   }).toList();
-  // await Future.delayed(const Duration(milliseconds: 500));
+  await Future.delayed(const Duration(milliseconds: 200));
   Isolate.exit(sendPort, result);
 }

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/apis_view_controller/extensions/filter_apis_view_extension.dart';
 import 'package:public_apis_desktop_client/app/modules/views/apis_view/widgets/api_card.dart';
+import 'package:public_apis_desktop_client/app/utils/extensions/getx_controller_extension.dart';
 import 'package:public_apis_desktop_client/app/utils/text_helper_methods.dart';
 
 import '../../../data/models/AllApis.dart';
@@ -34,10 +35,13 @@ class ApisView extends StatelessWidget {
         child: GetBuilder<ApisViewController>(
           id: category,
           builder: (controller) {
-            print("get builder new build");
+            devLog("get builder new build");
             return FutureBuilder(
-              future: runFilteredApisMethodOnSeparateIsolate(apis),
-              builder: ((context, AsyncSnapshot<List<Api>> snapshot) {
+              future: runAndGetFilteredApisMethodOnSeparateIsolate(apis),
+              builder: ((
+                context,
+                AsyncSnapshot<List<Api>> snapshot,
+              ) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return LinearProgressIndicator(
                     minHeight: 3,

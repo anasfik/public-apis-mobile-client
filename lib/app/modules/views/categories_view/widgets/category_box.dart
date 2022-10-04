@@ -6,7 +6,6 @@ import 'package:public_apis_desktop_client/app/modules/controllers/apis_view_con
 import 'package:public_apis_desktop_client/app/utils/text_helper_methods.dart';
 
 import '../../../../data/models/AllApis.dart';
-import '../../../controllers/favorites_controller.dart';
 import '../../../controllers/home_controller.dart';
 import '../../apis_view/apis_view.dart';
 
