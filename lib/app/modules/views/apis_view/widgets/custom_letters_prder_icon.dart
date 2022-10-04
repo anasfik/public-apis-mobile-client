@@ -25,7 +25,7 @@ class CustomLettersOrderIcon extends GetView<ApisViewController> {
       color: Theme.of(context).colorScheme.onSurface.withOpacity(0.12),
       clipBehavior: Clip.hardEdge,
       child: InkWell(
-        splashColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.24),
+        splashColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.12),
         onTap: () {
           controller.updateOrderByLettersStatus(
             orderByLetters == OrderByLetters.ZtoA,
