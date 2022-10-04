@@ -2,24 +2,24 @@ import 'package:animations/animations.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:public_apis_desktop_client/app/modules/controllers/apis_view_controller/apis_view_controller.dart';
 import 'package:public_apis_desktop_client/app/utils/text_helper_methods.dart';
 
 import '../../../../data/models/AllApis.dart';
+import '../../../bindings/apis_view_binding.dart';
 import '../../../controllers/home_controller.dart';
 import '../../apis_view/apis_view.dart';
 
 class CategoryBox extends GetView<HomeController> {
   const CategoryBox({
-    Key? key,
+    super.key,
     required this.dataList,
     required this.apis,
-  }) : super(key: key);
+  });
   final Map<String, String> dataList;
   final List<Api> apis;
   @override
   Widget build(BuildContext context) {
-    // return OpenContainer(closedBuilder: MyWidget(), openBuilder: () => )
+    final ApisViewBinding binding = ApisViewBinding();
     return OpenContainer(
       tappable: false,
       middleColor: Theme.of(context).scaffoldBackgroundColor,
@@ -28,10 +28,11 @@ class CategoryBox extends GetView<HomeController> {
       closedColor: Theme.of(context).scaffoldBackgroundColor,
       openColor: Theme.of(context).scaffoldBackgroundColor,
       onClosed: (value) {
-        Get.delete<ApisViewController>();
+        binding.unbind();
       },
       openBuilder: (context, function) {
-        Get.put<ApisViewController>(ApisViewController());
+        binding.bind();
+
         return ApisView(
           apis: apis,
           category: dataList["title"]!,

@@ -11,8 +11,8 @@ class HomeCategoriesPageBinding extends Bindings {
         context: Get.context,
       ),
     );
-    Get.put<FavoritesController>(
-      FavoritesController(),
-    );
+    // Get.put<FavoritesController>(
+    //   FavoritesController(),
+    // );
   }
 }
