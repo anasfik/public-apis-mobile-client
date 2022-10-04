@@ -20,14 +20,17 @@ class CustomLettersOrderIcon extends GetView<ApisViewController> {
   @override
   Widget build(BuildContext context) {
     assert(OrderByLetters.values.length == 2);
-    return GestureDetector(
-      onTap: () {
-        controller.updateOrderByLettersStatus(
-          orderByLetters == OrderByLetters.ZtoA,
-        );
-      },
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(5),
+    return Material(
+      borderRadius: BorderRadius.circular(5),
+      color: Theme.of(context).colorScheme.onSurface.withOpacity(0.12),
+      clipBehavior: Clip.hardEdge,
+      child: InkWell(
+        splashColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.24),
+        onTap: () {
+          controller.updateOrderByLettersStatus(
+            orderByLetters == OrderByLetters.ZtoA,
+          );
+        },
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 150),
           curve: Curves.easeInOutExpo,
