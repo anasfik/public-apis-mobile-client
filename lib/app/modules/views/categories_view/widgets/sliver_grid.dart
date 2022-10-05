@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/search_bar_change.dart';
 import 'package:public_apis_desktop_client/app/utils/dialog_helper.dart';
 
@@ -80,7 +78,7 @@ class CustomSliverGrid extends GetView<HomeController> {
               );
             }
 
-            /// we gonna handle error from remote service class
+            // we gonna handle error from remote service class
             if (snapshot.hasError) {
               DialogHelper.showInfoDialog(
                 title: (snapshot.error as Failure).title,

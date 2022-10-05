@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/scroll_controller_init.dart';
 
 import '../../../data/models/AllApis.dart';
 import '../../../services/fetch_api/remote_service.dart';
 
 class HomeController extends GetxController {
-  static BuildContext? _context = Get.context;
-  BuildContext? context;
   HomeController({this.context}) {
     _context = context;
     badgeBackgroundColor = Theme.of(_context!).primaryColor.obs;
   }
-  // localsBox
-  Box localsBox = Hive.box("locals");
+  //
+  static BuildContext? _context = Get.context;
+  BuildContext? context;
 
   // color observable
   late Rx<Color?> badgeBackgroundColor;
@@ -23,46 +23,6 @@ class HomeController extends GetxController {
     begin: badgeBackgroundColor.value,
     end: Theme.of(_context!).scaffoldBackgroundColor,
   ).obs;
-
-  // expanded height for sliver app bar
-  int expandedHeight = 140;
-  double sizedBoxHeight = 5;
-  double searchBarHeight = 50;
-  @override
-  void onInit() {
-    // Declare textEditingController
-    searchInputController = TextEditingController();
-
-    // initialize the crossAxiCount
-    crossAxisCount = localsBox.get("crossAxisCount") ?? 2;
-
-    // Get data and store it in the getAllApisData variable
-    getAllApisData = RemoteService.getData();
-
-    // init scrollController
-    scrollController = ScrollController();
-
-    // add listener to scrollController
-    scrollController.addListener(() {
-      if (scrollController.position.hasPixels &&
-          scrollController.position.pixels != double.infinity &&
-          scrollController.position.pixels > 0 &&
-          scrollController.position.pixels < 140) {
-        badgeBackgroundColor.value = badgeBackgroundColorTween.value.lerp(
-              scrollController.position.pixels /
-                  (expandedHeight - kToolbarHeight),
-            ) ??
-            Theme.of(_context!).primaryColor;
-      }
-    });
-    ever(badgeBackgroundColorTween, updateColor);
-
-    super.onInit();
-  }
-
-  updateColor(clr) {
-    badgeBackgroundColor.value = badgeBackgroundColorTween.value.begin;
-  }
 
   // Future variables to get data once and use it in the app
   late Future<List<CategoryApis>> getAllApisData;
@@ -75,4 +35,33 @@ class HomeController extends GetxController {
 
   // the scroll controller
   late ScrollController scrollController;
+
+//
+  int expandedHeight = 140;
+  double sizedBoxHeight = 5;
+  double searchBarHeight = 50;
+  @override
+  void onInit() {
+    // Declare textEditingController
+    searchInputController = TextEditingController();
+
+    // initialize the crossAxiCount
+    Box localsBox = Hive.box("locals");
+    crossAxisCount = localsBox.get("crossAxisCount") ?? 2;
+
+    // Get data and store it in the getAllApisData variable
+    getAllApisData = RemoteService.getData();
+
+    //
+    scrollControllerInit(_context!);
+
+    //
+    ever(badgeBackgroundColorTween, _updateColor);
+
+    super.onInit();
+  }
+
+  _updateColor(ColorTween clr) {
+    badgeBackgroundColor.value = badgeBackgroundColorTween.value.begin;
+  }
 }
