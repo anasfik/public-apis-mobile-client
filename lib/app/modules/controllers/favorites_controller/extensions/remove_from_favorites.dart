@@ -4,13 +4,11 @@ extension RemoveFromFavorites on FavoritesController {
   /// Remove api from favorites hive box
   void removeFromFavorites({
     required bool isFavorite,
-    required String category,
-    required String name,
+    required String key,
   }) {
-    if (favoritesBox.get("$category$name") != null) {
-      favoritesBox.delete("$category$name");
-      isFavorite = false;
-    }
-    update([name]);
+    favoritesBox.delete(key);
+    isFavorite = false;
+
+   
   }
 }

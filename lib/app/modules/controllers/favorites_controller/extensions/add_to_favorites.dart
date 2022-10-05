@@ -2,9 +2,14 @@ import 'package:public_apis_desktop_client/app/modules/controllers/favorites_con
 
 import '../../../../data/models/favoriteApi.dart';
 
+extension Checks on FavoriteApi? {
+  bool get exists => this != null;
+}
+
 extension AddToFavoritesExtension on FavoritesController {
   /// Add api to favorites hive box
   void addToFavoritesList({
+    required String key,
     required bool isFavorite,
     required String name,
     required String category,
@@ -14,9 +19,9 @@ extension AddToFavoritesExtension on FavoritesController {
     required String cors,
     required String link,
   }) {
-    if (favoritesBox.get("$category$name") == null) {
+    if (!favoritesBox.get(key).exists) {
       favoritesBox.put(
-        "$category$name",
+        key,
         FavoriteApi(
           name: name,
           category: category,
@@ -29,7 +34,6 @@ extension AddToFavoritesExtension on FavoritesController {
       );
       isFavorite = true;
     }
-    // update the GetBuilder of the widget with the name id
-    update([name]);
+   
   }
 }

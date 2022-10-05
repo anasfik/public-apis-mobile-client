@@ -1,9 +1,13 @@
 import 'package:public_apis_desktop_client/app/modules/controllers/favorites_controller/extensions/add_to_favorites.dart';
+import 'package:public_apis_desktop_client/app/modules/controllers/favorites_controller/extensions/generate_api_key.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/favorites_controller/extensions/remove_from_favorites.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/favorites_controller/favorites_controller.dart';
 
+
+
+
+
 extension ToggleFavoriteStatusExtension on FavoritesController {
-  
   /// Add / Remove favorite api from favorites box
   void toggleFavoriteStatus({
     required bool isFavorite,
@@ -15,18 +19,21 @@ extension ToggleFavoriteStatusExtension on FavoritesController {
     required String cors,
     required String link,
   }) {
+    String key = consistentKey(category, name);
+
     // When api is found in the box (isFavorite = true)), then remove it and quit
-    if (favoritesBox.get("$category$name") != null) {
+    if (favoritesBox.get(key).exists) {
       removeFromFavorites(
         isFavorite: isFavorite,
-        category: category,
-        name: name,
+        key: key,
       );
+      update([name]);
       return;
     }
 
     // else (isFavorite = false), then add it to the box
     addToFavoritesList(
+      key: key,
       isFavorite: isFavorite,
       name: name,
       category: category,
@@ -36,5 +43,6 @@ extension ToggleFavoriteStatusExtension on FavoritesController {
       cors: cors,
       link: link,
     );
+    update([name]);
   }
 }
