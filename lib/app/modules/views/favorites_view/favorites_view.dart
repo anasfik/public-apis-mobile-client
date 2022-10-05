@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../data/models/favoriteApi.dart';
-import '../../controllers/favorites_controller.dart';
+import '../../controllers/favorites_controller/favorites_controller.dart';
 import 'widgets/favorite_api_card.dart';
 
 class FavoritesView extends GetView<FavoritesController> {

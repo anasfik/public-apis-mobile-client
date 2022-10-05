@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:public_apis_desktop_client/app/data/models/favoriteApi.dart';
-import '../../../controllers/favorites_controller.dart';
+import '../../../controllers/favorites_controller/favorites_controller.dart';
 import '../../apis_view/widgets/api_chip.dart';
 import '../../apis_view/widgets/api_open_link_button.dart';
 

@@ -1,11 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:public_apis_desktop_client/app/modules/controllers/favorites_controller/extensions/toggle_favorite_status.dart';
 import 'package:public_apis_desktop_client/app/services/crashlytics/crashlytics.dart';
 import 'package:public_apis_desktop_client/app/utils/extensions/api_model_extension.dart';
 
 import '../../../../data/models/AllApis.dart';
-import '../../../controllers/favorites_controller.dart';
+import '../../../controllers/favorites_controller/favorites_controller.dart';
 import 'api_chip.dart';
 import 'api_open_link_button.dart';
 
