@@ -50,7 +50,10 @@ class CustomSliverGrid extends GetView<HomeController> {
                 id: "CategoryApisGridView",
                 builder: (controller) {
                   List<CategoryApis> resultList =
-                      controller.filteredList<CategoryApis>(snapshot.data);
+                      controller.filteredList<CategoryApis>(
+                    snapshot.data,
+                    controllerLinkedWith: controller.searchInputController,
+                  );
                   return SliverGrid.count(
                     crossAxisCount: controller.crossAxisCount,
                     childAspectRatio: controller.crossAxisCount == 2 ? 1.75 : 3,

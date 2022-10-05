@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import '../home_controller.dart';
 
 extension SearchBarChangeExtension on HomeController {
@@ -7,14 +9,17 @@ extension SearchBarChangeExtension on HomeController {
     update([categoriesGridViewId]);
   }
 
-  List<T> filteredList<T>(List list) {
-    if (searchInputController.text.isEmpty) {
-      return list as List<T>;
+  List<T> filteredList<T>(
+    List rawList, {
+    required TextEditingController controllerLinkedWith,
+  }) {
+    if (controllerLinkedWith.text.isEmpty) {
+      return rawList as List<T>;
     }
-    return list
+    return rawList
         .where(
           (element) => element.title.toLowerCase().startsWith(
-                searchInputController.text.toLowerCase(),
+                controllerLinkedWith.text.toLowerCase(),
               ),
         )
         .toList() as List<T>;
