@@ -46,19 +46,11 @@ class CustomSliverGrid extends GetView<HomeController> {
               );
             }
             if (snapshot.hasData) {
-              List<CategoryApis> result = snapshot.data as List<CategoryApis>;
-
               return GetBuilder<HomeController>(
                 id: "CategoryApisGridView",
                 builder: (controller) {
-                  List<CategoryApis> result2 = result
-                      .where(
-                        (e) => e.title.toLowerCase().startsWith(
-                              controller.searchInputController.text
-                                  .toLowerCase(),
-                            ),
-                      )
-                      .toList();
+                  List<CategoryApis> resultList =
+                      controller.filteredList<CategoryApis>(snapshot.data);
                   return SliverGrid.count(
                     crossAxisCount: controller.crossAxisCount,
                     childAspectRatio: controller.crossAxisCount == 2 ? 1.75 : 3,
@@ -67,16 +59,16 @@ class CustomSliverGrid extends GetView<HomeController> {
                         15 * ((controller.crossAxisCount.toDouble() % 2) + 1),
                     children: [
                       ...List.generate(
-                        result2.length,
+                        resultList.length,
                         (index) => CategoryBox(
                           dataList: {
-                            "title": result2[index].title,
+                            "title": resultList[index].title,
                             "image":
                                 "assets/categoriesImages/${TextHelperMethods.getFirstWordOfTitle(
-                              title: result2[index].title,
+                              title: resultList[index].title,
                             )}.jpg",
                           },
-                          apis: result2[index].apis,
+                          apis: resultList[index].apis,
                         ),
                       )
                     ],
