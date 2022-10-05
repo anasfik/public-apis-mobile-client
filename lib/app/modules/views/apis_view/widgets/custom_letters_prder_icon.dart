@@ -22,7 +22,8 @@ class CustomLettersOrderIcon extends GetView<ApisViewController> {
     assert(OrderByLetters.values.length == 2);
     return Material(
       borderRadius: BorderRadius.circular(5),
-      color: Theme.of(context).colorScheme.onSurface.withOpacity(0.12),
+      elevation: 1.5,
+      
       clipBehavior: Clip.hardEdge,
       child: InkWell(
         splashColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.12),
@@ -38,7 +39,7 @@ class CustomLettersOrderIcon extends GetView<ApisViewController> {
           color: controller
                   .colorBasedOnIsAscendingStatue(context, boolValue)
                   ?.withOpacity(.25) ??
-              Colors.transparent,
+              Theme.of(context).colorScheme.onSurface.withOpacity(0.12),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [

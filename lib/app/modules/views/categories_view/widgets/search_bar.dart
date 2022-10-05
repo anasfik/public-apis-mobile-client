@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/search_bar_change.dart';
 
-import '../../../controllers/home_controller.dart';
+import '../../../controllers/home_controller/home_controller.dart';
 
 class CustomTextField extends GetView<HomeController> {
   final TextEditingController inputController;
@@ -29,7 +30,7 @@ class CustomTextField extends GetView<HomeController> {
           autofocus: false,
           controller: inputController,
           onChanged: (value) {
-            controller.update();
+            controller.onSearchBarChange();
           },
           keyboardType: TextInputType.name,
           decoration: InputDecoration(
@@ -52,14 +53,14 @@ class CustomTextField extends GetView<HomeController> {
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(
                 color: Theme.of(context).primaryColor,
-                width: .75,
+                width: .6,
               ),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(
                 color: Theme.of(context).primaryColor,
-                width: .75,
+                width: .6,
               ),
             ),
           ),

@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
-import '../../home_controller.dart';
+import '../../home_controller/home_controller.dart';
 
 class ToggleCategoriesController extends GetxController {
   // locals box

@@ -15,7 +15,7 @@ String categoriesApisToJson(List<CategoryApis> data) => json.encode(
         ),
       ),
     );
-
+     
 class CategoryApis {
   CategoryApis({
     required this.title,

@@ -6,9 +6,10 @@ import 'package:public_apis_desktop_client/app/utils/text_helper_methods.dart';
 
 import '../../../../data/models/AllApis.dart';
 import '../../../bindings/apis_view_binding.dart';
-import '../../../controllers/home_controller.dart';
+import '../../../controllers/home_controller/home_controller.dart';
 import '../../apis_view/apis_view.dart';
 
+@mustCallSuper
 class CategoryBox extends GetView<HomeController> {
   const CategoryBox({
     super.key,
@@ -24,7 +25,7 @@ class CategoryBox extends GetView<HomeController> {
       tappable: false,
       middleColor: Theme.of(context).scaffoldBackgroundColor,
       transitionDuration: const Duration(milliseconds: 200),
-      // transitionType: ContainerTransitionType.fadeThrough,
+      transitionType: ContainerTransitionType.fadeThrough,
       closedColor: Theme.of(context).scaffoldBackgroundColor,
       openColor: Theme.of(context).scaffoldBackgroundColor,
       onClosed: (value) {
@@ -41,7 +42,7 @@ class CategoryBox extends GetView<HomeController> {
       closedBuilder: (context, openContainer) {
         return GestureDetector(
           onTap: () {
-            openContainer();
+            openContainer.call();
           },
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10),

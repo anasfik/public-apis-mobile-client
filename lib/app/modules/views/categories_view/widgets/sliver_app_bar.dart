@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../utils/text_helper_methods.dart';
-import '../../../controllers/home_controller.dart';
+import '../../../controllers/home_controller/home_controller.dart';
 import 'bookmark_page_icon.dart';
 import 'settings_page_icon.dart';
 

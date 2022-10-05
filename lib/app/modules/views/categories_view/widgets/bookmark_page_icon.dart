@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../../data/models/favoriteApi.dart';
-import '../../../controllers/home_controller.dart';
+import '../../../controllers/home_controller/home_controller.dart';
 
 class BookmarkPageIcon extends GetView<HomeController> {
   const BookmarkPageIcon({
