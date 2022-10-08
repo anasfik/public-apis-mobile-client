@@ -6,14 +6,13 @@ import 'bookmark_page_icon.dart';
 import 'settings_page_icon.dart';
 
 class CustomSliverAppBar extends GetView<HomeController> {
-  const CustomSliverAppBar({
-    Key? key,
-  }) : super(key: key);
+  const CustomSliverAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
       pinned: true,
+      floating: false,
       backgroundColor: Theme.of(context).primaryColor,
       automaticallyImplyLeading: true,
       expandedHeight: controller.expandedHeight.toDouble(),
@@ -22,10 +21,16 @@ class CustomSliverAppBar extends GetView<HomeController> {
         SettingsPageIcon(),
       ],
       flexibleSpace: FlexibleSpaceBar(
-        titlePadding: const EdgeInsets.all(20),
-        expandedTitleScale: 1.5,
+        titlePadding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 20,
+        ),
+        expandedTitleScale: 1.4,
         title: Text(
           ("categories").capitalizeAllWordsFirstLetter(),
+          style: const TextStyle(
+            letterSpacing: 1.25,
+          ),
         ),
         background: Container(
           color: Theme.of(context).scaffoldBackgroundColor,
