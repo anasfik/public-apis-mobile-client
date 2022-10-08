@@ -3,10 +3,15 @@ import 'package:flutter/cupertino.dart';
 typedef FabCallback = void Function();
 
 class FabData {
-  final IconData icon;
   final FabCallback callback;
+  final FabDirectionOption direction;
+  
   FabData({
-    required this.icon,
     required this.callback,
+    required this.direction,
   });
+}
+enum FabDirectionOption {
+  up,
+  down,
 }

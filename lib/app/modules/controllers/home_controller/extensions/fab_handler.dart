@@ -1,9 +1,6 @@
+import '../../../../data/models/fab_model.dart';
 import '../home_controller.dart';
 
-enum FabDirectionOption {
-  up,
-  down,
-}
 
 extension FabHandler on HomeController {
   

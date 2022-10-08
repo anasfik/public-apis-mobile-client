@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/fab_handler.dart';
 
+import '../../../../data/models/fab_model.dart';
 import '../home_controller.dart';
 
 extension ScrollControllerInitExtension on HomeController {

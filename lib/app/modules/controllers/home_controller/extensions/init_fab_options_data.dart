@@ -5,21 +5,20 @@ import 'package:public_apis_desktop_client/app/modules/controllers/home_controll
 import '../../../../data/models/fab_model.dart';
 
 extension InitFabOptionsDataExtension on HomeController {
-void initFabOptionsData() {
-  fabOptionsData = {
+  void initFabOptionsData() {
+    fabOptionsData = {
       "up": FabData(
+        direction: FabDirectionOption.up,
         callback: () {
           scrollToTop();
         },
-        icon: Icons.keyboard_arrow_up,
       ),
       "down": FabData(
+        direction: FabDirectionOption.down,
         callback: () {
           scrollToBottom();
         },
-        icon: Icons.keyboard_arrow_down,
       ),
     };
-}
-
+  }
 }

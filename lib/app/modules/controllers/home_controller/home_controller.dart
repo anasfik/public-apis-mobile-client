@@ -11,12 +11,12 @@ import '../../../services/fetch_api/remote_service.dart';
 
 class HomeController extends GetxController {
   HomeController({this.context}) {
-    _context = context;
+    _context = context ?? Get.context;
     badgeBackgroundColor = Theme.of(_context!).primaryColor.obs;
   }
 
   //
-  static BuildContext? _context = Get.context;
+  static BuildContext? _context;
   BuildContext? context;
 
   //
@@ -38,23 +38,31 @@ class HomeController extends GetxController {
   final double sizedBoxHeight = 5;
   final double searchBarHeight = 50;
   bool shouldFabShows = false;
+
   @override
   void onInit() {
-    searchInputController = TextEditingController();
+    getAllApisData = RemoteService.getData();
 
+    searchInputController = TextEditingController();
     initGridCrossAxisCount();
     initFabOptionsData();
     initScrollController(_context!);
 
-    getAllApisData = RemoteService.getData();
-
-    ever(badgeBackgroundColorTween, _updateColor);
     super.onInit();
   }
 
-  _updateColor(ColorTween clr) {
-    badgeBackgroundColor.value = badgeBackgroundColorTween.value.begin;
+  @override
+  void onReady() {
+    ever(badgeBackgroundColorTween, updateColor);
   }
 
+  @override
+  void onClose() {
+    searchInputController.dispose();
+    scrollController.dispose();
+  }
 
+  updateColor(ColorTween clr) {
+    badgeBackgroundColor.value = badgeBackgroundColorTween.value.begin;
+  }
 }
