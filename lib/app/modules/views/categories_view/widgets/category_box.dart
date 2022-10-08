@@ -13,10 +13,10 @@ import '../../apis_view/apis_view.dart';
 class CategoryBox extends GetView<HomeController> {
   const CategoryBox({
     super.key,
-    required this.dataList,
+    required this.dataMap,
     required this.apis,
   });
-  final Map<String, String> dataList;
+  final Map<String, String> dataMap;
   final List<Api> apis;
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class CategoryBox extends GetView<HomeController> {
 
         return ApisView(
           apis: apis,
-          category: dataList["title"]!,
+          category: dataMap["title"]!,
         );
       },
       closedBuilder: (context, openContainer) {
@@ -50,7 +50,7 @@ class CategoryBox extends GetView<HomeController> {
               fit: StackFit.expand,
               children: <Widget>[
                 Image.asset(
-                  dataList["image"]!,
+                  dataMap["image"]!,
                   fit: BoxFit.cover,
                 ),
                 Material(
@@ -63,12 +63,10 @@ class CategoryBox extends GetView<HomeController> {
                 Align(
                   alignment: Alignment.center,
                   child: AutoSizeText(
-                    dataList["title"]!,
+                    dataMap["title"]!,
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.headline3!.copyWith(
-                          fontSize: 
-                            dataList["title"]!.handleFontSizeValue(),
-                          
+                          fontSize: dataMap["title"]!.handleFontSizeValue(),
                         ),
                     maxLines: 3,
                   ),

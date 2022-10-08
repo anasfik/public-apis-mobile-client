@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/generate_asset_path_with_title.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/search_bar_change.dart';
 import 'package:public_apis_desktop_client/app/utils/dialog_helper.dart';
 
@@ -63,17 +64,17 @@ class CustomSliverGrid extends GetView<HomeController> {
                   mainAxisSpacing:
                       15 * ((controller.crossAxisCount.toDouble() % 2) + 1),
                   children: [
-                    ...List.generate(
-                      resultList.length,
-                      (index) => CategoryBox(
-                        dataList: {
-                          "title": resultList[index].title,
-                          "image":
-                              "assets/categoriesImages/${resultList[index].title.firstWord()}.jpg",
+                    ...List.generate(resultList.length, (index) {
+                      String title = resultList[index].title;
+
+                      return CategoryBox(
+                        dataMap: {
+                          "title": title,
+                          "image": controller.assetPathBasedInTitle(title),
                         },
                         apis: resultList[index].apis,
-                      ),
-                    )
+                      );
+                    })
                   ],
                 );
               }
