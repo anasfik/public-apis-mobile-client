@@ -50,36 +50,31 @@ class CustomSliverGrid extends GetView<HomeController> {
               }
 
               if (snapshot.hasData) {
-                return Builder(
-                  // id: "CategoryApisGridView",
-                  builder: (context) {
-                    List<CategoryApis> resultList =
-                        controller.filteredList<CategoryApis>(
-                      snapshot.data!,
-                      controllerLinkedWith: controller.searchInputController,
-                    );
-                    return SliverGrid.count(
-                      crossAxisCount: controller.crossAxisCount,
-                      childAspectRatio:
-                          controller.crossAxisCount == 2 ? 1.75 : 3,
-                      crossAxisSpacing: 15,
-                      mainAxisSpacing:
-                          15 * ((controller.crossAxisCount.toDouble() % 2) + 1),
-                      children: [
-                        ...List.generate(
-                          resultList.length,
-                          (index) => CategoryBox(
-                            dataList: {
-                              "title": resultList[index].title,
-                              "image":
-                                  "assets/categoriesImages/${resultList[index].title.firstWord()}.jpg",
-                            },
-                            apis: resultList[index].apis,
-                          ),
-                        )
-                      ],
-                    );
-                  },
+                List<CategoryApis> resultList =
+                    controller.filteredList<CategoryApis>(
+                  snapshot.data!,
+                  controllerLinkedWith: controller.searchInputController,
+                );
+
+                return SliverGrid.count(
+                  crossAxisCount: controller.crossAxisCount,
+                  childAspectRatio: controller.crossAxisCount == 2 ? 1.75 : 3,
+                  crossAxisSpacing: 15,
+                  mainAxisSpacing:
+                      15 * ((controller.crossAxisCount.toDouble() % 2) + 1),
+                  children: [
+                    ...List.generate(
+                      resultList.length,
+                      (index) => CategoryBox(
+                        dataList: {
+                          "title": resultList[index].title,
+                          "image":
+                              "assets/categoriesImages/${resultList[index].title.firstWord()}.jpg",
+                        },
+                        apis: resultList[index].apis,
+                      ),
+                    )
+                  ],
                 );
               }
 
