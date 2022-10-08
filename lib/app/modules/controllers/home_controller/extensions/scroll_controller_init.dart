@@ -5,7 +5,7 @@ import 'package:public_apis_desktop_client/app/modules/controllers/home_controll
 import '../home_controller.dart';
 
 extension ScrollControllerInitExtension on HomeController {
-  void scrollControllerInit(BuildContext context) {
+  void initScrollController(BuildContext context) {
     // init scrollController
     scrollController = ScrollController();
 

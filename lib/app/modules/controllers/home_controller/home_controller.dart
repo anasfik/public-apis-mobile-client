@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:public_apis_desktop_client/app/data/models/fab_model.dart';
+import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/init_axis_count.dart';
+import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/init_fab_options_data.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/scroll_controller_init.dart';
 
 import '../../../data/models/AllApis.dart';
@@ -12,56 +14,41 @@ class HomeController extends GetxController {
     _context = context;
     badgeBackgroundColor = Theme.of(_context!).primaryColor.obs;
   }
+
   //
   static BuildContext? _context = Get.context;
   BuildContext? context;
 
-  // color observable
+  //
   late Rx<Color?> badgeBackgroundColor;
-
-  // badge background color tween
   late Rx<ColorTween> badgeBackgroundColorTween = ColorTween(
     begin: badgeBackgroundColor.value,
     end: Theme.of(_context!).scaffoldBackgroundColor,
   ).obs;
-
-  // Future variables to get data once and use it in the app
   late Future<List<CategoryApis>> getAllApisData;
-
-  // Search text editing controller
   late final TextEditingController searchInputController;
-
-  // the crossAxisCount of the grid
   late int crossAxisCount;
-
-  // the scroll controller
+  late Map<String, FabData> fabOptionsData;
   late ScrollController scrollController;
+  late FabData currentFabData = fabOptionsData["down"]!;
 
   //
   final int expandedHeight = 140;
   final double sizedBoxHeight = 5;
   final double searchBarHeight = 50;
-
-
+  bool shouldFabShows = false;
 
   @override
   void onInit() {
-    // Declare textEditingController
     searchInputController = TextEditingController();
 
-    // initialize the crossAxiCount
-    Box localsBox = Hive.box("locals");
-    crossAxisCount = localsBox.get("crossAxisCount") ?? 2;
+    initGridCrossAxisCount();
+    initFabOptionsData();
+    initScrollController(_context!);
 
-    // Get data and store it in the getAllApisData variable
     getAllApisData = RemoteService.getData();
 
-    //
-    scrollControllerInit(_context!);
-
-    //
     ever(badgeBackgroundColorTween, _updateColor);
-
     super.onInit();
   }
 
@@ -69,39 +56,5 @@ class HomeController extends GetxController {
     badgeBackgroundColor.value = badgeBackgroundColorTween.value.begin;
   }
 
-  void _scrollToTop() {
-    scrollController.animateTo(
-      0,
-      duration: const Duration(milliseconds: 150),
-      curve: Curves.easeInOutQuart,
-    );
-  }
-
-  get scrollToTop => _scrollToTop;
-  void _scrollToBottom() {
-    scrollController.animateTo(
-      scrollController.position.maxScrollExtent,
-      duration: const Duration(milliseconds: 150),
-      curve: Curves.easeInOutQuart,
-    );
-  }
-  get scrollToBottom => _scrollToBottom;
-
-    late Map<String, FabData> fabOptionsData = {
-    "up": FabData(
-      callback: () {
-        scrollToTop();
-      },
-      icon: Icons.keyboard_arrow_up,
-    ),
-    "down": FabData(
-      callback: () {
-        scrollToBottom();
-      },
-      icon: Icons.keyboard_arrow_down,
-    ),
-  };
-  late FabData currentFabData = fabOptionsData["down"]!;
-  bool shouldFabShows = false;
 
 }
