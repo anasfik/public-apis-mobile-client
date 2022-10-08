@@ -5,6 +5,7 @@ import 'package:public_apis_desktop_client/app/modules/controllers/home_controll
 import 'package:public_apis_desktop_client/app/utils/dialog_helper.dart';
 
 import '../../../../data/models/AllApis.dart';
+import '../../../../data/models/category_box_data_model.dart';
 import '../../../../services/fetch_api/failure.dart';
 import '../../../../services/fetch_api/remote_service.dart';
 import '../../../../utils/text_helper_methods.dart';
@@ -68,11 +69,11 @@ class CustomSliverGrid extends GetView<HomeController> {
                       String title = resultList[index].title;
 
                       return CategoryBox(
-                        dataMap: {
-                          "title": title,
-                          "image": controller.assetPathBasedInTitle(title),
-                        },
-                        apis: resultList[index].apis,
+                        data: CategoryBoxData(
+                          title: title,
+                          assetPath: controller.assetPathBasedInTitle(title),
+                          apis: resultList[index].apis,
+                        ),
                       );
                     })
                   ],

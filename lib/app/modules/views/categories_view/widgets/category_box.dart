@@ -2,22 +2,19 @@ import 'package:animations/animations.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:public_apis_desktop_client/app/data/models/category_box_data_model.dart';
 import 'package:public_apis_desktop_client/app/utils/text_helper_methods.dart';
 
-import '../../../../data/models/AllApis.dart';
 import '../../../bindings/apis_view_binding.dart';
 import '../../../controllers/home_controller/home_controller.dart';
 import '../../apis_view/apis_view.dart';
 
-@mustCallSuper
 class CategoryBox extends GetView<HomeController> {
   const CategoryBox({
     super.key,
-    required this.dataMap,
-    required this.apis,
+    required this.data,
   });
-  final Map<String, String> dataMap;
-  final List<Api> apis;
+  final CategoryBoxData data;
   @override
   Widget build(BuildContext context) {
     final ApisViewBinding binding = ApisViewBinding();
@@ -35,8 +32,8 @@ class CategoryBox extends GetView<HomeController> {
         binding.bind();
 
         return ApisView(
-          apis: apis,
-          category: dataMap["title"]!,
+          apis: data.apis,
+          category: data.title,
         );
       },
       closedBuilder: (context, openContainer) {
@@ -50,7 +47,7 @@ class CategoryBox extends GetView<HomeController> {
               fit: StackFit.expand,
               children: <Widget>[
                 Image.asset(
-                  dataMap["image"]!,
+                  data.assetPath,
                   fit: BoxFit.cover,
                 ),
                 Material(
@@ -63,10 +60,10 @@ class CategoryBox extends GetView<HomeController> {
                 Align(
                   alignment: Alignment.center,
                   child: AutoSizeText(
-                    dataMap["title"]!,
+                    data.title,
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.headline3!.copyWith(
-                          fontSize: dataMap["title"]!.handleFontSizeValue(),
+                          fontSize: data.title.handleFontSizeValue(),
                         ),
                     maxLines: 3,
                   ),
