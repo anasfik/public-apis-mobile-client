@@ -65,17 +65,21 @@ class CustomSliverGrid extends GetView<HomeController> {
                   mainAxisSpacing:
                       15 * ((controller.crossAxisCount.toDouble() % 2) + 1),
                   children: [
-                    ...List.generate(resultList.length, (index) {
-                      String title = resultList[index].title;
+                    ...List.generate(
+                      resultList.length,
+                      (index) {
+                        String title = resultList[index].title;
 
-                      return CategoryBox(
-                        data: CategoryBoxData(
-                          title: title,
-                          assetPath: controller.assetPathBasedInTitle(title),
-                          apis: resultList[index].apis,
-                        ),
-                      );
-                    })
+                        return CategoryBox(
+                          index: index,
+                          data: CategoryBoxData(
+                            title: title,
+                            assetPath: controller.assetPathBasedInTitle(title),
+                            apis: resultList[index].apis,
+                          ),
+                        );
+                      },
+                    )
                   ],
                 );
               }
