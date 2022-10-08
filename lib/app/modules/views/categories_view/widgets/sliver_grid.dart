@@ -13,30 +13,31 @@ import 'category_box.dart';
 import 'spin_kit.dart';
 
 class CustomSliverGrid extends GetView<HomeController> {
-  const CustomSliverGrid({
-    Key? key,
-  }) : super(key: key);
-
+  const CustomSliverGrid({super.key});
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15) +
+      padding: const EdgeInsets.symmetric(horizontal: 15) +
           const EdgeInsets.only(bottom: 10),
-
       sliver: GetBuilder<HomeController>(
         id: controller.categoriesGridViewId,
         builder: (controller) {
-          return FutureBuilder(
+          return FutureBuilder<List<CategoryApis>>(
             key: const ValueKey("futureBuilder Key"),
             future: controller.getAllApisData,
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
+            builder: (
+              BuildContext context,
+              AsyncSnapshot<List<CategoryApis>> snapshot,
+            ) {
+              bool isWaiting =
+                  snapshot.connectionState == ConnectionState.waiting;
+
+              if (isWaiting) {
                 return SliverToBoxAdapter(
                   child: SizedBox(
                     height: MediaQuery.of(context).size.height -
                         MediaQuery.of(context).padding.top -
                         MediaQuery.of(context).padding.top -
-                        // this is sum of the widgets height plus the status bar height
                         controller.expandedHeight -
                         controller.sizedBoxHeight -
                         (controller.sizedBoxHeight * 6) -
@@ -47,18 +48,20 @@ class CustomSliverGrid extends GetView<HomeController> {
                   ),
                 );
               }
+
               if (snapshot.hasData) {
-                return GetBuilder<HomeController>(
-                  id: "CategoryApisGridView",
-                  builder: (controller) {
+                return Builder(
+                  // id: "CategoryApisGridView",
+                  builder: (context) {
                     List<CategoryApis> resultList =
                         controller.filteredList<CategoryApis>(
-                      snapshot.data,
+                      snapshot.data!,
                       controllerLinkedWith: controller.searchInputController,
                     );
                     return SliverGrid.count(
                       crossAxisCount: controller.crossAxisCount,
-                      childAspectRatio: controller.crossAxisCount == 2 ? 1.75 : 3,
+                      childAspectRatio:
+                          controller.crossAxisCount == 2 ? 1.75 : 3,
                       crossAxisSpacing: 15,
                       mainAxisSpacing:
                           15 * ((controller.crossAxisCount.toDouble() % 2) + 1),
@@ -79,7 +82,7 @@ class CustomSliverGrid extends GetView<HomeController> {
                   },
                 );
               }
-    
+
               // we gonna handle error from remote service class
               if (snapshot.hasError) {
                 DialogHelper.showInfoDialog(
@@ -92,7 +95,7 @@ class CustomSliverGrid extends GetView<HomeController> {
                   },
                   content: (snapshot.error as Failure).content,
                 );
-    
+
                 return SliverToBoxAdapter(
                   child: SizedBox(
                     height: MediaQuery.of(context).size.height -
