@@ -19,17 +19,22 @@ class HomeCategoriesPage extends GetView<HomeController> {
       },
       child: Scaffold(
         floatingActionButton: GetBuilder<HomeController>(
-            id: controller.fabId,
-            builder: (context) {
-              return FloatingActionButton(
+          id: controller.fabId,
+          builder: (context) {
+            return Visibility(
+              visible: controller.shouldFabShows,
+              
+              child: FloatingActionButton(
                 onPressed: controller.currentFabData.callback,
                 child: Icon(
                   controller.currentFabData.icon,
                   size: 30,
                   color: Colors.white,
                 ),
-              );
-            }),
+              ),
+            );
+          },
+        ),
         body: CustomScrollView(
           controller: controller.scrollController,
           slivers: <Widget>[

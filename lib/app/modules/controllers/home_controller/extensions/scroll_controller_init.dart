@@ -5,7 +5,6 @@ import 'package:public_apis_desktop_client/app/modules/controllers/home_controll
 import '../home_controller.dart';
 
 extension ScrollControllerInitExtension on HomeController {
-  
   void scrollControllerInit(BuildContext context) {
     // init scrollController
     scrollController = ScrollController();
@@ -22,15 +21,40 @@ extension ScrollControllerInitExtension on HomeController {
         } else if (_isScrollingUp(scrollController)) {
           switchFabDataTo(FabDirectionOption.down);
         }
+
+        if (scrollController.position.maxScrollExtent ==
+                scrollController.offset ||
+            scrollController.offset == 0) {
+          _hideFab();
+        } else {
+          _showFab();
+        }
       },
     );
   }
 
-  void _handleBadgeBgColor(ScrollController controller, BuildContext context) {
-    badgeBackgroundColor.value = badgeBackgroundColorTween.value.lerp(
-          scrollController.position.pixels / (expandedHeight - kToolbarHeight),
-        ) ??
-        Theme.of(context).primaryColor;
+  void _hideFab() {
+    shouldFabShows = false;
+    update([fabId]);
+  }
+
+  void _showFab() {
+    shouldFabShows = true;
+    update([fabId]);
+  }
+
+  bool _shouldChangeBadgeBgColor(ScrollController scrollController) {
+    return scrollController.position.userScrollDirection ==
+        ScrollDirection.forward;
+  }
+
+  void _handleBadgeBgColor(
+      ScrollController scrollController, BuildContext context) {
+    badgeBackgroundColorTween.value = ColorTween(
+      begin: badgeBackgroundColor.value,
+      end: Theme.of(context).scaffoldBackgroundColor,
+    );
+    badgeBackgroundColor.value = badgeBackgroundColorTween.value.lerp(0.5);
   }
 
   bool _isScrollingDown(ScrollController scrollController) {
@@ -43,12 +67,6 @@ extension ScrollControllerInitExtension on HomeController {
         ScrollDirection.reverse;
   }
 
-  bool _shouldChangeBadgeBgColor(ScrollController controller) {
-    return scrollController.position.hasPixels &&
-        scrollController.position.pixels != double.infinity &&
-        scrollController.position.pixels > 0 &&
-        scrollController.position.pixels < 140;
-  }
 
-  
+
 }

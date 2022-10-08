@@ -102,5 +102,6 @@ class HomeController extends GetxController {
     ),
   };
   late FabData currentFabData = fabOptionsData["down"]!;
+  bool shouldFabShows = false;
 
 }
