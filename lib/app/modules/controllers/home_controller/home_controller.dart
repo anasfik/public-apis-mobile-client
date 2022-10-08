@@ -33,11 +33,11 @@ class HomeController extends GetxController {
   late FabData currentFabData = fabOptionsData["down"]!;
 
   //
+  final String fabId = "fabId";
   final int expandedHeight = 140;
   final double sizedBoxHeight = 5;
   final double searchBarHeight = 50;
   bool shouldFabShows = false;
-
   @override
   void onInit() {
     searchInputController = TextEditingController();

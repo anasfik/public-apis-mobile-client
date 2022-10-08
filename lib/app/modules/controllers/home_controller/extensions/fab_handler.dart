@@ -1,25 +1,19 @@
-
 import '../home_controller.dart';
 
-
+enum FabDirectionOption {
+  up,
+  down,
+}
 
 extension FabHandler on HomeController {
-  static const String _fabId = "fabId";
-  String get fabId => _fabId;
-
-
-  void switchFabDataTo(FabDirectionOption directionOption) {
+  
+  void switchAndUpdateFabDataTo(FabDirectionOption directionOption) {
     String key = _keyBasedOnEnum(directionOption);
-currentFabData = fabOptionsData[key]!;
+    currentFabData = fabOptionsData[key]!;
     update([fabId]);
   }
 
   String _keyBasedOnEnum(FabDirectionOption enumValue) {
     return enumValue.name;
   }
-}
-
-enum FabDirectionOption {
-  up,
-  down,
 }

@@ -17,9 +17,9 @@ extension ScrollControllerInitExtension on HomeController {
         }
 
         if (_isScrollingDown(scrollController)) {
-          switchFabDataTo(FabDirectionOption.up);
+          switchAndUpdateFabDataTo(FabDirectionOption.up);
         } else if (_isScrollingUp(scrollController)) {
-          switchFabDataTo(FabDirectionOption.down);
+          switchAndUpdateFabDataTo(FabDirectionOption.down);
         }
 
         if (scrollController.position.maxScrollExtent ==
