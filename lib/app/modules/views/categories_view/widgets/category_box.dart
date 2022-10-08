@@ -47,7 +47,7 @@ class CategoryBox extends GetView<HomeController> {
           },
           closedBuilder: (context, openContainer) {
             return AnimatedScale(
-              duration: const Duration(milliseconds: 200),
+              duration: const Duration(milliseconds: 250),
               curve: Curves.elasticIn,
               scale: _scale,
               child: GestureDetector(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/fab_handler.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/request_new_scaffold_request.dart';
 import '../../controllers/home_controller/home_controller.dart';
 import 'widgets/search_bar.dart';
@@ -17,6 +18,18 @@ class HomeCategoriesPage extends GetView<HomeController> {
         controller.requestNewFocusScope(context);
       },
       child: Scaffold(
+        floatingActionButton: GetBuilder<HomeController>(
+            id: controller.fabId,
+            builder: (context) {
+              return FloatingActionButton(
+                onPressed: controller.currentFabData.callback,
+                child: Icon(
+                  controller.currentFabData.icon,
+                  size: 30,
+                  color: Colors.white,
+                ),
+              );
+            }),
         body: CustomScrollView(
           controller: controller.scrollController,
           slivers: <Widget>[

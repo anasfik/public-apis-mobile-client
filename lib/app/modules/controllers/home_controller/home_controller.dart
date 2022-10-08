@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:public_apis_desktop_client/app/data/models/fab_model.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/scroll_controller_init.dart';
 
 import '../../../data/models/AllApis.dart';
@@ -40,6 +41,9 @@ class HomeController extends GetxController {
   final int expandedHeight = 140;
   final double sizedBoxHeight = 5;
   final double searchBarHeight = 50;
+
+
+
   @override
   void onInit() {
     // Declare textEditingController
@@ -64,4 +68,39 @@ class HomeController extends GetxController {
   _updateColor(ColorTween clr) {
     badgeBackgroundColor.value = badgeBackgroundColorTween.value.begin;
   }
+
+  void _scrollToTop() {
+    scrollController.animateTo(
+      0,
+      duration: const Duration(milliseconds: 150),
+      curve: Curves.easeInOutQuart,
+    );
+  }
+
+  get scrollToTop => _scrollToTop;
+  void _scrollToBottom() {
+    scrollController.animateTo(
+      scrollController.position.maxScrollExtent,
+      duration: const Duration(milliseconds: 150),
+      curve: Curves.easeInOutQuart,
+    );
+  }
+  get scrollToBottom => _scrollToBottom;
+
+    late Map<String, FabData> fabOptionsData = {
+    "up": FabData(
+      callback: () {
+        scrollToTop();
+      },
+      icon: Icons.keyboard_arrow_up,
+    ),
+    "down": FabData(
+      callback: () {
+        scrollToBottom();
+      },
+      icon: Icons.keyboard_arrow_down,
+    ),
+  };
+  late FabData currentFabData = fabOptionsData["down"]!;
+
 }
