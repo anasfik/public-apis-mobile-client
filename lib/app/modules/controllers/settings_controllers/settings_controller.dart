@@ -12,19 +12,19 @@ class SettingsController extends GetxController {
   SettingsController() {
     settings = [
       SettingOptionModel(
-        title: TextHelperMethods.firstLettersToCapital("change Themes"),
+        title: ("change Themes").capitalizeAllWordsFirstLetter(),
         icon: Icons.palette_outlined,
         optionFunction: () {},
         settingsWidget: const ThemesButtons(),
       ),
       SettingOptionModel(
-        title: TextHelperMethods.firstLettersToCapital("categories view"),
+        title: "categories view".capitalizeAllWordsFirstLetter(),
         icon: Icons.grid_view_outlined,
         optionFunction: () {},
         settingsWidget: const ToggleCategoriesView(),
       ),
       SettingOptionModel(
-        title: TextHelperMethods.firstLettersToCapital("reset favorites"),
+        title: "reset favorites".capitalizeAllWordsFirstLetter(),
         icon: Icons.bookmark_remove_outlined,
         optionFunction: () {
           Get.find<ResetFavoritesController>()
@@ -33,7 +33,7 @@ class SettingsController extends GetxController {
         settingsWidget: const SizedBox(),
       ),
       SettingOptionModel(
-        title: TextHelperMethods.firstLettersToCapital("privacy"),
+        title: ("privacy").capitalizeAllWordsFirstLetter(),
         icon: Icons.shield_outlined,
         optionFunction: () {
           Get.toNamed("/privacy");
@@ -41,14 +41,13 @@ class SettingsController extends GetxController {
         settingsWidget: const SizedBox(),
       ),
       SettingOptionModel(
-        title: TextHelperMethods.firstLettersToCapital("share"),
+        title: ("share").capitalizeAllWordsFirstLetter(),
         icon: Icons.share_outlined,
         optionFunction: () async {
           // TODO: add share link
           ShareResult share = await Share.shareWithResult(
             r'Discover over than 1400+ free api to use, Public Apis',
           );
-
         },
         settingsWidget: const SizedBox(),
       ),

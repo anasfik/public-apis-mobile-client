@@ -4,7 +4,6 @@ import 'package:hive/hive.dart';
 import '../../../data/models/favoriteApi.dart';
 
 class FavoritesController extends GetxController {
-  // ! Variables
   // Get favorites box
   Box<FavoriteApi> favoritesBox = Hive.box<FavoriteApi>("favorites");
 

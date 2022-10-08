@@ -14,7 +14,7 @@ class SettingsView extends GetView<SettingsController> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          TextHelperMethods.firstLettersToCapital("settings"),
+          ("settings").capitalizeAllWordsFirstLetter(),
         ),
       ),
       body: Center(

@@ -40,7 +40,7 @@ class SettingsCard extends StatelessWidget {
             width: 15,
           ),
           Text(
-            TextHelperMethods.firstLettersToCapital(settingOption.title),
+            settingOption.title.capitalizeAllWordsFirstLetter(),
             style: Theme.of(context).textTheme.headline5!.copyWith(
                   fontSize: 18,
                 ),

@@ -17,13 +17,13 @@ class DialogHelper {
         builder: (context) {
           return AlertDialog(
             title: Text(
-              TextHelperMethods.firstLettersToCapital(title),
+              (title).capitalizeAllWordsFirstLetter(),
               style: Theme.of(context).textTheme.titleMedium!.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
             ),
             content: Text(
-              TextHelperMethods.firstLettersToCapital(content),
+              (content).capitalizeAllWordsFirstLetter(),
               style: Theme.of(context).textTheme.bodyText1,
             ),
             actions: [
@@ -32,7 +32,7 @@ class DialogHelper {
                   Get.back();
                 },
                 child: Text(
-                  TextHelperMethods.firstLettersToCapital("Cancel"),
+                  ("Cancel").capitalizeAllWordsFirstLetter(),
                 ),
               ),
               TextButton(

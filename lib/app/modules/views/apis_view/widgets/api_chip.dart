@@ -12,7 +12,7 @@ class ApiChip extends StatelessWidget {
   Widget build(BuildContext context) {
     return Chip(
       label: Text(
-        TextHelperMethods.firstLettersToCapital(text),
+        (text).capitalizeAllWordsFirstLetter(),
         style: TextStyle(
           color: Theme.of(context).primaryColor,
         ),

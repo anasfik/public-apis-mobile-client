@@ -25,7 +25,7 @@ class CustomSliverAppBar extends GetView<HomeController> {
         titlePadding: const EdgeInsets.all(20),
         expandedTitleScale: 1.5,
         title: Text(
-          TextHelperMethods.firstLettersToCapital("categories"),
+          ("categories").capitalizeAllWordsFirstLetter(),
         ),
         background: Container(
           color: Theme.of(context).scaffoldBackgroundColor,

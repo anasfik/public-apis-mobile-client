@@ -25,7 +25,7 @@ class ApiButton extends GetView<ApisViewController> {
       },
       splashColor: Colors.white.withOpacity(.2),
       child: Text(
-        TextHelperMethods.firstLettersToCapital(text),
+        (text).capitalizeAllWordsFirstLetter(),
         style: Theme.of(context).textTheme.bodyText2,
       ),
     );

@@ -22,14 +22,14 @@ class ResetFavoritesController extends GetxController {
               Get.back();
             },
             child: Text(
-              TextHelperMethods.firstLettersToCapital("cancel"),
+              ("cancel").capitalizeAllWordsFirstLetter(),
             ),
           ),
           TextButton(
             onPressed: () {
               clearTheFavoritesBox();
             },
-            child: Text(TextHelperMethods.firstLettersToCapital("reset")),
+            child: Text(("reset").capitalizeAllWordsFirstLetter()),
           ),
         ],
       ),

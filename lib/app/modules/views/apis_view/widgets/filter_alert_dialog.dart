@@ -18,7 +18,7 @@ class FilterAlertDialog extends GetView<ApisViewController> {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(
-        "filter :".firstLettersToCapital(),
+        "filter :".capitalizeAllWordsFirstLetter(),
         style: const TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 25,
@@ -31,7 +31,7 @@ class FilterAlertDialog extends GetView<ApisViewController> {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                "order :".firstLettersToCapital(),
+                "order :".capitalizeAllWordsFirstLetter(),
                 style: const TextStyle(
                   fontSize: 15,
                 ),
@@ -47,7 +47,7 @@ class FilterAlertDialog extends GetView<ApisViewController> {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                "Tags :".firstLettersToCapital(),
+                "Tags :".capitalizeAllWordsFirstLetter(),
                 style: const TextStyle(
                   fontSize: 15,
                 ),
@@ -65,14 +65,14 @@ class FilterAlertDialog extends GetView<ApisViewController> {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child: Text("cancel".firstLettersToCapital()),
+          child: Text("cancel".capitalizeAllWordsFirstLetter()),
         ),
         TextButton(
           onPressed: () {
             Navigator.of(context).pop();
             controller.update([category]);
           },
-          child: Text("ok".firstLettersToCapital()),
+          child: Text("ok".capitalizeAllWordsFirstLetter()),
         ),
       ],
     );

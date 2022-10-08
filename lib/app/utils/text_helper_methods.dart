@@ -1,71 +1,57 @@
-class TextHelperMethods {
-  static String firstLettersToCapital(String text) {
-    // remove extra padding letter spaces
-    String formattedText = text.toLowerCase().trim();
+extension StringExtension on String {
+  /// Capitalize the first letter of each word in a string
+  ///
+  /// ```dart
+  /// String example = "hello world".capitalizeAllWordsFirstLetter(); // Hello World
+  /// ```
 
-    // in case the text is empty
-    if (formattedText.isEmpty) return formattedText;
+  String capitalizeAllWordsFirstLetter() {
+    String lowerCasedString = toLowerCase();
+    String stringWithoutExtraSpaces = lowerCasedString.trim();
 
-    // split the text into a list of words without spaces
-    List<String> words = formattedText
-        .split(' ')
+    if (stringWithoutExtraSpaces.isEmpty) {
+      return "";
+    }
+    if (stringWithoutExtraSpaces.length == 1) {
+      return stringWithoutExtraSpaces.toUpperCase();
+    }
+
+    List<String> stringWordsList = stringWithoutExtraSpaces.split(" ");
+    List<String> capitalizedWordsFirstLetter = stringWordsList
         .map(
-          (word) => word.trim(),
+          (word) {
+            if (word.trim().isEmpty) return "";
+            return word.trim();
+          },
+        )
+        .where(
+          (word) => word != "",
+        )
+        .map(
+          (word) {
+            if (word.startsWith(RegExp(r'[\n\t\r]'))) {
+              return word;
+            }
+            return word[0].toUpperCase() + word.substring(1).toLowerCase();
+          },
         )
         .toList();
-
-    // Capitalize first letters of each word
-    List<String> capitalizedFirstLetters = words
-        .map(
-          (word) =>
-              word.substring(0, 1).toUpperCase() +
-              word.substring(1).toLowerCase(),
-        )
-        .toList();
-
-    //
-    return capitalizedFirstLetters.join(' ');
+    String finalResult = capitalizedWordsFirstLetter.join(" ");
+    return finalResult;
+  }
+  /// Get first word in String
+  /// ```dart
+  /// String example = "hello world".getFirstWord(); // hello
+  /// ```
+  String firstWord() {
+    return split(' ').first.toLowerCase();
   }
 
   // This handles the font Size for categories boxes
-  static double handleFontSizeValue(String text) {
-    if (text.length > 20) {
+  double handleFontSizeValue() {
+    if (length > 20) {
       return 17;
     }
     return 20;
-  }
-
-  static String getFirstWordOfTitle({required String title}) {
-    return title.split(' ').first.toLowerCase();
-  }
-}
-
-extension StringExtension on String {
-  String firstLettersToCapital() {
-    // remove extra padding letter spaces
-    String formattedText = toLowerCase().trim();
-
-    // in case the text is empty
-    if (formattedText.isEmpty) return formattedText;
-
-    // split the text into a list of words without spaces
-    List<String> words = formattedText
-        .split(' ')
-        .map(
-          (word) => word.trim(),
-        )
-        .toList();
-
-    // Capitalize first letters of each word
-    List<String> capitalizedFirstLetters = words
-        .map(
-          (word) =>
-              word.substring(0, 1).toUpperCase() +
-              word.substring(1).toLowerCase(),
-        )
-        .toList();
-
-    //
-    return capitalizedFirstLetters.join(' ');
   }
 }

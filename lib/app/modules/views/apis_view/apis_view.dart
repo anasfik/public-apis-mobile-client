@@ -84,7 +84,7 @@ class ApisView extends StatelessWidget {
                   child: Center(
                     child: Text(
                       "something wrong happened \ntry again"
-                          .firstLettersToCapital(),
+                          .capitalizeAllWordsFirstLetter(),
                       textAlign: TextAlign.center,
                       style: Theme.of(context)
                           .textTheme

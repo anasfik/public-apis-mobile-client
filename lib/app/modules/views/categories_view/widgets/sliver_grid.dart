@@ -65,9 +65,7 @@ class CustomSliverGrid extends GetView<HomeController> {
                           dataList: {
                             "title": resultList[index].title,
                             "image":
-                                "assets/categoriesImages/${TextHelperMethods.getFirstWordOfTitle(
-                              title: resultList[index].title,
-                            )}.jpg",
+                                "assets/categoriesImages/${resultList[index].title.firstWord()}.jpg",
                           },
                           apis: resultList[index].apis,
                         ),

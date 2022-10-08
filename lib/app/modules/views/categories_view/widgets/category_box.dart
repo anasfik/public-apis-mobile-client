@@ -66,9 +66,9 @@ class CategoryBox extends GetView<HomeController> {
                     dataList["title"]!,
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.headline3!.copyWith(
-                          fontSize: TextHelperMethods.handleFontSizeValue(
-                            dataList["title"]!,
-                          ),
+                          fontSize: 
+                            dataList["title"]!.handleFontSizeValue(),
+                          
                         ),
                     maxLines: 3,
                   ),

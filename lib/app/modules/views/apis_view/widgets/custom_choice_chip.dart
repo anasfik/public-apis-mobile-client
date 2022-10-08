@@ -41,7 +41,7 @@ class FilterChoiceChip extends StatelessWidget {
             ),
             label: Text(
               controller.filterOptions[index].optionText
-                  .firstLettersToCapital(),
+                  .capitalizeAllWordsFirstLetter(),
               style: Theme.of(context).textTheme.labelLarge!.copyWith(
                     color: controller.filterOptions[index].isSelected
                         ? Theme.of(context).primaryColor

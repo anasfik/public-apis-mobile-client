@@ -12,8 +12,10 @@ class PrivacyView extends GetView<PrivacyController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title:
-              Text(TextHelperMethods.firstLettersToCapital("privacy Policy"))),
+        title: Text(
+          "privacy Policy".capitalizeAllWordsFirstLetter(),
+        ),
+      ),
       body: Markdown(
         data: PrivacyController.privacyContent,
         selectable: true,
