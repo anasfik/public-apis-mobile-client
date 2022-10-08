@@ -64,4 +64,5 @@ class HomeController extends GetxController {
   _updateColor(ColorTween clr) {
     badgeBackgroundColor.value = badgeBackgroundColorTween.value.begin;
   }
-}
+
+  }

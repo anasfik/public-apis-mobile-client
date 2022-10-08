@@ -1,24 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/request_new_scaffold_request.dart';
 import '../../controllers/home_controller/home_controller.dart';
 import 'widgets/search_bar.dart';
 import 'widgets/sliver_app_bar.dart';
 import 'widgets/sliver_grid.dart';
 
-final focusNode = FocusNode();
-
 class HomeCategoriesPage extends GetView<HomeController> {
-  const HomeCategoriesPage({Key? key}) : super(key: key);
+  const HomeCategoriesPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // this will remove scope whenever we click outside the text field
-        FocusScope.of(context).requestFocus(focusNode);
-        if (focusNode.hasListeners && focusNode.hasPrimaryFocus) {
-          focusNode.dispose();
-        }
+        controller.requestNewFocusScope(context);
       },
       child: Scaffold(
         body: CustomScrollView(
