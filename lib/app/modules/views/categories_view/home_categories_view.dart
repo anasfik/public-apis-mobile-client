@@ -25,15 +25,10 @@ class HomeCategoriesPage extends GetView<HomeController> {
                 height: controller.sizedBoxHeight,
               ),
             ),
-            SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              sliver: SliverToBoxAdapter(
-                child: CustomTextField(
-                  hintText: "Ex: Blockchain, Anime, News...",
-                  inputController: controller.searchInputController,
-                  labelText: "Search",
-                ),
-              ),
+            CustomSliverTextField(
+              hintText: "Ex: Blockchain, Anime, News...",
+              inputController: controller.searchInputController,
+              labelText: "Search",
             ),
             SliverToBoxAdapter(
               child: SizedBox(

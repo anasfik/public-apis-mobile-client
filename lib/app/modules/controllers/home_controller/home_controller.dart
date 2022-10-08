@@ -36,10 +36,10 @@ class HomeController extends GetxController {
   // the scroll controller
   late ScrollController scrollController;
 
-//
-  int expandedHeight = 140;
-  double sizedBoxHeight = 5;
-  double searchBarHeight = 50;
+  //
+  final int expandedHeight = 140;
+  final double sizedBoxHeight = 5;
+  final double searchBarHeight = 50;
   @override
   void onInit() {
     // Declare textEditingController
@@ -64,5 +64,4 @@ class HomeController extends GetxController {
   _updateColor(ColorTween clr) {
     badgeBackgroundColor.value = badgeBackgroundColorTween.value.begin;
   }
-
-  }
+}
