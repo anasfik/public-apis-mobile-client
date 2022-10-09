@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
 import 'package:public_apis_desktop_client/app/data/models/fab_model.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/init_axis_count.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/init_fab_options_data.dart';
@@ -48,19 +47,19 @@ class HomeController extends GetxController {
     initFabOptionsData();
     initScrollController(_context!);
 
+    ever(badgeBackgroundColorTween, updateColor);
+
     super.onInit();
   }
 
-  @override
-  void onReady() {
-    ever(badgeBackgroundColorTween, updateColor);
-  }
+  // @override
+  // void onReady() {}
 
-  @override
-  void onClose() {
-    searchInputController.dispose();
-    scrollController.dispose();
-  }
+  // @override
+  // void onClose() {
+  //   searchInputController.dispose();
+  //   // scrollController.dispose();
+  // }
 
   updateColor(ColorTween clr) {
     badgeBackgroundColor.value = badgeBackgroundColorTween.value.begin;

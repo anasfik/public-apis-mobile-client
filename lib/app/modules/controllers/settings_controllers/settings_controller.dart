@@ -25,3 +25,4 @@ class SettingsController extends GetxController {
     update([settingsViewId]);
   }
 }
+

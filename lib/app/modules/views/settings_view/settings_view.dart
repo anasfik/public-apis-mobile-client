@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/settings_controllers/extensions/generate_expansion_tile_id.dart';
+import 'package:public_apis_desktop_client/app/modules/controllers/settings_controllers/extensions/handle_expantion_callback.dart';
 import 'package:public_apis_desktop_client/app/utils/text_helper_methods.dart';
 
+import '../../../data/models/setting_option_model.dart';
 import '../../controllers/settings_controllers/settings_controller.dart';
 import 'widgets/setting_card.dart';
 
@@ -31,24 +33,7 @@ class SettingsView extends GetView<SettingsController> {
                   dividerColor: Colors.transparent,
                   elevation: 0,
                   expansionCallback: (int index, bool isExpanded) {
-                    controller.settings[index].optionFunction();
-
-                    if (controller.settings[index].title
-                            .toLowerCase()
-                            .contains("reset") ||
-                        controller.settings[index].title
-                            .toLowerCase()
-                            .contains("privacy") ||
-                        controller.settings[index].title
-                            .toLowerCase()
-                            .contains("share")) {
-                      return;
-                    }
-
-                    controller.toggleExpansionTile(
-                      index,
-                      isExpanded: isExpanded,
-                    );
+                    controller.handleExpansionCallBack(index, isExpanded);
                   },
                   children: [
                     ...List.generate(
