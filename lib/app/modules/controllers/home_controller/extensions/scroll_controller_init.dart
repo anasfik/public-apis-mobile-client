@@ -7,10 +7,8 @@ import '../home_controller.dart';
 
 extension ScrollControllerInitExtension on HomeController {
   void initScrollController(BuildContext context) {
-    // init scrollController
     scrollController = ScrollController();
 
-    // add listener to scrollController
     scrollController.addListener(
       () {
         if (_shouldChangeBadgeBgColor(scrollController)) {
@@ -67,7 +65,4 @@ extension ScrollControllerInitExtension on HomeController {
     return scrollController.position.userScrollDirection ==
         ScrollDirection.reverse;
   }
-
-
-
 }

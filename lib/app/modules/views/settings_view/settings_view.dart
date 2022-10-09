@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:public_apis_desktop_client/app/modules/controllers/settings_controllers/extensions/generate_expansion_tile_id.dart';
 import 'package:public_apis_desktop_client/app/utils/text_helper_methods.dart';
 
 import '../../controllers/settings_controllers/settings_controller.dart';
@@ -23,6 +24,7 @@ class SettingsView extends GetView<SettingsController> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: GetBuilder<SettingsController>(
+              id: controller.settingsViewId,
               builder: (controller) {
                 return ExpansionPanelList(
                   expandedHeaderPadding: EdgeInsets.zero,
@@ -44,7 +46,7 @@ class SettingsView extends GetView<SettingsController> {
                     }
 
                     controller.toggleExpansionTile(
-                      index: index,
+                      index,
                       isExpanded: isExpanded,
                     );
                   },
@@ -61,7 +63,7 @@ class SettingsView extends GetView<SettingsController> {
                           );
                         },
                         body: controller.settings[index].settingsWidget,
-                        isExpanded: controller.isOpenedList[index],
+                        isExpanded: controller.expansionTilesOpenStatus[index],
                       ),
                     ),
                   ],
