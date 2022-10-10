@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:public_apis_desktop_client/app/data/models/fab_model.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/init_axis_count.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/init_fab_options_data.dart';
+import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/new_update_extension.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/scroll_controller_init.dart';
 
 import '../../../data/models/AllApis.dart';
@@ -49,6 +50,11 @@ class HomeController extends GetxController {
     initFabOptionsData();
 
     super.onInit();
+  }
+
+  @override
+  void onReady() {
+    showNewUpdateDialog(_context!);
   }
 
   updateColor(ColorTween clr) {
