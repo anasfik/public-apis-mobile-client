@@ -51,10 +51,7 @@ extension ScrollControllerInitExtension on HomeController {
 
   void _handleBadgeBgColor(
       ScrollController scrollController, BuildContext context) {
-    // badgeBackgroundColorTween.value = ColorTween(
-    //   begin: badgeBackgroundColor.value,
-    //   end: Theme.of(context).scaffoldBackgroundColor,
-    // );
+ 
     badgeBackgroundColor.value = badgeBackgroundColorTween.value.lerp(
           scrollController.position.pixels / (expandedHeight - kToolbarHeight),
         ) ??

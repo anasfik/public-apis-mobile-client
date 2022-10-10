@@ -3,17 +3,16 @@ import 'package:flutter/painting.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
+import '../../../../data/models/app_color_theme.dart';
 import '../../../../utils/colors/colors.dart';
 import '../../../../utils/themes.dart';
 import '../../home_controller/home_controller.dart';
 
 class ThemesButtonsSettingController extends GetxController {
-  // locals box
   Box localsBox = Hive.box("locals");
-
-  // the list of bool
   late List<bool> themesViewBool;
   late List<Color> colors;
+
   @override
   void onInit() {
     // init the categoriesViewBool list
