@@ -24,14 +24,18 @@ class ThemesButtonsSettingController extends GetxController {
           false,
           false,
           false,
+          false,
+          false,
         ];
 
     // the colors list
     colors = [
       AppColors.purple,
+      AppColors.blue,
       AppColors.brown,
       AppColors.green,
       AppColors.orange,
+      AppColors.grey,
     ];
     super.onInit();
   }
