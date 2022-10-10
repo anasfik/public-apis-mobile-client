@@ -43,17 +43,22 @@ extension ScrollControllerInitExtension on HomeController {
   }
 
   bool _shouldChangeBadgeBgColor(ScrollController scrollController) {
-    return scrollController.position.userScrollDirection ==
-        ScrollDirection.forward;
+    return scrollController.position.hasPixels &&
+        scrollController.position.pixels != double.infinity &&
+        scrollController.position.pixels > 0 &&
+        scrollController.position.pixels < 140;
   }
 
   void _handleBadgeBgColor(
       ScrollController scrollController, BuildContext context) {
-    badgeBackgroundColorTween.value = ColorTween(
-      begin: badgeBackgroundColor.value,
-      end: Theme.of(context).scaffoldBackgroundColor,
-    );
-    badgeBackgroundColor.value = badgeBackgroundColorTween.value.lerp(0.5);
+    // badgeBackgroundColorTween.value = ColorTween(
+    //   begin: badgeBackgroundColor.value,
+    //   end: Theme.of(context).scaffoldBackgroundColor,
+    // );
+    badgeBackgroundColor.value = badgeBackgroundColorTween.value.lerp(
+          scrollController.position.pixels / (expandedHeight - kToolbarHeight),
+        ) ??
+        Theme.of(context).primaryColor;
   }
 
   bool _isScrollingDown(ScrollController scrollController) {

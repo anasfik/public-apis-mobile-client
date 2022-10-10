@@ -41,27 +41,18 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     getAllApisData = RemoteService.getData();
+    initScrollController(_context!);
+    ever(badgeBackgroundColorTween, updateColor);
 
     searchInputController = TextEditingController();
     initGridCrossAxisCount();
     initFabOptionsData();
-    initScrollController(_context!);
-
-    ever(badgeBackgroundColorTween, updateColor);
 
     super.onInit();
   }
 
-  // @override
-  // void onReady() {}
-
-  // @override
-  // void onClose() {
-  //   searchInputController.dispose();
-  //   // scrollController.dispose();
-  // }
-
   updateColor(ColorTween clr) {
     badgeBackgroundColor.value = badgeBackgroundColorTween.value.begin;
+    print(badgeBackgroundColorTween.value.begin);
   }
 }
