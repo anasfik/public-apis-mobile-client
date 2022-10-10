@@ -27,6 +27,7 @@ dependencies:
   firebase_analytics: ^9.3.5
   firebase_crashlytics: ^2.8.10
   flutter_launcher_icons: ^0.10.0
+  in_app_review: ^2.0.4
 
 dev_dependencies:
   change_app_package_name: ^1.1.0

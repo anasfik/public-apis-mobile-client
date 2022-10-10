@@ -6,8 +6,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../../services/crashlytics/crashlytics.dart';
 
 extension HandleLaunchLinkExtension on ApisViewController {
-
-  
   /// Launch link method handler
   Future<void> handleLaunchLink(String link, context) async {
     // Get parsed link
@@ -25,6 +23,7 @@ extension HandleLaunchLinkExtension on ApisViewController {
           .logEvent(name: "links_opened_to_users_successfully", parameters: {
         "link": link,
       });
+      hiveService.incrementNumberOfApisOpenedByUser();
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
