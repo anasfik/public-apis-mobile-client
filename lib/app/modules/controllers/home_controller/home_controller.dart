@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import 'package:public_apis_desktop_client/app/data/models/fab_model.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/init_axis_count.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/init_fab_options_data.dart';
@@ -38,6 +39,8 @@ class HomeController extends GetxController {
   final double sizedBoxHeight = 5;
   final double searchBarHeight = 50;
   bool shouldFabShows = false;
+  bool isFirstTimeOpenedTheAppAfterUpdate =
+      Hive.box("locals").get("isFirstTimeOpenedTheAppAfterUpdate") ?? true;
 
   @override
   void onInit() {
@@ -54,7 +57,9 @@ class HomeController extends GetxController {
 
   @override
   void onReady() {
-    showNewUpdateDialog(_context!);
+    if (isFirstTimeOpenedTheAppAfterUpdate) {
+      showNewAppUpdateDialog(_context!);
+    }
   }
 
   updateColor(ColorTween clr) {

@@ -1,13 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:public_apis_desktop_client/app/modules/views/general/update_general_alert_dialog/new_update_alert_dialog.dart';
 
 import '../../../../data/models/update_feature.dart';
 import '../home_controller.dart';
 
 extension NewUpdateExtension on HomeController {
-  static bool isFirstTimeOpenedTheAppAfterUpdate = true;
+  static bool isFirstTimeOpenedTheAppAfterUpdate = Hive.box("locals").get("isFirstTimeOpenedTheAppAfterUpdate") ?? true;
   static final List<UpdateFeature> _featuresList = [
     UpdateFeature(
       type: UpdateType.add,
@@ -28,7 +29,7 @@ extension NewUpdateExtension on HomeController {
   ];
   List<UpdateFeature> get featuresList => _featuresList;
 
-  void showNewUpdateDialog(BuildContext context) {
+  void showNewAppUpdateDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (context) {
@@ -36,10 +37,11 @@ extension NewUpdateExtension on HomeController {
       },
     );
 
+    Box locals = Hive.box("locals");
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      if (kDebugMode) {
-        print("ff");
-        isFirstTimeOpenedTheAppAfterUpdate = false;
+      if (!kDebugMode) {
+        locals.put("isFirstTimeOpenedTheAppAfterUpdate", false);
+
       }
     });
   }
