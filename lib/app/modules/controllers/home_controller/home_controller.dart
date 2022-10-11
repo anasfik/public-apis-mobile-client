@@ -6,10 +6,10 @@ import 'package:public_apis_desktop_client/app/modules/controllers/home_controll
 import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/init_fab_options_data.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/new_update_extension.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/scroll_controller_init.dart';
-import 'package:public_apis_desktop_client/app/services/hive_db_service/hive_db.dart';
 
 import '../../../data/models/AllApis.dart';
 import '../../../services/fetch_api/remote_service.dart';
+import '../../../services/in_app_review/in_app_review_show_logic.dart';
 
 class HomeController extends GetxController {
   HomeController({this.context}) {

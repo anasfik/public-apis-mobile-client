@@ -13,8 +13,8 @@ class InAppReviewService {
     }
   }
 
-  void fakeRequest() {
-    print("request app review");
+  void fakeRequest([int testNumber = 0]) {
+    print("request app review $testNumber");
   }
 
   Future<bool> isServiceAvailable() async {
