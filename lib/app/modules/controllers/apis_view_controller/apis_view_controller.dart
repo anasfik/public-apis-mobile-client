@@ -5,7 +5,7 @@ import 'package:public_apis_desktop_client/app/modules/controllers/apis_view_con
 
 import '../../../services/analytics/mixin.dart';
 import '../../../services/crashlytics/mixin.dart';
-import '../../../services/hive_db_service/hive_db.dart';
+import '../../../services/in_app_review/in_app_review_show_logic.dart';
 import 'mixins/filter_options_Lists.dart';
 
 class ApisViewController extends GetxController

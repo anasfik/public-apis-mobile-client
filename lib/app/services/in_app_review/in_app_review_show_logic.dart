@@ -25,7 +25,7 @@ class HiveService {
     locals.put(
       _dateAfter15DayFromDateOfFirstAppOpenKey,
       DateTime.now().add(
-        const Duration(minutes: 1),
+        const Duration(days: 15),
       ),
     );
   }
@@ -91,7 +91,7 @@ class HiveService {
     DateTime triggeredDateAfterFirstAppReviewRequest = DateTime.now();
     DateTime targetNextReviewRequest =
         triggeredDateAfterFirstAppReviewRequest.add(
-      const Duration(minutes: 1),
+      const Duration(days: 30),
     );
 
     locals.put(_targetNextReviewRequestKey, targetNextReviewRequest);
