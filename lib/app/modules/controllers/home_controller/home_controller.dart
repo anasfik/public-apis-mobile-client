@@ -9,7 +9,7 @@ import 'package:public_apis_desktop_client/app/modules/controllers/home_controll
 
 import '../../../data/models/AllApis.dart';
 import '../../../services/fetch_api/remote_service.dart';
-import '../../../services/in_app_review/in_app_review_show_logic.dart';
+import '../../../services/in_app_review/in_app_review.dart';
 
 class HomeController extends GetxController {
   HomeController({this.context}) {
@@ -22,7 +22,7 @@ class HomeController extends GetxController {
   BuildContext? context;
 
 //
-  HiveService _hiveService = HiveService();
+  InAppReview _hiveService = InAppReview();
   //
   late Rx<Color?> badgeBackgroundColor;
   late Rx<ColorTween> badgeBackgroundColorTween = ColorTween(

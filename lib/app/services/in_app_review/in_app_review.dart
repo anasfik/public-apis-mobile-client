@@ -1,30 +1,13 @@
-import 'package:in_app_review/in_app_review.dart';
+import 'in_app_review_show_interface.dart';
 
-class InAppReviewService {
-  final InAppReview inAppReview = InAppReview.instance;
-  Future<void> request() async {
-    bool isAvailable = await isServiceAvailable();
-
-    if (isAvailable) {
-      inAppReview.requestReview();
+class InAppReview extends InAppReviewShowLogicInterface {
+  void handleShowingTheReviewRequest() {
+    if (isFirstTimeOpenedTheApp()) {
+      saveDateOfFirstAppOpen();
+      initializeApisOpensCounterIfFirstTime();
     }
-  }
 
-  Future<void> openStoreListing({
-    String? appStoreId,
-    String? microsoftStoreId,
-  }) async {
-    bool isAvailable = await isServiceAvailable();
-
-    if (isAvailable) {
-      inAppReview.openStoreListing(
-        appStoreId: appStoreId,
-        microsoftStoreId: microsoftStoreId,
-      );
-    }
-  }
-
-  Future<bool> isServiceAvailable() async {
-    return await inAppReview.isAvailable();
+    handleFirstShowingOfAppRequestReview();
+    handleShowingReviewAppRequestAfterFirstTime();
   }
 }

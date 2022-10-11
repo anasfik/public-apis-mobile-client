@@ -5,7 +5,8 @@ import 'package:public_apis_desktop_client/app/modules/controllers/apis_view_con
 
 import '../../../services/analytics/mixin.dart';
 import '../../../services/crashlytics/mixin.dart';
-import '../../../services/in_app_review/in_app_review_show_logic.dart';
+import '../../../services/in_app_review/in_app_review.dart';
+import '../../../services/in_app_review/in_app_review_show_interface.dart';
 import 'mixins/filter_options_Lists.dart';
 
 class ApisViewController extends GetxController
@@ -31,7 +32,7 @@ class ApisViewController extends GetxController
   String get orderLettersToggleId => _orderLettersId;
 
   /// hive service
-  HiveService hiveService = HiveService();
+  InAppReview hiveService = InAppReview();
   // /// id which responsible to update the the apisView
   // final String _apisViewId = "ApisView";
   // String get apisViewId => _apisViewId;
