@@ -6,6 +6,7 @@ import 'package:public_apis_desktop_client/app/modules/controllers/home_controll
 import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/init_fab_options_data.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/new_update_extension.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/scroll_controller_init.dart';
+import 'package:public_apis_desktop_client/app/services/hive_db_service/hive_db.dart';
 
 import '../../../data/models/AllApis.dart';
 import '../../../services/fetch_api/remote_service.dart';
@@ -20,6 +21,8 @@ class HomeController extends GetxController {
   static BuildContext? _context;
   BuildContext? context;
 
+//
+  HiveService _hiveService = HiveService();
   //
   late Rx<Color?> badgeBackgroundColor;
   late Rx<ColorTween> badgeBackgroundColorTween = ColorTween(
@@ -57,6 +60,9 @@ class HomeController extends GetxController {
 
   @override
   void onReady() {
+    _hiveService.saveDateOfFirstAppOpen();
+    _hiveService.handleFirstShowingOfAppRequestReview();
+    _hiveService.handleShowingReviewAppRequestAfterFirstTime();
     if (isFirstTimeOpenedTheAppAfterUpdate) {
       showNewAppUpdateDialog(_context!);
     }
