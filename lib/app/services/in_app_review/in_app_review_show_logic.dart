@@ -10,21 +10,27 @@ class HiveService {
       "dateAfter15DayFromDateOfFirstAppOpen";
   final String _targetNextReviewRequestKey = "targetNextReviewRequest";
 
-  void saveDateOfFirstAppOpen() {
+  void handleShowingTheReviewRequest() {
     if (_isFirstTimeOpenedTheApp()) {
-      locals.put(_dateOfFirstAppOpenKey, DateTime.now());
-      locals.put(
-        _dateAfter15DayFromDateOfFirstAppOpenKey,
-        DateTime.now().add(
-          const Duration(minutes: 1),
-        ),
-      );
+      _saveDateOfFirstAppOpen();
+      _initializeApisOpensCounterIfFirstTime();
     }
+
+    _handleFirstShowingOfAppRequestReview();
+    _handleShowingReviewAppRequestAfterFirstTime();
   }
 
-  void handleFirstShowingOfAppRequestReview() {
-    _initializeApisOpensCounterIfFirstTime();
+  void _saveDateOfFirstAppOpen() {
+    locals.put(_dateOfFirstAppOpenKey, DateTime.now());
+    locals.put(
+      _dateAfter15DayFromDateOfFirstAppOpenKey,
+      DateTime.now().add(
+        const Duration(minutes: 1),
+      ),
+    );
+  }
 
+  void _handleFirstShowingOfAppRequestReview() {
     if (_hasUserOpenedMoreThanTwoApis() &&
         _havePassedMoreThan15DaysFromFirstAppOpen() &&
         !_didScheduledNext30DaysAfterFirstReviewRequest()) {
@@ -34,7 +40,7 @@ class HiveService {
     }
   }
 
-  void handleShowingReviewAppRequestAfterFirstTime() {
+  void _handleShowingReviewAppRequestAfterFirstTime() {
     if (_didScheduledNext30DaysAfterFirstReviewRequest()) {
       if (_havePassed30DaysFromFirstRequestReviewRequestAndToday()) {
         _inAppReviewService.fakeRequest(2);

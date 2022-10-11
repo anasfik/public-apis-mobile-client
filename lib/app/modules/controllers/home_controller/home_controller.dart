@@ -60,12 +60,10 @@ class HomeController extends GetxController {
 
   @override
   void onReady() {
-    _hiveService.saveDateOfFirstAppOpen();
-    _hiveService.handleFirstShowingOfAppRequestReview();
-    _hiveService.handleShowingReviewAppRequestAfterFirstTime();
     if (isFirstTimeOpenedTheAppAfterUpdate) {
       showNewAppUpdateDialog(_context!);
     }
+    _hiveService.handleShowingTheReviewRequest();
   }
 
   updateColor(ColorTween clr) {
