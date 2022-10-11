@@ -8,7 +8,8 @@ import '../../../../data/models/update_feature.dart';
 import '../home_controller.dart';
 
 extension NewUpdateExtension on HomeController {
-  static bool isFirstTimeOpenedTheAppAfterUpdate = Hive.box("locals").get("isFirstTimeOpenedTheAppAfterUpdate") ?? true;
+  static bool isFirstTimeOpenedTheAppAfterUpdate =
+      Hive.box("locals").get("isFirstTimeOpenedTheAppAfterUpdate") ?? true;
   static final List<UpdateFeature> _featuresList = [
     UpdateFeature(
       type: UpdateType.add,
@@ -41,7 +42,6 @@ extension NewUpdateExtension on HomeController {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       if (!kDebugMode) {
         locals.put("isFirstTimeOpenedTheAppAfterUpdate", false);
-
       }
     });
   }
