@@ -35,7 +35,7 @@ class HiveService {
         _havePassedMoreThan15DaysFromFirstAppOpen() &&
         !_didScheduledNext30DaysAfterFirstReviewRequest()) {
       print(1);
-      _inAppReviewService.fakeRequest(1);
+              _inAppReviewService.request();
       _scheduleNextReviewAfter30Days();
     }
   }
@@ -43,7 +43,7 @@ class HiveService {
   void _handleShowingReviewAppRequestAfterFirstTime() {
     if (_didScheduledNext30DaysAfterFirstReviewRequest()) {
       if (_havePassed30DaysFromFirstRequestReviewRequestAndToday()) {
-        _inAppReviewService.fakeRequest(2);
+        _inAppReviewService.request();
         _scheduleNextReviewAfter30Days();
       }
     }
