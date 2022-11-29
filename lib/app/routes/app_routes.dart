@@ -12,6 +12,7 @@ abstract class Routes {
 
 abstract class _Paths {
   _Paths._();
+  
   static const homeCategoriesPagePath = '/home';
   static const apisViewPath = '/apis';
   static const favoritesViewPath = '/favorites';

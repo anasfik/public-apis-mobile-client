@@ -5,16 +5,18 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../firebase_options.dart';
 import '../../data/models/favoriteApi.dart';
+import '../crashlytics/crashlytics.dart';
 
 class MainInit {
   Future<void> init() async {
     WidgetsFlutterBinding.ensureInitialized();
-
     await _initAppServices();
     Hive.registerAdapter(FavoriteApiAdapter());
     await _opnHiveBoxes();
 
     await _clearHiveBoxesInDebugMode();
+      FlutterError.onError = Crashlytics().crashlyticsInstance.recordFlutterError;
+
   }
 
   Future<void> _initAppServices() async {

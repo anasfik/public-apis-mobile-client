@@ -14,7 +14,6 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const homeCategoriesView = Routes.homeCategoriesView;
 
   static final routes = <GetPage>[
     GetPage(
@@ -34,7 +33,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.privacyPath,
-      page: () => PrivacyView(),
+      page: () => const PrivacyView(),
       binding: PrivacyBinding(),
     ),
   ];
