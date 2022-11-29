@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_launcher_icons/main.dart';
 
 import 'package:get/get.dart';
 import 'package:public_apis_desktop_client/app/services/crashlytics/crashlytics.dart';
@@ -11,17 +12,20 @@ import 'app/routes/app_pages.dart';
 Future<void> main() async {
   await MainInit().init();
   FlutterError.onError = Crashlytics().crashlyticsInstance.recordFlutterError;
-  runApp(PublicApisApp());
+  runApp(const PublicApisApp());
 }
 
 class PublicApisApp extends StatelessWidget {
-  PublicApisApp({super.key});
+  const PublicApisApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       initialBinding:
           BindingsBuilder.put(() => ThemesButtonsSettingController()),
+      defaultTransition: Transition.native,
+
+      
       debugShowCheckedModeBanner: false,
       title: "Public Apis",
       initialRoute: AppPages.homeCategoriesView,
