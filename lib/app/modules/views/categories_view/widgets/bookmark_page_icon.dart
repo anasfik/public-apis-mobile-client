@@ -13,9 +13,10 @@ class BookmarkPageIcon extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      alignment: Alignment.center,
       children: [
         IconButton(
-          onPressed: () { 
+          onPressed: () {
             Get.toNamed("/favorites");
           },
           icon: const Icon(
@@ -23,7 +24,7 @@ class BookmarkPageIcon extends GetView<HomeController> {
           ),
         ),
         Positioned(
-          top: 5,
+          top: 10,
           left: 5,
           child: Stack(
             alignment: Alignment.center,

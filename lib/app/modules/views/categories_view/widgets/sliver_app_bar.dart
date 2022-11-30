@@ -10,10 +10,13 @@ class CustomSliverAppBar extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return SliverAppBar(
+      toolbarHeight: kToolbarHeight + 5,
       pinned: true,
       floating: false,
-      backgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: theme.primaryColor,
       automaticallyImplyLeading: true,
       expandedHeight: controller.expandedHeight.toDouble(),
       actions: const <Widget>[
@@ -33,7 +36,7 @@ class CustomSliverAppBar extends GetView<HomeController> {
           ),
         ),
         background: Container(
-          color: Theme.of(context).scaffoldBackgroundColor,
+          color: theme.scaffoldBackgroundColor,
         ),
       ),
     );

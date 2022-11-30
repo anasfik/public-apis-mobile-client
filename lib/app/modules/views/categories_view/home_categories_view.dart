@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/fab_handler.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/request_new_scaffold_request.dart';
-import '../../../data/models/fab_model.dart';
+import 'package:public_apis_desktop_client/app/modules/views/categories_view/widgets/custom_fab.dart';
 import '../../controllers/home_controller/home_controller.dart';
 import 'widgets/search_bar.dart';
 import 'widgets/sliver_app_bar.dart';
 import 'widgets/sliver_grid.dart';
 import 'widgets/sliver_sized_box.dart';
-import 'dart:math' as math;
 
 class HomeCategoriesPage extends GetView<HomeController> {
   const HomeCategoriesPage({super.key});
@@ -17,37 +15,14 @@ class HomeCategoriesPage extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        controller.requestNewFocusScope(context);
+        controller.removeTextFieldFocus(context);
       },
       child: Scaffold(
-        floatingActionButton: GetBuilder<HomeController>(
-          id: controller.fabId,
-          builder: (context) {
-            return AnimatedScale(
-              duration: const Duration(milliseconds: 150),
-              scale: controller.shouldFabShows ? 1 : 0,
-              child: FloatingActionButton(
-                onPressed: controller.currentFabData.callback,
-                child: AnimatedRotation(
-                  duration: const Duration(milliseconds: 75),
-                  curve: Curves.easeInOut,
-                  turns: controller.currentFabData.direction ==
-                          FabDirectionOption.up
-                      ? 0
-                      : 1 / 2,
-                  child: const Icon(
-                    Icons.keyboard_arrow_up,
-                    size: 30,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            );
-          },
-        ),
+        floatingActionButton: const CustomFAB(),
         body: CustomScrollView(
           controller: controller.scrollController,
           slivers: <Widget>[
+            // const SliverSizedBox(height: 15),
             const CustomSliverAppBar(),
             SliverSizedBox(height: controller.sizedBoxHeight),
             CustomSliverTextField(
