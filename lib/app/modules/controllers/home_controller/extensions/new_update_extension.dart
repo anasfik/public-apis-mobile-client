@@ -15,22 +15,12 @@ extension NewUpdateExtension on HomeController {
       type: UpdateType.fix,
       feature: "Fixed The non changing categories Grid in the settings",
     ),
-    // UpdateFeature(
-    //   type: UpdateType.add,
-    //   feature: "added APIs filter with tags (Github, https...).",
-    // ),
-    // UpdateFeature(
-    //   type: UpdateType.add,
-    //   feature: "added scroll to top / bottom floating action button.",
-    // ),
-    // UpdateFeature(
-    //   type: UpdateType.improvement,
-    //   feature: "Improved the performance of the app.",
-    // ),
   ];
   List<UpdateFeature> get featuresList => _featuresList;
 
   void showNewAppUpdateDialog(BuildContext context) {
+    print(isFirstTimeOpenedTheAppAfterUpdate);
+
     showDialog(
       context: context,
       builder: (context) {
@@ -40,9 +30,7 @@ extension NewUpdateExtension on HomeController {
 
     Box locals = Hive.box("locals");
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      if (!kDebugMode) {
-        locals.put("isFirstTimeOpenedTheAppAfterUpdate2", false);
-      }
+      locals.put("isFirstTimeOpenedTheAppAfterUpdate2", false);
     });
   }
 }

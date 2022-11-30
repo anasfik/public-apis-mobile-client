@@ -9,61 +9,64 @@ import '../../home_controller/home_controller.dart';
 
 class ThemesButtonsSettingController extends GetxController {
   Box localsBox = Hive.box("locals");
-  late List<bool> themesViewBool;
-  late List<Color> colors;
+
+  List<bool>? themeOptionSelectedBool;
+  List<Color>? colors;
+
+  HomeController get homeController {
+    if (GetInstance().isRegistered<HomeController>()) {
+      return Get.find<HomeController>();
+    }
+
+    return Get.put(HomeController());
+  }
 
   @override
   void onInit() {
-    // init the categoriesViewBool list
-    themesViewBool = localsBox.get("themesViewBool") ??
-
-        // each version will have a new theme color
-        [
-          true,
-          false,
-          false,
-          false,
-          false,
-          false,
-        ];
-
-    // the colors list
-    colors = [
-      AppColors.purple,
-      AppColors.blue,
-      AppColors.brown,
-      AppColors.green,
-      AppColors.orange,
-      AppColors.grey,
-    ];
+    colors = AppColors.themeColors;
+    themeOptionSelectedBool = _getListFromLocalOrCreateOne();
     super.onInit();
   }
 
-  // change theme method
   void chooseTheme({
     required Color color,
     required int index,
   }) {
-    // fill bool list with false
-    themesViewBool.fillRange(0, themesViewBool.length, false);
+    _unselectAllOptions();
+    _selectOptionAt(index);
+    _changeTheme(color);
+    _saveChangesLocally(color);
+    _changeBadgeColor(color);
+  }
 
-    // change the true value
-    themesViewBool[index] = true;
-
-    // and the main change theme
-    Get.changeTheme(AppThemes.themeDataBasedOnColor(color));
-
-    // then save the bool list
-    localsBox.put("themesViewBool", themesViewBool);
-
-    // and save that color
-    localsBox.put("lastSavedThemeColorValue", color.value);
-
-    // don't forget to update the badge bg since it's getted from a separate controller
-    HomeController homeController = Get.find<HomeController>();
+  void _changeBadgeColor(Color color) {
     homeController.badgeBackgroundColorTween.value.begin = color;
     homeController.badgeBackgroundColor.value = color;
+  }
 
-//
+  void _saveChangesLocally(Color color) {
+    localsBox.put("themesViewBool", themeOptionSelectedBool);
+    localsBox.put("lastSavedThemeColorValue", color.value);
+  }
+
+  void _changeTheme(Color color) {
+    Get.changeTheme(AppThemes.themeDataBasedOnColor(color));
+  }
+
+  void _unselectAllOptions() {
+    themeOptionSelectedBool?.fillRange(
+      0,
+      themeOptionSelectedBool?.length ?? 0,
+      false,
+    );
+  }
+
+  void _selectOptionAt(int index) {
+    themeOptionSelectedBool?[index] = true;
+  }
+
+  List<bool> _getListFromLocalOrCreateOne() {
+    return localsBox.get("themesViewBool") ??
+        List<bool>.generate(colors?.length ?? 0, (index) => index == 0);
   }
 }

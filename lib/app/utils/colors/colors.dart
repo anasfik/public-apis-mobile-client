@@ -7,4 +7,13 @@ class AppColors {
   static final brown = hex("#7d3200");
   static final grey = hex("#2f3640");
   static final blue = hex("#2980b9");
+
+  static final themeColors = [
+    AppColors.purple,
+    AppColors.blue,
+    AppColors.brown,
+    AppColors.green,
+    AppColors.orange,
+    AppColors.grey,
+  ];
 }

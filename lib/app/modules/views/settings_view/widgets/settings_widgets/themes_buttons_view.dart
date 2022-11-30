@@ -11,11 +11,11 @@ class ThemesButtons extends GetView<ThemesButtonsSettingController> {
   @override
   Widget build(BuildContext context) {
     // notice when icons, bool list have different length
-    assert(controller.colors.length == controller.themesViewBool.length,
+    assert(controller.colors?.length == controller.themeOptionSelectedBool?.length,
         "the defined boolean list length should match the colors list length");
 
     // one element should be true
-    assert(controller.themesViewBool.any((element) => element == true) == true,
+    assert(controller.themeOptionSelectedBool?.any((element) => element == true) == true,
         "it should be at least one true value in the boolean list");
     return GetBuilder<ThemesButtonsSettingController>(
       builder: ((controller) => Container(
@@ -27,12 +27,12 @@ class ThemesButtons extends GetView<ThemesButtonsSettingController> {
             child: Row(
               children: <Widget>[
                 ...List.generate(
-                  controller.colors.length,
+                  controller.colors!.length,
                   (index) => Expanded(
                     child: GestureDetector(
                       onTap: () {
                         controller.chooseTheme(
-                          color: controller.colors[index],
+                          color: controller.colors![index],
                           index: index,
                         );
                       },
@@ -40,7 +40,7 @@ class ThemesButtons extends GetView<ThemesButtonsSettingController> {
                         duration: const Duration(milliseconds: 100),
                         curve: Curves.easeInOutQuad,
                         color: Theme.of(context).primaryColor.withOpacity(
-                              controller.themesViewBool[index] ? 1 : 0.5,
+                              controller.themeOptionSelectedBool![index] ? 1 : 0.5,
                             ),
                         child: Center(
                           child: Padding(
@@ -52,7 +52,7 @@ class ThemesButtons extends GetView<ThemesButtonsSettingController> {
                                     width: .3,
                                     color: Colors.white,
                                   ),
-                                  color: controller.colors[index],
+                                  color: controller.colors![index],
                                   borderRadius: BorderRadius.circular(100),
                                 ),
                                 width: 20,
