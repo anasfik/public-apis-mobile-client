@@ -18,33 +18,32 @@ class CustomSliverGrid extends GetView<HomeController> {
     return SliverPadding(
       padding: const EdgeInsets.symmetric(horizontal: 15) +
           const EdgeInsets.only(bottom: 10),
-      sliver: GetBuilder<HomeController>(
-        id: controller.categoriesGridViewId,
-        builder: (controller) {
-          return FutureBuilder<List<CategoryApis>>(
-            // key: const ValueKey("futureBuilder Key"),
-            future: controller.getAllApisData,
-            builder: (
-              BuildContext context,
-              AsyncSnapshot<List<CategoryApis>> snapshot,
-            ) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return LoadingWidget(
-                  height: controller.calculateReminderHeight(context),
-                );
-              }
+      sliver: FutureBuilder<List<CategoryApis>>(
+        // key: const ValueKey("futureBuilder Key"),
+        future: controller.getAllApisData,
+        builder: (
+          BuildContext context,
+          AsyncSnapshot<List<CategoryApis>> snapshot,
+        ) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return LoadingWidget(
+              height: controller.calculateReminderHeight(context),
+            );
+          }
 
-              if (snapshot.hasData) {
-                final resultList = controller.filteredList<CategoryApis>(
-                  snapshot.data ?? [],
-                );
+          if (snapshot.hasData) {
+            final resultList = controller.filteredList<CategoryApis>(
+              snapshot.data ?? [],
+            );
 
+            return GetBuilder<HomeController>(
+              id: controller.categoriesGridViewId,
+              builder: (controller) {
                 return SliverGrid.count(
                   crossAxisCount: controller.crossAxisCount,
                   childAspectRatio: controller.childAspectRatioBasedOnSetting,
                   crossAxisSpacing: 15,
-                  mainAxisSpacing:
-                      controller.mainAxisSpacingBasedOnSetting,
+                  mainAxisSpacing: controller.mainAxisSpacingBasedOnSetting,
                   children: List.generate(
                     resultList.length,
                     (index) {
@@ -62,22 +61,22 @@ class CustomSliverGrid extends GetView<HomeController> {
                     },
                   ),
                 );
-              }
+              },
+            );
+          }
 
-              if (snapshot.hasError) {
-                controller.showErrorDialog(snapshot.error!, context);
+          if (snapshot.hasError) {
+            controller.showErrorDialog(snapshot.error!, context);
 
-                return RetryManuallyWidget(
-                  height: controller.calculateReminderHeight(context),
-                  onTap: () {
-                    controller.retryGetData();
-                  },
-                );
-              }
+            return RetryManuallyWidget(
+              height: controller.calculateReminderHeight(context),
+              onTap: () {
+                controller.retryGetData();
+              },
+            );
+          }
 
-              return const SliverToBoxAdapter(child: Nil());
-            },
-          );
+          return const SliverToBoxAdapter(child: Nil());
         },
       ),
     );

@@ -45,7 +45,10 @@ class ToggleCategoriesController extends GetxController {
     Get.find<HomeController>().crossAxisCount = temporaryCrossAxisCount;
 
     // then update the view
-    Get.find<HomeController>().update();
+    final ctl = Get.find<HomeController>();
+
+    ctl.update([ctl.categoriesGridViewId]);
+    
 
     // then Get back to home
     Get.back();

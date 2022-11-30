@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import '../home_controller.dart';
 
 extension SearchBarChangeExtension on HomeController {
-  static const String _categoriesGridViewId = "categoriesGridViewId";
-  String get categoriesGridViewId => _categoriesGridViewId;
-
+  
   /// this will just update the grid state, since it's linked already with the search bar controller
   void onSearchBarChange() {
     update([categoriesGridViewId]);

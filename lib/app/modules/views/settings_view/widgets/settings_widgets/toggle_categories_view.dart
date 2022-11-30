@@ -11,14 +11,12 @@ class ToggleCategoriesView extends GetView<ToggleCategoriesController> {
   final List<IconData> icons = const [Icons.grid_view_rounded, Icons.view_day];
   @override
   Widget build(BuildContext context) {
-    // notice when icons, bool list have different length
     assert(icons.length == controller.categoriesViewBool.length,
         "the defined boolean list length should match the icons length");
 
-    // one element should be true
-    assert(
-        controller.categoriesViewBool.any((element) => element == true) == true,
+    assert(controller.categoriesViewBool.any((element) => element),
         "it should be at least one true value in the boolean list");
+
     return GetBuilder<ToggleCategoriesController>(
       builder: ((controller) => Container(
             clipBehavior: Clip.hardEdge,

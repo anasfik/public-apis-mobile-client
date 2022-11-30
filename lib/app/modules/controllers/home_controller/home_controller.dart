@@ -20,6 +20,7 @@ class HomeController extends GetxController {
   }
 
   //
+
   static BuildContext? _context;
   BuildContext? context;
 
@@ -70,6 +71,8 @@ class HomeController extends GetxController {
     }
     _hiveService.handleShowingTheReviewRequest();
   }
+
+  final categoriesGridViewId = "categoriesGridViewId";
 
   updateColor(ColorTween clr) {
     badgeBackgroundColor.value = badgeBackgroundColorTween.value.begin;
