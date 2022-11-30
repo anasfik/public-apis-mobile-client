@@ -19,7 +19,6 @@ class CustomSliverGrid extends GetView<HomeController> {
       padding: const EdgeInsets.symmetric(horizontal: 15) +
           const EdgeInsets.only(bottom: 10),
       sliver: FutureBuilder<List<CategoryApis>>(
-        
         future: controller.getAllApisData,
         builder: (
           BuildContext context,
@@ -32,13 +31,13 @@ class CustomSliverGrid extends GetView<HomeController> {
           }
 
           if (snapshot.hasData) {
-            final resultList = controller.filteredList<CategoryApis>(
-              snapshot.data ?? [],
-            );
-
             return GetBuilder<HomeController>(
               id: controller.categoriesGridViewId,
               builder: (controller) {
+                final resultList = controller.filteredList<CategoryApis>(
+                  snapshot.data ?? [],
+                );
+
                 return SliverGrid.count(
                   crossAxisCount: controller.crossAxisCount,
                   childAspectRatio: controller.childAspectRatioBasedOnSetting,

@@ -8,12 +8,14 @@ class CustomSliverTextField extends GetView<HomeController> {
   final TextEditingController inputController;
   final String labelText;
   final String hintText;
+  final void Function(String) onChanged;
 
   const CustomSliverTextField({
     super.key,
     required this.inputController,
     required this.hintText,
     required this.labelText,
+    required this.onChanged,
   });
 
   @override
@@ -36,9 +38,7 @@ class CustomSliverTextField extends GetView<HomeController> {
               ),
               autofocus: false,
               controller: inputController,
-              onChanged: (value) {
-                controller.onSearchBarChange();
-              },
+              onChanged: onChanged,
               keyboardType: TextInputType.name,
               decoration: InputDecoration(
                 suffixIcon: Icon(
@@ -56,20 +56,9 @@ class CustomSliverTextField extends GetView<HomeController> {
                   color: Colors.grey.withOpacity(0.5),
                 ),
                 fillColor: Colors.grey.withOpacity(0.1),
-                border: OutlineInputBorder(
-                  borderRadius: const BorderRadius.all(Radius.circular(5)),
-                  borderSide: BorderSide(
-                    color: theme.primaryColor,
-                    width: 0.6,
-                  ),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: theme.primaryColor,
-                    width: 0.6,
-                  ),
-                  borderRadius: const BorderRadius.all(Radius.circular(5)),
-                ),
+                border: _outlinedBorder(theme),
+                enabledBorder: _outlinedBorder(theme),
+                focusedBorder: _outlinedBorder(theme, 0.7),
               ),
             ),
           ),
@@ -77,4 +66,14 @@ class CustomSliverTextField extends GetView<HomeController> {
       ),
     );
   }
+}
+
+_outlinedBorder(ThemeData theme, [double borderWidth = 0.6]) {
+  return OutlineInputBorder(
+    borderRadius: const BorderRadius.all(Radius.circular(5)),
+    borderSide: BorderSide(
+      color: theme.primaryColor,
+      width: borderWidth,
+    ),
+  );
 }
