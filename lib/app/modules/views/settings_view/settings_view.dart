@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:public_apis_desktop_client/app/modules/controllers/settings_controllers/extensions/generate_expansion_tile_id.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/settings_controllers/extensions/handle_expantion_callback.dart';
 import 'package:public_apis_desktop_client/app/utils/text_helper_methods.dart';
 
@@ -17,7 +16,7 @@ class SettingsView extends GetView<SettingsController> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          ("settings").capitalizeAllWordsFirstLetter(),
+          "settings".capitalizeAllWordsFirstLetter(),
         ),
       ),
       body: Center(
@@ -35,23 +34,29 @@ class SettingsView extends GetView<SettingsController> {
                   expansionCallback: (int index, bool isExpanded) {
                     controller.handleExpansionCallBack(index, isExpanded);
                   },
-                  children: [
-                    ...List.generate(
-                      controller.settings.length,
-                      (index) => ExpansionPanel(
+                  children: List.generate(
+                    controller.settings?.length ?? 0,
+                    (index) {
+                      final currentSettingOption =
+                          controller.settings?[index] ??
+                              SettingOptionModel.errorNotifier();
+
+                      return ExpansionPanel(
                         canTapOnHeader: true,
                         backgroundColor:
                             Theme.of(context).scaffoldBackgroundColor,
                         headerBuilder: (context, isExpanded) {
                           return SettingsCard(
-                            settingOption: controller.settings[index],
+                            settingOption: currentSettingOption,
                           );
                         },
-                        body: controller.settings[index].settingsWidget,
-                        isExpanded: controller.expansionTilesOpenStatus[index],
-                      ),
-                    ),
-                  ],
+                        body: currentSettingOption.settingsWidget,
+                        isExpanded:
+                            controller.expansionTilesOpenStatus?[index] ??
+                                false,
+                      );
+                    },
+                  ),
                 );
               },
             ),

@@ -3,14 +3,18 @@ import '../settings_controller.dart';
 
 extension HandleExpansionCallBack on SettingsController {
   void handleExpansionCallBack(int index, bool isExpanded) {
-    SettingOptionModel currentSettingOption = settings[index];
-    currentSettingOption.optionFunction();
-    if (currentSettingOption.shouldNotExpandSettingTile) {
-      return;
+    SettingOptionModel currentSettingOption = _settingModelAt(index);
+    currentSettingOption.optionFunction.call();
+
+    if (currentSettingOption.shouldExpandSettingTile) {
+      toggleExpansionTile(
+        index,
+        isExpanded: isExpanded,
+      );
     }
-    toggleExpansionTile(
-      index,
-      isExpanded: isExpanded,
-    );
+  }
+
+  SettingOptionModel _settingModelAt(int index) {
+    return settings?[index] ?? SettingOptionModel.errorNotifier();
   }
 }

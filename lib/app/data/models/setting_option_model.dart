@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:public_apis_desktop_client/app/modules/views/widgets/nil.dart';
 
 class SettingOptionModel {
   String title;
@@ -12,6 +13,15 @@ class SettingOptionModel {
     required this.optionFunction,
     required this.settingsWidget,
   });
+
+  factory SettingOptionModel.errorNotifier() {
+    return SettingOptionModel(
+      title: "",
+      icon: Icons.error_outline,
+      optionFunction: () {},
+      settingsWidget: const Nil(),
+    );
+  }
 }
 
 extension BoolExtensionChecks on SettingOptionModel {
