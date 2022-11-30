@@ -13,6 +13,7 @@ class CustomSliverAppBar extends GetView<HomeController> {
     final theme = Theme.of(context);
 
     return SliverAppBar(
+      
       toolbarHeight: kToolbarHeight + 5,
       pinned: true,
       floating: false,
@@ -24,13 +25,10 @@ class CustomSliverAppBar extends GetView<HomeController> {
         SettingsPageIcon(),
       ],
       flexibleSpace: FlexibleSpaceBar(
-        titlePadding: const EdgeInsets.symmetric(
-          horizontal: 20,
-          vertical: 20,
-        ),
+        titlePadding: const EdgeInsets.all(20),
         expandedTitleScale: 1.4,
         title: Text(
-          ("categories").capitalizeAllWordsFirstLetter(),
+          "categories".capitalizeAllWordsFirstLetter(),
           style: const TextStyle(
             letterSpacing: 1.25,
           ),

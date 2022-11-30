@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:public_apis_desktop_client/app/utils/text_helper_methods.dart';
 
 class DialogHelper {
-  static showInfoDialog({
+  static void showInfoDialog({
     required BuildContext context,
     String title = "Error",
     required String content,

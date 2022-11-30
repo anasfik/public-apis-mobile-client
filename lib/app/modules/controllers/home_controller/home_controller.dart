@@ -8,8 +8,10 @@ import 'package:public_apis_desktop_client/app/modules/controllers/home_controll
 import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/scroll_controller_init.dart';
 
 import '../../../data/models/AllApis.dart';
+import '../../../services/fetch_api/failure.dart';
 import '../../../services/fetch_api/remote_service.dart';
 import '../../../services/in_app_review/in_app_review.dart';
+import '../../../utils/dialog_helper.dart';
 
 class HomeController extends GetxController {
   HomeController({this.context}) {
@@ -21,9 +23,12 @@ class HomeController extends GetxController {
   static BuildContext? _context;
   BuildContext? context;
 
-//
+  double get childAspectRatioBasedOnSetting => crossAxisCount == 2 ? 1.75 : 3;
+  double get mainAxisSpacingBasedOnSetting =>
+      15 * ((crossAxisCount.toDouble() % 2) + 1);
+
   InAppReview _hiveService = InAppReview();
-  //
+
   late Rx<Color?> badgeBackgroundColor;
   late Rx<ColorTween> badgeBackgroundColorTween = ColorTween(
     begin: badgeBackgroundColor.value,
@@ -69,5 +74,34 @@ class HomeController extends GetxController {
   updateColor(ColorTween clr) {
     badgeBackgroundColor.value = badgeBackgroundColorTween.value.begin;
     print(badgeBackgroundColorTween.value.begin);
+  }
+
+  double calculateReminderHeight(BuildContext context) {
+    final mq = MediaQuery.of(context);
+    final statusBatHeight = mq.padding.top;
+    final screenSize = mq.size.height;
+
+    return screenSize -
+        statusBatHeight * 2 -
+        expandedHeight -
+        (sizedBoxHeight * 5) -
+        searchBarHeight;
+  }
+
+  void retryGetData() {
+    Get.back();
+    getAllApisData = RemoteService.getData();
+    update(["categoriesGridViewId"]);
+  }
+
+  void showErrorDialog(Object error, context) {
+    DialogHelper.showInfoDialog(
+      title: error is Failure ? error.title : "something went wrong",
+      context: context,
+      retryButtonMethod: () async {
+        retryGetData();
+      },
+      content: error is Failure ? error.content : "something went wrong",
+    );
   }
 }

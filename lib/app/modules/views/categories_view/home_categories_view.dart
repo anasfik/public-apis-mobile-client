@@ -22,7 +22,6 @@ class HomeCategoriesPage extends GetView<HomeController> {
         body: CustomScrollView(
           controller: controller.scrollController,
           slivers: <Widget>[
-            // const SliverSizedBox(height: 15),
             const CustomSliverAppBar(),
             SliverSizedBox(height: controller.sizedBoxHeight),
             CustomSliverTextField(
