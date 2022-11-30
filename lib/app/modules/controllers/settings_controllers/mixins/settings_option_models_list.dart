@@ -14,6 +14,7 @@ mixin SettingsOptionModelsListExtension {
   List<SettingOptionModel> settingsOptionModelsList() {
     return [
       SettingOptionModel(
+        
         title: ("change Themes").capitalizeAllWordsFirstLetter(),
         icon: Icons.palette_outlined,
         optionFunction: () {},
@@ -32,7 +33,7 @@ mixin SettingsOptionModelsListExtension {
           Get.find<ResetFavoritesController>()
               .openConfirmDialogToDeleteFavorites();
         },
-        settingsWidget: const Nil(),
+        settingsWidget: const SizedBox(),
       ),
       SettingOptionModel(
         title: ("privacy").capitalizeAllWordsFirstLetter(),
@@ -40,7 +41,7 @@ mixin SettingsOptionModelsListExtension {
         optionFunction: () {
           Get.toNamed("/privacy");
         },
-        settingsWidget: const Nil(),
+        settingsWidget: const SizedBox(),
       ),
       SettingOptionModel(
         title: ("share").capitalizeAllWordsFirstLetter(),
@@ -51,7 +52,7 @@ mixin SettingsOptionModelsListExtension {
             r'Discover over than 1400+ free api to use, Public Apis',
           );
         },
-        settingsWidget: const Nil(),
+        settingsWidget: const SizedBox(),
       ),
     ];
   }

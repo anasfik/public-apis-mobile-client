@@ -24,7 +24,7 @@ class SettingsController extends GetxController
   }
 
   void _toggleExpansionAt(int index, bool newValue) {
-    expansionTilesOpenStatus?[index] = !newValue;
+    expansionTilesOpenStatus![index] = newValue;
   }
 
   void _updateSettingUI() {
