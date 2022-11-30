@@ -5,69 +5,73 @@ import '../../../../controllers/settings_controllers/sub_settings/themes_buttons
 
 class ThemesButtons extends GetView<ThemesButtonsSettingController> {
   const ThemesButtons({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    // notice when icons, bool list have different length
-    assert(controller.colors?.length == controller.themeOptionSelectedBool?.length,
-        "the defined boolean list length should match the colors list length");
+    assert(
+      controller.hasOnlyOneSelectedOption,
+      "it should be at least one true value in the boolean list",
+    );
 
-    // one element should be true
-    assert(controller.themeOptionSelectedBool?.any((element) => element == true) == true,
-        "it should be at least one true value in the boolean list");
     return GetBuilder<ThemesButtonsSettingController>(
-      builder: ((controller) => Container(
-            clipBehavior: Clip.hardEdge,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            width: MediaQuery.of(context).size.width * 0.6,
-            child: Row(
-              children: <Widget>[
-                ...List.generate(
-                  controller.colors!.length,
-                  (index) => Expanded(
-                    child: GestureDetector(
-                      onTap: () {
-                        controller.chooseTheme(
-                          color: controller.colors![index],
-                          index: index,
-                        );
-                      },
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 100),
-                        curve: Curves.easeInOutQuad,
-                        color: Theme.of(context).primaryColor.withOpacity(
-                              controller.themeOptionSelectedBool![index] ? 1 : 0.5,
-                            ),
+      builder: ((controller) {
+        return Container(
+          clipBehavior: Clip.hardEdge,
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+          ),
+          width: MediaQuery.of(context).size.width * 0.6,
+          child: Row(
+            children:
+                List<Widget>.generate(controller.colors?.length ?? 0, (index) {
+              return Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    controller.chooseTheme(
+                      color: controller.colors?[index] ?? Colors.white,
+                      index: index,
+                    );
+                  },
+                  child: AnimatedContainer(
+                    duration: controller.selectingAnimationDuration,
+                    curve: controller.selectingAnimationCurve,
+                    color: Theme.of(context).primaryColor.withOpacity(
+                          controller.themeOptionSelectedBool?[index] ?? true
+                              ? 1
+                              : 0.5,
+                        ),
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
                         child: Center(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: Center(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    width: .3,
-                                    color: Colors.white,
-                                  ),
-                                  color: controller.colors![index],
-                                  borderRadius: BorderRadius.circular(100),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: const Border.fromBorderSide(
+                                BorderSide(
+                                  width: 0.3,
+                                  color: Colors.white,
                                 ),
-                                width: 20,
-                                height: 20,
+                              ),
+                              color: controller.colors?[index] ?? Colors.white,
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(100),
                               ),
                             ),
+                            width: 20,
+                            height: 20,
                           ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ],
-            ),
-          )),
+              );
+            }),
+          ),
+        );
+      }),
     );
   }
 }

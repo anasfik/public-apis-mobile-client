@@ -26,7 +26,7 @@ class PublicApisApp extends StatelessWidget {
       title: "Public Apis",
       initialRoute: Routes.homeCategoriesView,
       getPages: AppPages.routes,
-      theme: AppThemes.lightTheme,
+      theme: AppThemes().lightTheme,
     );
   }
 }

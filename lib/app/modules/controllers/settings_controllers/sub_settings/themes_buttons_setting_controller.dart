@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:public_apis_desktop_client/app/utils/extensions/list_extension.dart';
 
 import '../../../../utils/colors/colors.dart';
 import '../../../../utils/themes.dart';
@@ -10,8 +11,14 @@ import '../../home_controller/home_controller.dart';
 class ThemesButtonsSettingController extends GetxController {
   Box localsBox = Hive.box("locals");
 
+  Duration selectingAnimationDuration = const Duration(milliseconds: 100);
+  Curve selectingAnimationCurve = Curves.easeInOutQuad;
+
   List<bool>? themeOptionSelectedBool;
   List<Color>? colors;
+
+  bool get hasOnlyOneSelectedOption =>
+      themeOptionSelectedBool.containsOnlyOnce(true);
 
   HomeController get homeController {
     if (GetInstance().isRegistered<HomeController>()) {
@@ -67,6 +74,9 @@ class ThemesButtonsSettingController extends GetxController {
 
   List<bool> _getListFromLocalOrCreateOne() {
     return localsBox.get("themesViewBool") ??
-        List<bool>.generate(colors?.length ?? 0, (index) => index == 0);
+        List<bool>.generate(
+          colors?.length ?? 0,
+          (index) => index == AppThemes().defaultThemColorIndex,
+        );
   }
 }

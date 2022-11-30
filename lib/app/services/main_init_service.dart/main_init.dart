@@ -42,8 +42,8 @@ class MainInit {
     Box localsBox = Hive.box("locals");
 
     if (kDebugMode) {
-      // await favoritesBox.clear();
-      // await localsBox.clear();
+      await favoritesBox.clear();
+      await localsBox.clear();
     }
   }
 }

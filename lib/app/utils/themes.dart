@@ -6,18 +6,24 @@ import 'colors/colors_helper.dart';
 import 'colors/colors.dart';
 
 class AppThemes {
-  // Get the locals box
-  static Box localsBox = Hive.box("locals");
+  AppThemes._();
+  static final _instance = AppThemes._();
 
-  // Get the lastSaved Color to theme the app with it, if it's null, then use the default color which is the purple
-  static int lastSavedThemeColorValue =
-      localsBox.get("lastSavedThemeColorValue") ?? AppColors.purple.value;
-  static Color lastSavedThemeColor = Color(lastSavedThemeColorValue);
+  factory AppThemes() {
+    return _instance;
+  }
 
-  // Set it
-  static ThemeData lightTheme = themeDataBasedOnColor(
-    lastSavedThemeColor,
-  );
+  int get defaultThemColorIndex => 2;
+  Box get localsBox => Hive.box("locals");
+
+  Color get defaultThemeColor => AppColors.themeColors[defaultThemColorIndex];
+
+  int get lastSavedThemeColorValue =>
+      localsBox.get("lastSavedThemeColorValue") ?? defaultThemeColor.value;
+
+  Color get lastSavedThemeColor => Color(lastSavedThemeColorValue);
+
+  ThemeData get lightTheme => themeDataBasedOnColor(lastSavedThemeColor);
 
   // themeData method
   static ThemeData themeDataBasedOnColor(Color color) {
