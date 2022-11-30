@@ -13,6 +13,8 @@ class HomeCategoriesPage extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    final sizedBoxHeight = controller.sizedBoxHeight;
+
     return GestureDetector(
       onTap: () {
         controller.removeTextFieldFocus(context);
@@ -23,13 +25,13 @@ class HomeCategoriesPage extends GetView<HomeController> {
           controller: controller.scrollController,
           slivers: <Widget>[
             const CustomSliverAppBar(),
-            SliverSizedBox(height: controller.sizedBoxHeight),
+            SliverSizedBox(height: sizedBoxHeight),
             CustomSliverTextField(
               hintText: "Ex: Blockchain, Anime, News...",
               inputController: controller.searchInputController,
               labelText: "Search",
             ),
-            SliverSizedBox(height: controller.sizedBoxHeight * 6),
+            SliverSizedBox(height: sizedBoxHeight * 6),
             const CustomSliverGrid(),
           ],
         ),

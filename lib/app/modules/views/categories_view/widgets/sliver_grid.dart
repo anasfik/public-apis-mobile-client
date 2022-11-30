@@ -19,7 +19,7 @@ class CustomSliverGrid extends GetView<HomeController> {
       padding: const EdgeInsets.symmetric(horizontal: 15) +
           const EdgeInsets.only(bottom: 10),
       sliver: FutureBuilder<List<CategoryApis>>(
-        // key: const ValueKey("futureBuilder Key"),
+        
         future: controller.getAllApisData,
         builder: (
           BuildContext context,

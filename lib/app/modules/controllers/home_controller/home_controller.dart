@@ -49,7 +49,7 @@ class HomeController extends GetxController {
   final double searchBarHeight = 50;
   bool shouldFabShows = false;
   bool isFirstTimeOpenedTheAppAfterUpdate =
-      Hive.box("locals").get("isFirstTimeOpenedTheAppAfterUpdate") ?? true;
+      Hive.box("locals").get("isFirstTimeOpenedTheAppAfterUpdate2") ?? true;
 
   @override
   void onInit() {

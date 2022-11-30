@@ -9,24 +9,24 @@ import '../home_controller.dart';
 
 extension NewUpdateExtension on HomeController {
   static bool isFirstTimeOpenedTheAppAfterUpdate =
-      Hive.box("locals").get("isFirstTimeOpenedTheAppAfterUpdate") ?? true;
+      Hive.box("locals").get("isFirstTimeOpenedTheAppAfterUpdate2") ?? true;
   static final List<UpdateFeature> _featuresList = [
     UpdateFeature(
-      type: UpdateType.add,
-      feature: "added (A-Z) / (Z-A) sort for APIs list.",
+      type: UpdateType.fix,
+      feature: "Fixed The non changing categories Grid in the settings",
     ),
-    UpdateFeature(
-      type: UpdateType.add,
-      feature: "added APIs filter with tags (Github, https...).",
-    ),
-    UpdateFeature(
-      type: UpdateType.add,
-      feature: "added scroll to top / bottom floating action button.",
-    ),
-    UpdateFeature(
-      type: UpdateType.improvement,
-      feature: "Improved the performance of the app.",
-    ),
+    // UpdateFeature(
+    //   type: UpdateType.add,
+    //   feature: "added APIs filter with tags (Github, https...).",
+    // ),
+    // UpdateFeature(
+    //   type: UpdateType.add,
+    //   feature: "added scroll to top / bottom floating action button.",
+    // ),
+    // UpdateFeature(
+    //   type: UpdateType.improvement,
+    //   feature: "Improved the performance of the app.",
+    // ),
   ];
   List<UpdateFeature> get featuresList => _featuresList;
 
@@ -41,7 +41,7 @@ extension NewUpdateExtension on HomeController {
     Box locals = Hive.box("locals");
     SchedulerBinding.instance.addPostFrameCallback((_) {
       if (!kDebugMode) {
-        locals.put("isFirstTimeOpenedTheAppAfterUpdate", false);
+        locals.put("isFirstTimeOpenedTheAppAfterUpdate2", false);
       }
     });
   }
