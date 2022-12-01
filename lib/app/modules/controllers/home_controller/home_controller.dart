@@ -99,7 +99,7 @@ class HomeController extends GetxController {
   }
 
   void showErrorDialog(Object error, BuildContext context) {
-    final onWrongString = "something went wrong";
+    const onWrongString = "something went wrong";
     final content = error is Failure ? error.content : onWrongString;
     final title = error is Failure ? error.title : onWrongString;
 
