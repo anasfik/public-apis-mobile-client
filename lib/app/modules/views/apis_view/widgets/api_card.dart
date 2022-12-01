@@ -61,16 +61,12 @@ class ApiCard extends GetView<FavoritesController> {
                       return GestureDetector(
                         onTap: () {
                           isFavorite = !isFavorite;
-                          final fav = FavoriteApi(
-                            name: apiInformation.name,
-                            category: category,
-                            description: apiInformation.description,
-                            auth: apiInformation.auth,
-                            https: apiInformation.https,
-                            cors: apiInformation.cors,
-                            link: apiInformation.link,
+                          final currentFav =
+                              FavoriteApi.from(apiInformation, category);
+                          controller.toggleFavoriteStatus(
+                            currentFav,
+                            isFavorite,
                           );
-                          controller.toggleFavoriteStatus(fav, isFavorite);
                         },
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(100),
