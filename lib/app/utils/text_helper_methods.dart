@@ -20,8 +20,11 @@ extension StringExtension on String {
     List<String> capitalizedWordsFirstLetter = stringWordsList
         .map(
           (word) {
-            if (word.trim().isEmpty) return "";
-            return word.trim();
+            final trimmed = word.trim();
+
+            if (trimmed.isEmpty) return "";
+
+            return trimmed;
           },
         )
         .where(
@@ -32,13 +35,16 @@ extension StringExtension on String {
             if (word.startsWith(RegExp(r'[\n\t\r]'))) {
               return word;
             }
+
             return word[0].toUpperCase() + word.substring(1).toLowerCase();
           },
         )
         .toList();
     String finalResult = capitalizedWordsFirstLetter.join(" ");
+
     return finalResult;
   }
+
   /// Get first word in String
   /// ```dart
   /// String example = "hello world".getFirstWord(); // hello
@@ -47,11 +53,12 @@ extension StringExtension on String {
     return split(' ').first.toLowerCase();
   }
 
-  // This handles the font Size for categories boxes
+  // This handles the font Size for categories boxes.
   double handleFontSizeValue() {
     if (length > 20) {
       return 17;
     }
+
     return 20;
   }
 }
