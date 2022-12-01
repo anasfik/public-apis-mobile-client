@@ -10,6 +10,7 @@ extension ToggleFavoriteStatusExtension on FavoritesController {
     FavoriteApi favoriteApi,
     bool isFavorite,
   ) {
+    final id = favoriteApi.name;
     String key = consistentKey(
       favoriteApi.category,
       favoriteApi.name,
@@ -17,21 +18,21 @@ extension ToggleFavoriteStatusExtension on FavoritesController {
 
     // When api is found in the box (isFavorite = true)), then remove it and quit.
     if (favoritesBox.get(key).exists) {
-        removeFromFavorites(
+      removeFromFavorites(
         isFavorite: isFavorite,
         key: key,
       );
-      update([favoriteApi.name]);
 
       return;
+    } else {
+      // Else (isFavorite = false), then add it to the box.
+      addToFavorites(
+        key: key,
+        isFavorite: isFavorite,
+        favoriteApi: favoriteApi,
+      );
     }
 
-    // Else (isFavorite = false), then add it to the box.
-    addToFavoritesList(
-      key: key,
-      isFavorite: isFavorite,
-      favoriteApi: favoriteApi,
-    );
-    update([favoriteApi.name]);
+    update([id]);
   }
 }
