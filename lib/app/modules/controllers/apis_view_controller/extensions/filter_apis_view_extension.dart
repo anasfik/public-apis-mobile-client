@@ -12,103 +12,107 @@ import '../apis_view_controller.dart';
 Future<List<Api>> runAndGetFilteredApisMethodOnSeparateIsolate(
   List<Api> categoryApis,
 ) async {
-  /// new controller will be injected every time to re init the values
+  /// New controller will be injected every time to re init the values.
   final ApisViewController newController =
       Get.put<ApisViewController>(ApisViewController());
 
-  /// the receive port for the isolate
+  /// The receive port for the isolate.
   ReceivePort receivePort = ReceivePort();
 
-  /// we sent the receive port to the function in the isolate with other necessary data that will work with
-  await Isolate.spawn(
-    filteredApis,
-    [
-      receivePort.sendPort,
-      categoryApis,
-      newController.selectedFilterOptions,
-    ],
-  );
+  /// We sent the receive port to the function in the isolate with other necessary data that will work with.
+  await Isolate.spawn(filteredApis, [
+    receivePort.sendPort,
+    categoryApis,
+    newController.selectedFilterOptions,
+  ]);
 
   /// the ReceivePort.first will return the first message that is sent to the isolate,
-// ! see docs ( it implements Stream )
+  // ! see docs ( it implements Stream )
   List<Api> finalResult = await receivePort.first;
 
-  /// returns the final result
+  /// Returns the final result.
+  // reversed here is O(1)
   return newController.shouldApisListReverse
       ? finalResult.reversed.toList()
       : finalResult;
 }
 
+// ignore: long-method
 void filteredApis(List<dynamic> arguments) async {
-  // ! Here it's strict checks to avoid types problems in future
-  assert(arguments[0] is SendPort,
-      "please assign the SendPort object as first argument");
+  // ! Here it's strict checks to avoid types problems in future.
+
+  assert(
+    arguments[0] is SendPort,
+    "please assign the SendPort object as first argument",
+  );
   SendPort sendPort = arguments[0];
 
-  assert(arguments[1] is List<Api>,
-      "please assign the List<Api> object as second argument");
+  assert(
+    arguments[1] is List<Api>,
+    "please assign the List<Api> object as second argument",
+  );
   List<Api> categoryApis = arguments[1];
 
-  assert(arguments[2] is List<FilterChoiceOption>,
-      "please assign the List<FilterChoiceOption> object as third argument");
+  assert(
+    arguments[2] is List<FilterChoiceOption>,
+    "please assign the List<FilterChoiceOption> object as third argument",
+  );
   List<FilterChoiceOption> selectedChoiceOptions = arguments[2];
 
   if (selectedChoiceOptions.isEmpty) {
     Isolate.exit(sendPort, categoryApis);
   }
+  List<Api> result = categoryApis.where(
+    (api) {
+      bool isApiValid = false;
+      for (FilterChoiceOption selectedChoiceOption in selectedChoiceOptions) {
+        if (selectedChoiceOption.optionText == "auth") {
+          if (api.hasAuth()) {
+            isApiValid = true;
+          } else {
+            return false;
+          }
+        }
+        if (selectedChoiceOption.optionText.toLowerCase() == "apikey") {
+          if (api.hasAuthWithApiKey()) {
+            isApiValid = true;
+          } else {
+            return false;
+          }
+        }
+        if (selectedChoiceOption.optionText == "https") {
+          if (api.isHttps()) {
+            isApiValid = true;
+          } else {
+            return false;
+          }
+        }
+        if (selectedChoiceOption.optionText == "http") {
+          if (api.isHttp()) {
+            isApiValid = true;
+          } else {
+            return false;
+          }
+        }
+        if (selectedChoiceOption.optionText == "cors") {
+          if (api.hasCors() && !api.hasUnknownCors()) {
+            isApiValid = true;
+          } else {
+            return false;
+          }
+        }
+        if (selectedChoiceOption.optionText == "open source") {
+          if (api.isOpenSource()) {
+            isApiValid = true;
+          } else {
+            return false;
+          }
+        }
+      }
 
-  List<Api> result = categoryApis.where((api) {
-    bool isApiValid = false;
-
-    for (FilterChoiceOption selectedChoiceOption in selectedChoiceOptions) {
-      if (selectedChoiceOption.optionText == "auth") {
-        if (api.hasAuth()) {
-          isApiValid = true;
-        } else {
-          return false;
-        }
-      }
-      if (selectedChoiceOption.optionText.toLowerCase() == "apikey") {
-        if (api.hasAuthWithApiKey()) {
-          isApiValid = true;
-        } else {
-          return false;
-        }
-      }
-      if (selectedChoiceOption.optionText == "https") {
-        if (api.isHttps()) {
-          isApiValid = true;
-        } else {
-          return false;
-        }
-      }
-      if (selectedChoiceOption.optionText == "http") {
-        if (api.isHttp()) {
-          isApiValid = true;
-        } else {
-          return false;
-        }
-      }
-      if (selectedChoiceOption.optionText == "cors") {
-        if (api.hasCors() && !api.hasUnknownCors()) {
-          isApiValid = true;
-        } else {
-          return false;
-        }
-      }
-       if (selectedChoiceOption.optionText == "open source") {
-        if (api.isOpenSource()) {
-          isApiValid = true;
-        } else {
-          return false;
-        }
-      }
-    }
-    // print("name: ${api.name} isApiValid: $isApiValid");
-    // print("result: ${result.length}");
-    // print("${api.name} isApiValid: $isApiValid");
-    return isApiValid;
-  }).toList();
+      return isApiValid;
+    },
+  ).toList();
   await Future.delayed(const Duration(milliseconds: 200));
   Isolate.exit(sendPort, result);
 }
