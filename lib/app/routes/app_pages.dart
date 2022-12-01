@@ -12,9 +12,6 @@ import '../modules/views/settings_view/settings_view.dart';
 part 'app_routes.dart';
 
 class AppPages {
-  AppPages._();
-
-
   static final routes = <GetPage>[
     GetPage(
       name: Routes.homeCategoriesView,
@@ -37,4 +34,6 @@ class AppPages {
       binding: PrivacyBinding(),
     ),
   ];
+
+  AppPages._();
 }

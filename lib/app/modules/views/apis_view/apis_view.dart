@@ -11,14 +11,15 @@ import '../../controllers/apis_view_controller/apis_view_controller.dart';
 import 'widgets/apis_view_app_bar.dart';
 
 class ApisView extends StatelessWidget {
+  final List<Api> apis;
+  final String category;
+
   const ApisView({
     super.key,
     required this.category,
     required this.apis,
   });
 
-  final List<Api> apis;
-  final String category;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +43,7 @@ class ApisView extends StatelessWidget {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return LinearProgressIndicator(
                     minHeight: 3,
-                    backgroundColor: Colors.white.withOpacity(.4),
+                    backgroundColor: Colors.white.withOpacity(0.4),
                   );
                 }
                 if (snapshot.hasData) {
@@ -53,29 +54,28 @@ class ApisView extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        ...List.generate(
-                          processedApis.length,
-                          (index) => ApiCard(
-                            key: ValueKey(
-                              "${processedApis[index].name} $index",
-                            ),
-                            apiInformation: processedApis[index],
-                            category: category,
-                            isFavorite: Hive.box<FavoriteApi>("favorites")
-                                .values
-                                .toList()
-                                .any(
-                                  (favoriteApi) =>
-                                      favoriteApi.name ==
-                                      processedApis[index].name,
-                                ),
+                      children: List<Widget>.generate(
+                        processedApis.length,
+                        (index) => ApiCard(
+                          key: ValueKey(
+                            "${processedApis[index].name} $index",
                           ),
+                          apiInformation: processedApis[index],
+                          category: category,
+                          isFavorite: Hive.box<FavoriteApi>("favorites")
+                              .values
+                              .toList()
+                              .any(
+                                (favoriteApi) =>
+                                    favoriteApi.name ==
+                                    processedApis[index].name,
+                              ),
                         ),
-                      ],
+                      ),
                     ),
                   );
                 }
+
                 return Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 15,

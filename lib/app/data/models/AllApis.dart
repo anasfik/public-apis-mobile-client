@@ -1,12 +1,11 @@
-// To parse this JSON data, do
-//
-//     final welcome = welcomeFromJson(jsonString);
-
 import 'dart:convert';
 
 List<CategoryApis> categoriesApisFromJson(String str) =>
     List<CategoryApis>.from(
-        json.decode(str).map((x) => CategoryApis.fromJson(x)));
+      json.decode(str).map(
+            (x) => CategoryApis.fromJson(x),
+          ),
+    );
 
 String categoriesApisToJson(List<CategoryApis> data) => json.encode(
       List<dynamic>.from(
@@ -15,15 +14,14 @@ String categoriesApisToJson(List<CategoryApis> data) => json.encode(
         ),
       ),
     );
-     
+
 class CategoryApis {
+  String title;
+  List<Api> apis;
   CategoryApis({
     required this.title,
     required this.apis,
   });
-
-  String title;
-  List<Api> apis;
 
   factory CategoryApis.fromJson(Map<String, dynamic> json) => CategoryApis(
         title: json["title"],
@@ -37,6 +35,13 @@ class CategoryApis {
 }
 
 class Api {
+  String name;
+  String description;
+  String auth;
+  String https;
+  String cors;
+  String link;
+
   Api({
     required this.name,
     required this.description,
@@ -45,13 +50,6 @@ class Api {
     required this.cors,
     required this.link,
   });
-
-  String name;
-  String description;
-  String auth;
-  String https;
-  String cors;
-  String link;
 
   factory Api.fromJson(Map<String, dynamic> json) => Api(
         name: json["name"],

@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'filter_alert_dialog.dart';
 
 class ApisViewAppBar extends StatelessWidget {
+  final String title;
+
   const ApisViewAppBar({
     super.key,
     required this.title,
   });
-  final String title;
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -34,7 +36,7 @@ class ApisViewAppBar extends StatelessWidget {
               Icons.filter_list,
             ),
           ),
-        )
+        ),
       ],
     );
   }

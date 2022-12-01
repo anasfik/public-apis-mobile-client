@@ -13,10 +13,12 @@ class MainInit {
     await _initAppServices();
     Hive.registerAdapter(FavoriteApiAdapter());
     await _opnHiveBoxes();
-
     await _clearHiveBoxesInDebugMode();
-      FlutterError.onError = Crashlytics().crashlyticsInstance.recordFlutterError;
+    _configureCrashlytics();
+  }
 
+  void _configureCrashlytics() {
+    FlutterError.onError = Crashlytics().crashlyticsInstance.recordFlutterError;
   }
 
   Future<void> _initAppServices() async {
@@ -36,12 +38,10 @@ class MainInit {
   }
 
   Future<void> _clearHiveBoxesInDebugMode() async {
-    // favorites box
     Box favoritesBox = Hive.box<FavoriteApi>("favorites");
-    // locals box
     Box localsBox = Hive.box("locals");
 
-    if (kDebugMode) {
+    if (!kDebugMode) {
       await favoritesBox.clear();
       await localsBox.clear();
     }
