@@ -11,26 +11,12 @@ extension AddToFavoritesExtension on FavoritesController {
   void addToFavoritesList({
     required String key,
     required bool isFavorite,
-    required String name,
-    required String category,
-    required String description,
-    required String auth,
-    required String https,
-    required String cors,
-    required String link,
+    required FavoriteApi favoriteApi,
   }) {
     if (!favoritesBox.get(key).exists) {
       favoritesBox.put(
         key,
-        FavoriteApi(
-          name: name,
-          category: category,
-          description: description,
-          auth: auth,
-          https: https,
-          cors: cors,
-          link: link,
-        ),
+        favoriteApi,
       );
       isFavorite = true;
     }

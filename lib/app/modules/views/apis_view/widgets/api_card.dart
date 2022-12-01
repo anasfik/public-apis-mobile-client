@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:public_apis_desktop_client/app/data/models/favoriteApi.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/favorites_controller/extensions/toggle_favorite_status.dart';
 import 'package:public_apis_desktop_client/app/services/crashlytics/crashlytics.dart';
 import 'package:public_apis_desktop_client/app/utils/extensions/api_model_extension.dart';
@@ -60,8 +61,7 @@ class ApiCard extends GetView<FavoritesController> {
                       return GestureDetector(
                         onTap: () {
                           isFavorite = !isFavorite;
-                          controller.toggleFavoriteStatus(
-                            isFavorite: isFavorite,
+                          final fav = FavoriteApi(
                             name: apiInformation.name,
                             category: category,
                             description: apiInformation.description,
@@ -70,6 +70,7 @@ class ApiCard extends GetView<FavoritesController> {
                             cors: apiInformation.cors,
                             link: apiInformation.link,
                           );
+                          controller.toggleFavoriteStatus(fav, isFavorite);
                         },
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(100),

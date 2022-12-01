@@ -8,7 +8,5 @@ extension RemoveFromFavorites on FavoritesController {
   }) {
     favoritesBox.delete(key);
     isFavorite = false;
-
-   
   }
 }
