@@ -7,7 +7,7 @@ import '../../../services/analytics/mixin.dart';
 import '../../../services/crashlytics/mixin.dart';
 import '../../../services/in_app_review/in_app_review.dart';
 import '../../../services/in_app_review/in_app_review_show_interface.dart';
-import 'mixins/filter_options_Lists.dart';
+import 'mixins/filter_options_lists.dart';
 
 class ApisViewController extends GetxController
     with FilterOptionsListsInitMixin, AnalyticsMixin, CrashlyticsMixin {
