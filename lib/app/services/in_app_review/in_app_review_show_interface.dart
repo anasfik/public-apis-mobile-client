@@ -38,7 +38,6 @@ class InAppReviewShowLogicInterface {
     if (_hasUserOpenedMoreThanTwoApis() &&
         _havePassedMoreThan15DaysFromFirstAppOpen() &&
         !_didScheduledNext30DaysAfterFirstReviewRequest()) {
-      print(1);
       _inAppReviewService.request();
       _scheduleNextReviewAfter30Days();
     }
@@ -51,6 +50,12 @@ class InAppReviewShowLogicInterface {
         _scheduleNextReviewAfter30Days();
       }
     }
+  }
+
+  void incrementNumberOfApisOpenedByUser() {
+    int numberOfTimesUserOpenedAnApiLink = locals.get(_timesUserOpenApisKey);
+
+    locals.put(_timesUserOpenApisKey, ++numberOfTimesUserOpenedAnApiLink);
   }
 
   bool isFirstTimeOpenedTheApp() {
@@ -83,12 +88,6 @@ class InAppReviewShowLogicInterface {
         locals.get(_dateAfter15DayFromDateOfFirstAppOpenKey);
 
     return DateTime.now().isAfter(dateWhichWeAreAllowedToShowReviewRequest);
-  }
-
-  void incrementNumberOfApisOpenedByUser() {
-    int numberOfTimesUserOpenedAnApiLink = locals.get(_timesUserOpenApisKey);
-
-    locals.put(_timesUserOpenApisKey, ++numberOfTimesUserOpenedAnApiLink);
   }
 
   void _scheduleNextReviewAfter30Days() {
