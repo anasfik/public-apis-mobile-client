@@ -11,29 +11,28 @@ import 'mixins/filter_options_Lists.dart';
 
 class ApisViewController extends GetxController
     with FilterOptionsListsInitMixin, AnalyticsMixin, CrashlyticsMixin {
+  /// Responsible to reverse apis view list.
+
+  late bool shouldApisListReverse;
+
+  /// Bool that will store last state bool value of the toggle button.
+  late bool previousIsAscending;
+
+  /// HashMap where we store bool values.
+  late final HashMap orderByLettersBoolValuesHashMap;
+
+  /// Hive service.
+  InAppReview hiveService = InAppReview();
+
+  /// Id which is used to update the toggle button.
+  final String _orderLettersId = "OrderByLettersToggleId";
+
+  String get orderLettersToggleId => _orderLettersId;
+  HashMap get orderByLettersBoolHashMap => orderByLettersBoolValuesHashMap;
+
   @override
   void onInit() {
     initializeVariables();
     super.onInit();
   }
-
-  /// responsible to reverse apis view list
-  late bool shouldApisListReverse;
-
-  /// bool that will store last state bool value of the toggle button
-  late bool previousIsAscending;
-
-  /// hashMap where we store bool values
-  late final HashMap orderByLettersBoolValuesHashMap;
-  HashMap get orderByLettersBoolHashMap => orderByLettersBoolValuesHashMap;
-
-  /// id which is used to update the toggle button
-  final String _orderLettersId = "OrderByLettersToggleId";
-  String get orderLettersToggleId => _orderLettersId;
-
-  /// hive service
-  InAppReview hiveService = InAppReview();
-  // /// id which responsible to update the the apisView
-  // final String _apisViewId = "ApisView";
-  // String get apisViewId => _apisViewId;
 }
