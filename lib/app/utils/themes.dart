@@ -6,12 +6,7 @@ import 'colors/colors_helper.dart';
 import 'colors/colors.dart';
 
 class AppThemes {
-  AppThemes._();
   static final _instance = AppThemes._();
-
-  factory AppThemes() {
-    return _instance;
-  }
 
   int get defaultThemColorIndex => 2;
   Box get localsBox => Hive.box("locals");
@@ -25,7 +20,11 @@ class AppThemes {
 
   ThemeData get lightTheme => themeDataBasedOnColor(lastSavedThemeColor);
 
-  // themeData method
+  factory AppThemes() {
+    return _instance;
+  }
+  AppThemes._();
+
   static ThemeData themeDataBasedOnColor(Color color) {
     ThemeData theme = ThemeData.light().copyWith(
       scaffoldBackgroundColor: hex("#161616"),
