@@ -11,21 +11,23 @@ class NewUpdateAlertWidget extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return AlertDialog(
       scrollable: true,
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        children: <Widget>[
           Text(
             "updated successfully".capitalizeAllWordsFirstLetter(),
-            style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+            style: textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
           ),
           Text(
-            "version: 1.2.0",
-            style: Theme.of(context).textTheme.subtitle1,
-          )
+            "version: ${controller.appVersion}",
+            style: textTheme.subtitle1,
+          ),
         ],
       ),
       content: SizedBox(
@@ -38,15 +40,13 @@ class NewUpdateAlertWidget extends GetView<HomeController> {
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ...List.generate(
-                    controller.featuresList.length,
-                    (index) => UpdateTile(
-                      feature: controller.featuresList[index].feature,
-                      title: controller.featuresList[index].title,
-                    ),
-                  )
-                ],
+                children: List.generate(
+                  controller.featuresList.length,
+                  (index) => UpdateTile(
+                    feature: controller.featuresList[index].feature,
+                    title: controller.featuresList[index].title,
+                  ),
+                ),
               ),
             ),
           ),
@@ -58,7 +58,7 @@ class NewUpdateAlertWidget extends GetView<HomeController> {
             Navigator.pop(context);
           },
           child: const Text("ok"),
-        )
+        ),
       ],
     );
   }

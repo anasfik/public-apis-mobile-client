@@ -8,12 +8,17 @@ import '../../../../data/models/update_feature.dart';
 import '../home_controller.dart';
 
 extension NewUpdateExtension on HomeController {
+  String get appVersion => "1.3.1";
   static bool isFirstTimeOpenedTheAppAfterUpdate =
       Hive.box("locals").get("isFirstTimeOpenedTheAppAfterUpdate2") ?? true;
   static final List<UpdateFeature> _featuresList = [
     UpdateFeature(
       type: UpdateType.fix,
       feature: "Fixed The non changing categories Grid in the settings",
+    ),
+    UpdateFeature(
+      type: UpdateType.edit,
+      feature: "Added new Theme",
     ),
   ];
   List<UpdateFeature> get featuresList => _featuresList;

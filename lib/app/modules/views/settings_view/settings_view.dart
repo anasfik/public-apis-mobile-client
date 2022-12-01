@@ -22,44 +22,42 @@ class SettingsView extends GetView<SettingsController> {
       body: Center(
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: GetBuilder<SettingsController>(
-              id: controller.settingsViewId,
-              builder: (controller) {
-                return ExpansionPanelList(
-                  expandedHeaderPadding: EdgeInsets.zero,
-                  dividerColor: Colors.transparent,
-                  elevation: 0,
-                  expansionCallback: (int index, bool isExpanded) {
-                    controller.handleExpansionCallBack(index, isExpanded);
-                  },
-                  children: List.generate(
-                    controller.settings?.length ?? 0,
-                    (index) {
-                      final currentSettingOption =
-                          controller.settings?[index] ??
-                              SettingOptionModel.errorNotifier();
+          child: GetBuilder<SettingsController>(
+            id: controller.settingsViewId,
+            builder: (controller) {
+              return ExpansionPanelList(
+                expandedHeaderPadding: EdgeInsets.zero,
+                dividerColor: Colors.transparent,
+                elevation: 0,
+                expansionCallback: (int index, bool isExpanded) {
+                  controller.handleExpansionCallBack(index, isExpanded);
+                },
+                children: List.generate(
+                  controller.settings?.length ?? 0,
+                  (index) {
+                    final currentSettingOption = controller.settings?[index] ??
+                        SettingOptionModel.errorNotifier();
 
-                      return ExpansionPanel(
-                        canTapOnHeader: true,
-                        backgroundColor:
-                            Theme.of(context).scaffoldBackgroundColor,
-                        headerBuilder: (context, isExpanded) {
-                          return SettingsCard(
+                    return ExpansionPanel(
+                      canTapOnHeader: true,
+                      backgroundColor:
+                          Theme.of(context).scaffoldBackgroundColor,
+                      body: currentSettingOption.settingsWidget,
+                      isExpanded:
+                          controller.expansionTilesOpenStatus?[index] ?? false,
+                      headerBuilder: (context, isExpanded) {
+                        return Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          child: SettingsCard(
                             settingOption: currentSettingOption,
-                          );
-                        },
-                        body: currentSettingOption.settingsWidget,
-                        isExpanded:
-                            controller.expansionTilesOpenStatus?[index] ??
-                                false,
-                      );
-                    },
-                  ),
-                );
-              },
-            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
+              );
+            },
           ),
         ),
       ),
