@@ -10,6 +10,7 @@ import 'package:public_apis_desktop_client/app/modules/controllers/favorites_con
 extension ToggleFavoriteStatusExtension on FavoritesController {
   /// Add / Remove favorite api from favorites box
   void toggleFavoriteStatus({
+    Fa
     required bool isFavorite,
     required String name,
     required String category,

@@ -7,7 +7,7 @@ extension Checks on FavoriteApi? {
 }
 
 extension AddToFavoritesExtension on FavoritesController {
-  /// Add api to favorites hive box
+  /// Add api to favorites hive box.
   void addToFavoritesList({
     required String key,
     required bool isFavorite,
