@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:public_apis_desktop_client/app/data/models/dialog_data.dart';
 import 'package:public_apis_desktop_client/app/data/models/fab_model.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/init_axis_count.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/init_fab_options_data.dart';
@@ -97,14 +98,22 @@ class HomeController extends GetxController {
     update(["categoriesGridViewId"]);
   }
 
-  void showErrorDialog(Object error, context) {
-    DialogHelper.showInfoDialog(
-      title: error is Failure ? error.title : "something went wrong",
-      context: context,
+  void showErrorDialog(Object error, BuildContext context) {
+    final onWrongString = "something went wrong";
+    final content = error is Failure ? error.content : onWrongString;
+    final title = error is Failure ? error.title : onWrongString;
+
+    final dialogData = DialogData(
+      title: title,
+      content: content,
       retryButtonMethod: () async {
         retryGetData();
       },
-      content: error is Failure ? error.content : "something went wrong",
+    );
+
+    DialogHelper.showInfoDialog(
+      dialogData,
+      context,
     );
   }
 }
