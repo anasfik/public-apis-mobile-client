@@ -8,14 +8,13 @@ import 'package:share_plus/share_plus.dart';
 
 import '../../../views/settings_view/widgets/settings_widgets/themes_buttons_view.dart';
 import '../../../views/settings_view/widgets/settings_widgets/toggle_categories_view.dart';
-import '../sub_settings/reset_favorites_setting_controller.dart';
+import '../sub_settings_controllers/reset_favorites_setting_controller.dart';
 
 mixin SettingsOptionModelsListExtension {
   List<SettingOptionModel> settingsOptionModelsList() {
     return [
       SettingOptionModel(
-        
-        title: ("change Themes").capitalizeAllWordsFirstLetter(),
+        title: "change Themes".capitalizeAllWordsFirstLetter(),
         icon: Icons.palette_outlined,
         optionFunction: () {},
         settingsWidget: const ThemesButtons(),
