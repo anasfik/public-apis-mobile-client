@@ -21,15 +21,24 @@ extension ScrollControllerInitExtension on HomeController {
           switchAndUpdateFabDataTo(FabDirectionOption.down);
         }
 
-        if (scrollController.position.maxScrollExtent ==
-                scrollController.offset ||
-            scrollController.offset == 0) {
+
+        final isAtScreenLimits = _hasReachedEndOfScreen(scrollController) ||
+            _hasReachedStartOfScreen(scrollController);
+        if (isAtScreenLimits) {
           _hideFab();
         } else {
           _showFab();
         }
       },
     );
+  }
+
+  bool _hasReachedEndOfScreen(ScrollController scrollController) {
+    return scrollController.position.maxScrollExtent == scrollController.offset;
+  }
+
+  bool _hasReachedStartOfScreen(ScrollController scrollController) {
+    return scrollController.offset == 0;
   }
 
   void _hideFab() {
@@ -43,15 +52,18 @@ extension ScrollControllerInitExtension on HomeController {
   }
 
   bool _shouldChangeBadgeBgColor(ScrollController scrollController) {
+    final pixels = scrollController.position.pixels;
+
     return scrollController.position.hasPixels &&
-        scrollController.position.pixels != double.infinity &&
-        scrollController.position.pixels > 0 &&
-        scrollController.position.pixels < 140;
+        pixels != double.infinity &&
+        pixels > 0 &&
+        pixels < expandedHeight;
   }
 
   void _handleBadgeBgColor(
-      ScrollController scrollController, BuildContext context) {
- 
+    ScrollController scrollController,
+    BuildContext context,
+  ) {
     badgeBackgroundColor.value = badgeBackgroundColorTween.value.lerp(
           scrollController.position.pixels / (expandedHeight - kToolbarHeight),
         ) ??
