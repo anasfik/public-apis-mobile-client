@@ -9,58 +9,62 @@ class CustomSliverTextField extends GetView<HomeController> {
   final String labelText;
   final String hintText;
   final void Function(String) onChanged;
-  
+
   const CustomSliverTextField({
     super.key,
     required this.inputController,
     required this.hintText,
     required this.labelText,
     required this.onChanged,
-      });
+  });
 
   @override
   Widget build(BuildContext context) {
     final hintColor = Colors.grey.withOpacity(0.75);
     final theme = Theme.of(context);
+    final primary = theme.colorScheme.primary;
 
     return SliverPadding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       sliver: SliverToBoxAdapter(
         child: SizedBox(
-          // autofocus: false,
-          // canRequestFocus: true,
-          child: SizedBox(
-            height: controller.searchBarHeight,
-            child: TextField(
-              focusNode: controller.focusNode,
-              style: theme.textTheme.headline3?.copyWith(
-                color: Colors.white,
-                fontSize: 14,
-              ),
-              autofocus: false,
-              controller: inputController,
-              onChanged: onChanged,
-              keyboardType: TextInputType.name,
-              decoration: InputDecoration(
-                suffixIcon: Icon(
+          height: controller.searchBarHeight,
+          child: TextField(
+            focusNode: controller.focusNode,
+            style: theme.textTheme.headline3?.copyWith(
+              color: Colors.white,
+              fontSize: 14,
+            ),
+            autofocus: false,
+            controller: inputController,
+            onChanged: onChanged,
+            keyboardType: TextInputType.name,
+            decoration: InputDecoration(
+              suffixIcon: InkWell(
+                splashColor: primary,
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(5),
+                ),
+                onTap: () {},
+                child: Icon(
                   Icons.search,
                   color: hintColor,
                 ),
-                labelText: labelText,
-                labelStyle: TextStyle(
-                  color: hintColor,
-                  fontSize: 14,
-                ),
-                filled: true,
-                hintText: hintText,
-                hintStyle: TextStyle(
-                  color: Colors.grey.withOpacity(0.5),
-                ),
-                fillColor: Colors.grey.withOpacity(0.1),
-                border: _outlinedBorder(theme),
-                enabledBorder: _outlinedBorder(theme),
-                focusedBorder: _outlinedBorder(theme, 0.7),
               ),
+              labelText: labelText,
+              labelStyle: TextStyle(
+                color: hintColor,
+                fontSize: 14,
+              ),
+              filled: true,
+              hintText: hintText,
+              hintStyle: TextStyle(
+                color: Colors.grey.withOpacity(0.5),
+              ),
+              fillColor: Colors.grey.withOpacity(0.1),
+              border: _outlinedBorder(theme),
+              enabledBorder: _outlinedBorder(theme),
+              focusedBorder: _outlinedBorder(theme, 0.7),
             ),
           ),
         ),
