@@ -18,7 +18,7 @@ class HomeCategoriesPage extends GetView<HomeController> {
 
     return GestureDetector(
       onTap: () {
-        controller.removeTextFieldFocus(context);
+        controller.removeTextFieldsFocus();
       },
       child: Scaffold(
         floatingActionButton: const CustomFAB(),

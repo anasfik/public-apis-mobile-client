@@ -9,14 +9,14 @@ class CustomSliverTextField extends GetView<HomeController> {
   final String labelText;
   final String hintText;
   final void Function(String) onChanged;
-
+  
   const CustomSliverTextField({
     super.key,
     required this.inputController,
     required this.hintText,
     required this.labelText,
     required this.onChanged,
-  });
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +26,13 @@ class CustomSliverTextField extends GetView<HomeController> {
     return SliverPadding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       sliver: SliverToBoxAdapter(
-        child: FocusScope(
-          autofocus: false,
-          canRequestFocus: true,
+        child: SizedBox(
+          // autofocus: false,
+          // canRequestFocus: true,
           child: SizedBox(
             height: controller.searchBarHeight,
             child: TextField(
+              focusNode: controller.focusNode,
               style: theme.textTheme.headline3?.copyWith(
                 color: Colors.white,
                 fontSize: 14,

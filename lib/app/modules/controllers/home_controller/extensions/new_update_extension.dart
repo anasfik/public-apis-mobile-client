@@ -9,6 +9,7 @@ import '../home_controller.dart';
 
 extension NewUpdateExtension on HomeController {
   String get appVersion => "1.3.1";
+
   static bool isFirstTimeOpenedTheAppAfterUpdate =
       Hive.box("locals").get("isFirstTimeOpenedTheAppAfterUpdate2") ?? true;
   static final List<UpdateFeature> _featuresList = [
@@ -24,7 +25,6 @@ extension NewUpdateExtension on HomeController {
   List<UpdateFeature> get featuresList => _featuresList;
 
   void showNewAppUpdateDialog(BuildContext context) {
-    print(isFirstTimeOpenedTheAppAfterUpdate);
 
     showDialog(
       context: context,

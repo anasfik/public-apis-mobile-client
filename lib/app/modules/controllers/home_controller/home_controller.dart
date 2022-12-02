@@ -15,6 +15,8 @@ import '../../../services/in_app_review/in_app_review.dart';
 import '../../../utils/dialog_helper.dart';
 
 class HomeController extends GetxController {
+  final FocusNode focusNode = FocusNode();
+
   HomeController({this.context}) {
     _context = context ?? Get.context;
     badgeBackgroundColor = Theme.of(_context!).primaryColor.obs;
