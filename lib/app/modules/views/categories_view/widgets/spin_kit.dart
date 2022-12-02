@@ -51,7 +51,7 @@ class _SpinKitState extends State<SpinKit> with SingleTickerProviderStateMixin {
             height: 45,
             decoration: BoxDecoration(
               color: Colors.white.withOpacity(1 - _animation.value),
-              borderRadius: BorderRadius.circular(50),
+              borderRadius: const BorderRadius.all(Radius.circular(50)),
             ),
           ),
         );

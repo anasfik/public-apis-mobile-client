@@ -45,3 +45,4 @@ flutter:
   assets:
     - assets/
     - assets/categoriesImages/
+    - assets/md_content/
