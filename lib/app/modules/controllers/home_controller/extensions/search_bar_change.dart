@@ -1,26 +1,22 @@
-
 import '../home_controller.dart';
 
 extension SearchBarChangeExtension on HomeController {
   void onSearchBarChange() {
-    _filterWithSearchInput();
     update([categoriesGridViewId]);
   }
 
-void _filterWithSearchInput() {
-
-}
   List<T> filteredList<T>(
     List rawList,
   ) {
     if (searchInputController.text.isEmpty) {
       return rawList as List<T>;
     }
+    final searchFieldInput = searchInputController.text;
 
     return rawList
         .where(
-          (element) => element.title.toLowerCase().startsWith(
-                searchInputController.text.toLowerCase(),
+          (category) => category.title.toLowerCase().startsWith(
+                searchFieldInput.toLowerCase(),
               ),
         )
         .toList() as List<T>;
