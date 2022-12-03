@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:public_apis_desktop_client/app/utils/extensions/list_extension.dart';
 
-import '../../../../utils/colors/colors.dart';
-import '../../../../utils/themes.dart';
-import '../../home_controller/home_controller.dart';
+import '../../../utils/colors/colors.dart';
+import '../../../utils/themes.dart';
+import '../home_controller/home_controller.dart';
 
 class ThemesButtonsSettingController extends GetxController {
   Box localsBox = Hive.box("locals");

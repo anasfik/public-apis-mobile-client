@@ -2,16 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
-import '../../home_controller/home_controller.dart';
+import '../../../data/models/grid_setting_view.dart';
+import '../home_controller/home_controller.dart';
 
-class GridViewSetting {
-  final IconData icon;
-  final bool isSelected;
-  GridViewSetting({
-    required this.icon,
-    this.isSelected = false,
-  });
-}
 
 class ToggleCategoriesController extends GetxController {
   late List<bool> categoriesViewBool;

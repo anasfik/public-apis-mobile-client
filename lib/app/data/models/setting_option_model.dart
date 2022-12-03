@@ -4,14 +4,14 @@ import 'package:public_apis_desktop_client/app/modules/views/widgets/nil.dart';
 class SettingOptionModel {
   String title;
   IconData icon;
-  void Function() optionFunction;
-  Widget settingsWidget;
+  void Function()? optionFunction;
+  Widget? settingsWidget;
 
   SettingOptionModel({
     required this.title,
     required this.icon,
-    required this.optionFunction,
-    required this.settingsWidget,
+    this.optionFunction,
+    this.settingsWidget,
   });
 
   factory SettingOptionModel.errorNotifier() {

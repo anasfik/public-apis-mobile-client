@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../controllers/settings_controllers/sub_settings_controllers/themes_buttons_setting_controller.dart';
+import '../../../../controllers/themes_buttons_setting_controller/themes_buttons_setting_controller.dart';
 
 class ThemesButtons extends GetView<ThemesButtonsSettingController> {
   const ThemesButtons({

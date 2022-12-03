@@ -10,4 +10,8 @@ class PrivacyController extends GetxController {
 
     return privacy;
   }
+
+  void navigateToPrivacyPage() {
+    Get.toNamed("/privacy");
+  }
 }

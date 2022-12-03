@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../controllers/settings_controllers/sub_settings_controllers/category_box__setting_controller.dart';
+import '../../../../controllers/category_box__setting_controller/category_box__setting_controller.dart';
 
 class ToggleCategoriesView extends GetView<ToggleCategoriesController> {
   const ToggleCategoriesView({

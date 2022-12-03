@@ -4,7 +4,8 @@ import '../settings_controller.dart';
 extension HandleExpansionCallBack on SettingsController {
   void handleExpansionCallBack(int index, bool isExpanded) {
     SettingOptionModel currentSettingOption = settingModelAt(index);
-    currentSettingOption.optionFunction.call();
+
+    currentSettingOption.optionFunction?.call();
 
     if (currentSettingOption.shouldNotExpandSettingTile) {
       return;

@@ -42,7 +42,8 @@ class SettingsView extends GetView<SettingsController> {
                       canTapOnHeader: true,
                       backgroundColor:
                           Theme.of(context).scaffoldBackgroundColor,
-                      body: currentSettingOption.settingsWidget,
+                      body: currentSettingOption.settingsWidget ??
+                          const SizedBox(),
                       isExpanded:
                           controller.expansionTilesOpenStatus?[index] ?? false,
                       headerBuilder: (context, isExpanded) {

@@ -1,57 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:public_apis_desktop_client/app/data/models/setting_option_model.dart';
-import 'package:public_apis_desktop_client/app/modules/controllers/settings_controllers/settings_controller.dart';
-import 'package:public_apis_desktop_client/app/modules/views/widgets/nil.dart';
+import 'package:public_apis_desktop_client/app/modules/controllers/privacy_controller/privacy_controller.dart';
 import 'package:public_apis_desktop_client/app/utils/text_helper_methods.dart';
-import 'package:share_plus/share_plus.dart';
-
 import '../../../views/settings_view/widgets/settings_widgets/themes_buttons_view.dart';
 import '../../../views/settings_view/widgets/settings_widgets/toggle_categories_view.dart';
-import '../sub_settings_controllers/reset_favorites_setting_controller.dart';
+import '../../reset_favorites_setting_controller/reset_favorites_setting_controller.dart';
+import '../../share_app_controller/share_app_controller.dart';
 
 mixin SettingsOptionModelsListExtension {
+  ResetFavoritesController get resetFavoritesController =>
+      Get.find<ResetFavoritesController>();
+  PrivacyController get privacyController => Get.find<PrivacyController>();
+  ShareAppController get shareAppController => Get.find<ShareAppController>();
+
   List<SettingOptionModel> settingsOptionModelsList() {
     return [
       SettingOptionModel(
         title: "change Themes".capitalizeAllWordsFirstLetter(),
         icon: Icons.palette_outlined,
-        optionFunction: () {},
         settingsWidget: const ThemesButtons(),
       ),
       SettingOptionModel(
         title: "categories view".capitalizeAllWordsFirstLetter(),
         icon: Icons.grid_view_outlined,
-        optionFunction: () {},
         settingsWidget: const ToggleCategoriesView(),
       ),
       SettingOptionModel(
         title: "reset favorites".capitalizeAllWordsFirstLetter(),
         icon: Icons.bookmark_remove_outlined,
         optionFunction: () {
-          Get.find<ResetFavoritesController>()
-              .openConfirmDialogToDeleteFavorites();
+          resetFavoritesController.openConfirmDialogToDeleteFavorites();
         },
-        settingsWidget: const SizedBox(),
       ),
       SettingOptionModel(
-        title: ("privacy").capitalizeAllWordsFirstLetter(),
+        title: "privacy".capitalizeAllWordsFirstLetter(),
         icon: Icons.shield_outlined,
         optionFunction: () {
-          Get.toNamed("/privacy");
+          privacyController.navigateToPrivacyPage();
         },
-        settingsWidget: const SizedBox(),
       ),
       SettingOptionModel(
-        title: ("share").capitalizeAllWordsFirstLetter(),
+        title: "share".capitalizeAllWordsFirstLetter(),
         icon: Icons.share_outlined,
         optionFunction: () async {
-          // TODO: add share link
-          ShareResult share = await Share.shareWithResult(
-            r'Discover over than 1400+ free api to use, Public Apis',
-          );
+          shareAppController.shareApp();
         },
-        settingsWidget: const SizedBox(),
       ),
     ];
   }
