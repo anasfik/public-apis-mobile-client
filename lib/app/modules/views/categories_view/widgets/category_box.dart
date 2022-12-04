@@ -11,29 +11,38 @@ import '../../../controllers/home_controller/home_controller.dart';
 import '../../apis_view/apis_view.dart';
 
 class CategoryBox extends GetView<HomeController> {
+  final CategoryBoxData data;
+  final int index;
+  final ApisViewBinding binding = ApisViewBinding();
+
+  String? categoryBoxId;
+
+  double _scale = 1;
+
   CategoryBox({
     super.key,
     required this.data,
     required this.index,
-  });
-  final CategoryBoxData data;
-  final int index;
+  }) {
+    categoryBoxId = controller.generateCategoryBoxId(data, index);
+  }
 
-  double _scale = 1;
   @override
   Widget build(BuildContext context) {
-    final String categoryBoxId = controller.generateCategoryBoxId(data, index);
-    final ApisViewBinding binding = ApisViewBinding();
+    final theme = Theme.of(context);
+    final scaffoldBackgroundColor = theme.scaffoldBackgroundColor;
+    const animationDuration = Duration(milliseconds: 20);
+
     return GetBuilder<HomeController>(
       id: categoryBoxId,
       builder: (controller) {
         return OpenContainer(
           tappable: false,
-          middleColor: Theme.of(context).scaffoldBackgroundColor,
-          transitionDuration: const Duration(milliseconds: 200),
+          middleColor: scaffoldBackgroundColor,
+          transitionDuration: animationDuration,
           transitionType: ContainerTransitionType.fadeThrough,
-          closedColor: Theme.of(context).scaffoldBackgroundColor,
-          openColor: Theme.of(context).scaffoldBackgroundColor,
+          closedColor: scaffoldBackgroundColor,
+          openColor: scaffoldBackgroundColor,
           onClosed: (value) {
             binding.unbind();
           },
@@ -47,27 +56,27 @@ class CategoryBox extends GetView<HomeController> {
           },
           closedBuilder: (context, openContainer) {
             return AnimatedScale(
-              duration: const Duration(milliseconds: 250),
+              duration: animationDuration,
               curve: Curves.elasticIn,
               scale: _scale,
               child: GestureDetector(
                 onPanCancel: () {
                   _scale = 1;
-                  controller.update([categoryBoxId]);
+                  controller.update([categoryBoxId ?? ""]);
                 },
                 onPanEnd: (DragEndDetails details) {
                   _scale = 1;
-                  controller.update([categoryBoxId]);
+                  controller.update([categoryBoxId ?? ""]);
                 },
                 onPanDown: (DragDownDetails details) {
                   _scale = 0.95;
-                  controller.update([categoryBoxId]);
+                  controller.update([categoryBoxId ?? ""]);
                 },
                 onTap: () {
                   openContainer.call();
                 },
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
                   child: Stack(
                     fit: StackFit.expand,
                     children: <Widget>[
@@ -76,8 +85,8 @@ class CategoryBox extends GetView<HomeController> {
                         fit: BoxFit.cover,
                       ),
                       Material(
-                        animationDuration: const Duration(milliseconds: 400),
-                        color: Theme.of(context).primaryColor.withOpacity(.4),
+                        animationDuration: animationDuration,
+                        color: theme.primaryColor.withOpacity(0.4),
                         child: Container(
                           width: double.infinity,
                         ),
@@ -87,10 +96,9 @@ class CategoryBox extends GetView<HomeController> {
                         child: AutoSizeText(
                           data.title,
                           textAlign: TextAlign.center,
-                          style:
-                              Theme.of(context).textTheme.headline3!.copyWith(
-                                    fontSize: data.title.handleFontSizeValue(),
-                                  ),
+                          style: theme.textTheme.headline3?.copyWith(
+                            fontSize: data.title.handleFontSizeValue(),
+                          ),
                           maxLines: 3,
                         ),
                       ),
