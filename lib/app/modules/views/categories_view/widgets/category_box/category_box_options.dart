@@ -10,22 +10,24 @@ class CategoryBoxOptions extends GetView<CategoryBoxController> {
 
   @override
   Widget build(BuildContext context) {
-    // copy, share, hide, bookmark all category apis, unbookmark all category apis,
-
     return Stack(
-      fit: StackFit.expand,
       children: <Widget>[
         Column(
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             const SizedBox(
               height: 30,
             ),
             Column(
+              mainAxisSize: MainAxisSize.min,
               children: List.generate(controller.options.length, (index) {
                 return CategoryBoxOptionTile(
                   option: controller.options[index],
                 );
               }),
+            ),
+            const SizedBox(
+              height: 30,
             ),
           ],
         ),

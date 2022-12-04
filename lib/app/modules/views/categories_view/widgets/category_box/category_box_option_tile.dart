@@ -1,10 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/state_manager.dart';
 import 'package:public_apis_desktop_client/app/utils/text_helper_methods.dart';
 
 import '../../../../../data/models/category_box_option.dart';
+import '../../../../controllers/category_box_controller/category_box_option_tile_controller.dart';
 
-class CategoryBoxOptionTile extends StatelessWidget {
+class CategoryBoxOptionTile extends GetView<CategoryBoxOptionTileController> {
   final CategoryBoxOption option;
   final bool shouldHaveExtraVerticalPadding;
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CloseButtonController extends GetxController {
+class CategoryBoxOptionTileController extends GetxController {
   final id = "closeButtonId";
 
   Color? closeButtonColor;

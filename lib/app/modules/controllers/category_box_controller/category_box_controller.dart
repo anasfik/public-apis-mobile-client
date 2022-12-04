@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:public_apis_desktop_client/app/modules/controllers/category_box_controller/extensions/bottom_sheet_pptions_extension.dart';
 
 import '../../views/categories_view/widgets/category_box/category_box_options.dart';
 import 'mixins/category_box_options_mixin.dart';
@@ -24,15 +25,7 @@ class CategoryBoxController extends GetxController
   }
 
   void onLongPress(BuildContext context) {
-    _showBottomSheetOptions(context);
+showBottomSheetOptions(context);
   }
 
-  void _showBottomSheetOptions(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      builder: (context) {
-        return CategoryBoxOptions();
-      },
-    );
-  }
 }
