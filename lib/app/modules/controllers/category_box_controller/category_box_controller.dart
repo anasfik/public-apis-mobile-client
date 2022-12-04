@@ -1,7 +1,12 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
-class CategoryBoxController extends GetxController {
+import '../../views/categories_view/widgets/category_box/category_box_options.dart';
+import 'mixins/category_box_options_mixin.dart';
+
+class CategoryBoxController extends GetxController
+    with CategoryBoxOptionsMixin {
   double scale = 1;
   void onPanCancel(String id) {
     scale = 1;
@@ -14,7 +19,20 @@ class CategoryBoxController extends GetxController {
   }
 
   void onPanDown(String id) {
-    scale = 0.95;
+    scale = 0.98;
     update([id]);
+  }
+
+  void onLongPress(BuildContext context) {
+    _showBottomSheetOptions(context);
+  }
+
+  void _showBottomSheetOptions(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return CategoryBoxOptions();
+      },
+    );
   }
 }

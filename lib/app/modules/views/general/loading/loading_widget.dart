@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:public_apis_desktop_client/app/modules/views/categories_view/widgets/spin_kit.dart';
+import 'package:public_apis_desktop_client/app/modules/views/general/loading/spin_kit.dart';
 
 class LoadingWidget extends StatelessWidget {
   final double? height;

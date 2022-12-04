@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/generate_asset_path_with_title.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/search_bar_change.dart';
-import 'package:public_apis_desktop_client/app/modules/views/categories_view/widgets/loading_widget.dart';
+import 'package:public_apis_desktop_client/app/modules/views/general/loading/loading_widget.dart';
 
 import '../../../../data/models/AllApis.dart';
 import '../../../../data/models/category_box_data_model.dart';
 import '../../../controllers/home_controller/home_controller.dart';
 import '../../widgets/nil.dart';
-import 'category_box.dart';
+import 'category_box/category_box.dart';
 import 'retry_manually_widget.dart';
 
 class CustomSliverGrid extends GetView<HomeController> {

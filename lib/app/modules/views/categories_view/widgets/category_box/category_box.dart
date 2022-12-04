@@ -6,25 +6,24 @@ import 'package:public_apis_desktop_client/app/data/models/category_box_data_mod
 import 'package:public_apis_desktop_client/app/modules/controllers/category_box_controller/extensions/generate_category_box_id.dart';
 import 'package:public_apis_desktop_client/app/utils/text_helper_methods.dart';
 
-import '../../../bindings/apis_view_binding.dart';
-import '../../../controllers/category_box_controller/category_box_controller.dart';
-import '../../../controllers/home_controller/home_controller.dart';
-import '../../apis_view/apis_view.dart';
+import '../../../../bindings/apis_view_binding.dart';
+import '../../../../controllers/category_box_controller/category_box_controller.dart';
+
+import '../../../apis_view/apis_view.dart';
 
 class CategoryBox extends GetView<CategoryBoxController> {
   final CategoryBoxData data;
   final int index;
   final ApisViewBinding binding = ApisViewBinding();
 
-  String? categoryBoxId;
+  late final String? categoryBoxId =
+      controller.generateCategoryBoxId(data, index);
 
   CategoryBox({
     super.key,
     required this.data,
     required this.index,
-  }) {
-    categoryBoxId = controller.generateCategoryBoxId(data, index);
-  }
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -62,16 +61,19 @@ class CategoryBox extends GetView<CategoryBoxController> {
               scale: controller.scale,
               child: GestureDetector(
                 onPanCancel: () {
-                  controller.onPanCancel(categoryBoxId!);
+                  controller.onPanCancel(categoryBoxId ?? "");
                 },
                 onPanEnd: (DragEndDetails details) {
-                  controller.onPanEnd(categoryBoxId!);
+                  controller.onPanEnd(categoryBoxId ?? "");
                 },
                 onPanDown: (DragDownDetails details) {
-                  controller.onPanDown(categoryBoxId!);
+                  controller.onPanDown(categoryBoxId ?? "");
                 },
                 onTap: () {
                   openContainer.call();
+                },
+                onLongPress: () {
+                  controller.onLongPress(context);
                 },
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
