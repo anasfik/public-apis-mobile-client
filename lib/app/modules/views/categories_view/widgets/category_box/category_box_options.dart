@@ -12,21 +12,30 @@ class CategoryBoxOptions extends GetView<CategoryBoxController> {
   Widget build(BuildContext context) {
     // copy, share, hide, bookmark all category apis, unbookmark all category apis,
 
-    return Column(
+    return Stack(
+      fit: StackFit.expand,
       children: <Widget>[
-        Align(
-          alignment: Alignment.centerRight,
-          child: CategoryBoxCloseButton(),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
         Column(
-          children: List.generate(controller.options.length, (index) {
-            return CategoryBoxOptionTile(
-              option: controller.options[index],
-            );
-          }),
+          children: <Widget>[
+            const SizedBox(
+              height: 30,
+            ),
+            Column(
+              children: List.generate(controller.options.length, (index) {
+                return CategoryBoxOptionTile(
+                  option: controller.options[index],
+                );
+              }),
+            ),
+          ],
+        ),
+        const Positioned(
+          right: 0,
+          top: 0,
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: CategoryBoxCloseButton(),
+          ),
         ),
       ],
     );

@@ -28,7 +28,7 @@ class CategoryBoxCloseButton extends GetView<CloseButtonController> {
             margin: const EdgeInsets.all(10),
             child: ClipOval(
               child: AnimatedContainer(
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(10),
                 duration: const Duration(milliseconds: 200),
                 color: controller.closeButtonColor,
                 child: const Icon(Icons.close),
