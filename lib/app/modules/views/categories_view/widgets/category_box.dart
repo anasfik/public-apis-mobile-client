@@ -3,21 +3,20 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:public_apis_desktop_client/app/data/models/category_box_data_model.dart';
-import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/generate_category_box_id.dart';
+import 'package:public_apis_desktop_client/app/modules/controllers/category_box_controller/extensions/generate_category_box_id.dart';
 import 'package:public_apis_desktop_client/app/utils/text_helper_methods.dart';
 
 import '../../../bindings/apis_view_binding.dart';
+import '../../../controllers/category_box_controller/category_box_controller.dart';
 import '../../../controllers/home_controller/home_controller.dart';
 import '../../apis_view/apis_view.dart';
 
-class CategoryBox extends GetView<HomeController> {
+class CategoryBox extends GetView<CategoryBoxController> {
   final CategoryBoxData data;
   final int index;
   final ApisViewBinding binding = ApisViewBinding();
 
   String? categoryBoxId;
-
-  double _scale = 1;
 
   CategoryBox({
     super.key,
@@ -33,8 +32,10 @@ class CategoryBox extends GetView<HomeController> {
     final scaffoldBackgroundColor = theme.scaffoldBackgroundColor;
     const animationDuration = Duration(milliseconds: 20);
 
-    return GetBuilder<HomeController>(
+    return GetBuilder<CategoryBoxController>(
       id: categoryBoxId,
+      init: CategoryBoxController(),
+      global: false,
       builder: (controller) {
         return OpenContainer(
           tappable: false,
@@ -58,19 +59,16 @@ class CategoryBox extends GetView<HomeController> {
             return AnimatedScale(
               duration: animationDuration,
               curve: Curves.elasticIn,
-              scale: _scale,
+              scale: controller.scale,
               child: GestureDetector(
                 onPanCancel: () {
-                  _scale = 1;
-                  controller.update([categoryBoxId ?? ""]);
+                  controller.onPanCancel(categoryBoxId!);
                 },
                 onPanEnd: (DragEndDetails details) {
-                  _scale = 1;
-                  controller.update([categoryBoxId ?? ""]);
+                  controller.onPanEnd(categoryBoxId!);
                 },
                 onPanDown: (DragDownDetails details) {
-                  _scale = 0.95;
-                  controller.update([categoryBoxId ?? ""]);
+                  controller.onPanDown(categoryBoxId!);
                 },
                 onTap: () {
                   openContainer.call();
