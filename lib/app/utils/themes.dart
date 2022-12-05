@@ -56,6 +56,9 @@ class AppThemes {
       bottomSheetTheme: const BottomSheetThemeData(
         backgroundColor: Colors.white,
       ),
+      snackBarTheme: SnackBarThemeData(
+        actionTextColor: Colors.white.withOpacity(0.55),
+      ),
     );
 
     return theme;

@@ -8,7 +8,7 @@ extension BottomSheetOptionsExtension on CategoryBoxController {
     showModalBottomSheet(
       context: context,
       builder: (context) {
-        return const CategoryBoxOptions();
+        return CategoryBoxOptions();
       },
     );
   }

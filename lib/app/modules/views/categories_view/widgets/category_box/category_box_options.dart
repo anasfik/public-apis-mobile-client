@@ -25,8 +25,15 @@ class CategoryBoxOptions extends GetView<CategoryBoxController> {
                 final current = controller.options[index];
 
                 return GestureDetector(
-                  onTap: () {
-                    current.onTap.call();
+                  onTap: () async {
+                    try {
+                      await current.onTap();
+                      showSnackbar(context, current.onSuccessText);
+                    } catch (e) {
+                      showSnackbar(context, current.onErrorText);
+                    } finally {
+                      Get.back();
+                    }
                   },
                   child: CategoryBoxOptionTile(
                     index: index,
@@ -51,4 +58,32 @@ class CategoryBoxOptions extends GetView<CategoryBoxController> {
       ],
     );
   }
+}
+
+void showSnackbar(BuildContext context, String message) {
+  final theme = Theme.of(context);
+  void Function()? closeSnackbar;
+
+  final snackbar = SnackBar(
+    action: SnackBarAction(
+      label: 'Close',
+      onPressed: () {
+        if (closeSnackbar != null) {
+          closeSnackbar.call();
+        }
+      },
+    ),
+    duration: const Duration(milliseconds: 1500),
+    dismissDirection: DismissDirection.up,
+    content: Text(
+      message,
+      style: theme.textTheme.button?.copyWith(
+        color: theme.bottomSheetTheme.backgroundColor,
+      ),
+    ),
+  );
+
+  final scaffoldController =
+      ScaffoldMessenger.of(context).showSnackBar(snackbar);
+  closeSnackbar = scaffoldController.close;
 }

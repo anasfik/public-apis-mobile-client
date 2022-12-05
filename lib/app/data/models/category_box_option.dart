@@ -1,14 +1,19 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class CategoryBoxOption {
   final IconData icon;
-  final VoidCallback onTap;
+  final Future<void> Function() onTap;
   final String title;
-  static int indexId = 0;
+  final String onSuccessText;
+  final String onErrorText;
 
   CategoryBoxOption({
     required this.title,
     required this.icon,
     required this.onTap,
+    this.onSuccessText = "Success",
+    this.onErrorText = "Error",
   });
 }

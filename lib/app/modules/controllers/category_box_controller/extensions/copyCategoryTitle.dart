@@ -15,16 +15,11 @@ extension CopyCategoryTitleExtension on CategoryBoxController {
       textToCopy = _generateTextToCopy();
     }
     await _copyToClipBoard(textToCopy);
-    print(textToCopy);
   }
 
   Future<void> _copyToClipBoard(String text) async {
     final clipboardData = ClipboardData(text: text);
-    try {
-      await Clipboard.setData(clipboardData);
-    } catch (e) {
-      print(e);
-    }
+    await Clipboard.setData(clipboardData);
   }
 
   String _generateTextToCopy([String? category]) {
