@@ -2,6 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:public_apis_desktop_client/app/services/local_db/hive/favorites_db.dart';
+import 'package:public_apis_desktop_client/app/services/local_db/hive/locals_box.dart';
 
 import '../../../firebase_options.dart';
 import '../../data/models/favoriteApi.dart';
@@ -39,12 +41,13 @@ class MainInit {
   }
 
   Future<void> _clearHiveBoxesInDebugMode() async {
-    Box favoritesBox = HiveBoxes.favoritesBox;
-    Box localsBox = HiveBoxes.localsBox;
+    LocalsDB favorites = LocalsDB.instance;
+    FavoritesDB locals = FavoritesDB.instance;
 
-    if (!kDebugMode) {
-      await favoritesBox.clear();
-      await localsBox.clear();
+    if (kDebugMode) {
+      final ct = await favorites.clear();
+      final ft = await locals.clear();
+      print("Cleared $ct favorites and $ft locals");
     }
   }
 }

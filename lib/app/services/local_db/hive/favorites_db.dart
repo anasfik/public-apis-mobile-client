@@ -17,4 +17,9 @@ class FavoritesDB implements LocalDataImpl {
   void putWithKey(String key, value) {
     HiveBoxes.favoritesBox.put(key, value);
   }
+
+  @override
+  Future<int> clear() async {
+    return HiveBoxes.favoritesBox.clear();
+  }
 }

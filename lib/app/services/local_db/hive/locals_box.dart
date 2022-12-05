@@ -17,4 +17,9 @@ class LocalsDB implements LocalDataImpl {
   void putWithKey(String key, value) {
     HiveBoxes.localsBox.put(key, value);
   }
+
+  @override
+  Future<int> clear() async {
+    return HiveBoxes.localsBox.clear();
+  }
 }
