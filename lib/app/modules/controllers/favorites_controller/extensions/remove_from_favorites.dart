@@ -6,7 +6,7 @@ extension RemoveFromFavorites on FavoritesController {
     required bool isFavorite,
     required String key,
   }) {
-    favoritesBox.delete(key);
+    favorites.deleteWithKey(key);
     isFavorite = false;
   }
 }

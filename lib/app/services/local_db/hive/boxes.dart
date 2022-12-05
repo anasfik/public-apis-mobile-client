@@ -9,7 +9,8 @@ abstract class BoxesConstants {
 }
 
 class HiveBoxes {
-  static Box favoritesBox = Hive.box<FavoriteApi>(BoxesConstants.favorites);
+  static Box<FavoriteApi> favoritesBox =
+      Hive.box<FavoriteApi>(BoxesConstants.favorites);
   static Box localsBox = Hive.box(BoxesConstants.locals);
   HiveBoxes._();
 }

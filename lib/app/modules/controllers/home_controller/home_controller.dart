@@ -12,26 +12,30 @@ import '../../../data/models/AllApis.dart';
 import '../../../services/fetch_api/failure.dart';
 import '../../../services/fetch_api/remote_service.dart';
 import '../../../services/in_app_review/in_app_review.dart';
+import '../../../services/local_db/hive/locals_box.dart';
 import '../../../utils/dialog_helper.dart';
 
 class HomeController extends GetxController {
+  BuildContext? context;
   final FocusNode focusNode = FocusNode();
 
-  HomeController({this.context}) {
-    _context = context ?? Get.context;
-    badgeBackgroundColor = Theme.of(_context!).primaryColor.obs;
-  }
+  LocalsDB locals = LocalsDB.instance;
 
-  //
+  final String fabId = "fabId";
+  final int expandedHeight = 140;
+  final double sizedBoxHeight = 5;
+  final double searchBarHeight = 50;
+  bool shouldFabShows = false;
 
+  final _hiveService = InAppReview();
   static BuildContext? _context;
-  BuildContext? context;
+
+  bool get isFirstTimeOpenedTheAppAfterUpdate =>
+      locals.getWithKey("isFirstTimeOpenedTheAppAfterUpdate") ?? true;
 
   double get childAspectRatioBasedOnSetting => crossAxisCount == 2 ? 1.75 : 3;
   double get mainAxisSpacingBasedOnSetting =>
       15 * ((crossAxisCount.toDouble() % 2) + 1);
-
-  InAppReview _hiveService = InAppReview();
 
   late Rx<Color?> badgeBackgroundColor;
   late Rx<ColorTween> badgeBackgroundColorTween = ColorTween(
@@ -45,14 +49,10 @@ class HomeController extends GetxController {
   late ScrollController scrollController;
   late FabData currentFabData = fabOptionsData["down"]!;
 
-  //
-  final String fabId = "fabId";
-  final int expandedHeight = 140;
-  final double sizedBoxHeight = 5;
-  final double searchBarHeight = 50;
-  bool shouldFabShows = false;
-  bool isFirstTimeOpenedTheAppAfterUpdate =
-      Hive.box("locals").get("isFirstTimeOpenedTheAppAfterUpdate2") ?? true;
+  HomeController({this.context}) {
+    _context = context ?? Get.context;
+    badgeBackgroundColor = Theme.of(_context!).primaryColor.obs;
+  }
 
   @override
   void onInit() {
@@ -79,7 +79,6 @@ class HomeController extends GetxController {
 
   updateColor(ColorTween clr) {
     badgeBackgroundColor.value = badgeBackgroundColorTween.value.begin;
-    print(badgeBackgroundColorTween.value.begin);
   }
 
   double calculateReminderHeight(BuildContext context) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:public_apis_desktop_client/app/services/local_db/hive/locals_box.dart';
 import 'package:public_apis_desktop_client/app/utils/extensions/list_extension.dart';
 
 import '../../../utils/colors/colors.dart';
@@ -8,7 +9,7 @@ import '../../../utils/themes.dart';
 import '../home_controller/home_controller.dart';
 
 class ThemesButtonsSettingController extends GetxController {
-  Box localsBox = Hive.box("locals");
+  LocalsDB locals = LocalsDB.instance;
 
   Duration selectingAnimationDuration = const Duration(milliseconds: 100);
   Curve selectingAnimationCurve = Curves.easeInOutQuad;
@@ -51,8 +52,8 @@ class ThemesButtonsSettingController extends GetxController {
   }
 
   void _saveChangesLocally(Color color) {
-    localsBox.put("themesViewBool", themeOptionSelectedBool);
-    localsBox.put("lastSavedThemeColorValue", color.value);
+    locals.putWithKey("themesViewBool", themeOptionSelectedBool);
+    locals.putWithKey("lastSavedThemeColorValue", color.value);
   }
 
   void _changeTheme(Color color) {
@@ -72,7 +73,7 @@ class ThemesButtonsSettingController extends GetxController {
   }
 
   List<bool> _getListFromLocalOrCreateOne() {
-    return localsBox.get("themesViewBool") ??
+    return locals.getWithKey("themesViewBool") ??
         List<bool>.generate(
           colors?.length ?? 0,
           (index) => index == AppThemes().defaultThemColorIndex,

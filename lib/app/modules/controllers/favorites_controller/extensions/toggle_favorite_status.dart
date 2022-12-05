@@ -17,7 +17,8 @@ extension ToggleFavoriteStatusExtension on FavoritesController {
     );
 
     // When api is found in the box (isFavorite = true)), then remove it and quit.
-    if (favoritesBox.get(key).exists) {
+    final doesFavoriteApiExist = favorites.doesKeyExist(key);
+    if (doesFavoriteApiExist) {
       removeFromFavorites(
         isFavorite: isFavorite,
         key: key,
