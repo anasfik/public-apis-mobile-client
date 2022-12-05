@@ -9,9 +9,10 @@ import '../../../../controllers/category_box_controller/category_box_option_tile
 class CategoryBoxOptionTile extends GetView<CategoryBoxOptionTileController> {
   final CategoryBoxOption option;
   final bool shouldHaveExtraVerticalPadding;
-
+  final int index;
   const CategoryBoxOptionTile({
     super.key,
+    required this.index,
     required this.option,
     this.shouldHaveExtraVerticalPadding = false,
   });
@@ -19,26 +20,51 @@ class CategoryBoxOptionTile extends GetView<CategoryBoxOptionTileController> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final id = index.toString();
 
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: Row(
-        children: <Widget>[
-          Icon(
-            option.icon,
-            color: theme.colorScheme.primary.withOpacity(0.7),
-          ),
-          const SizedBox(
-            width: 20,
-          ),
-          AutoSizeText(
-            option.title.capitalizeAllWordsFirstLetter(),
-            style: theme.textTheme.button?.copyWith(
-              fontSize: 18,
+    return GetBuilder<CategoryBoxOptionTileController>(
+      init: CategoryBoxOptionTileController(),
+      global: false,
+      id: id,
+      builder: (controller) {
+        return GestureDetector(
+          onPanDown: (DragDownDetails details) {
+            controller.onPanDown(id);
+          },
+          onPanCancel: () {
+            controller.onPanCancel(id);
+          },
+          onPanEnd: (DragEndDetails details) {
+            controller.onPanEnd(id);
+          },
+          onPanStart: (DragStartDetails details) {
+            controller.onPanStart(id);
+          },
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            color: controller.optionTileBgColor ??
+                Theme.of(context).bottomSheetTheme.backgroundColor,
+            child: Row(
+              children: <Widget>[
+                Icon(
+                  option.icon,
+                  color: theme.colorScheme.primary.withOpacity(0.7),
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                AutoSizeText(
+                  option.title.capitalizeAllWordsFirstLetter(),
+                  style: theme.textTheme.button?.copyWith(
+                    fontSize: 18,
+                  ),
+                ),
+              ],
             ),
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

@@ -22,6 +22,7 @@ class CategoryBoxOptions extends GetView<CategoryBoxController> {
               mainAxisSize: MainAxisSize.min,
               children: List.generate(controller.options.length, (index) {
                 return CategoryBoxOptionTile(
+                  index: index,
                   option: controller.options[index],
                 );
               }),

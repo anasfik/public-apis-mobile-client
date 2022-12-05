@@ -24,7 +24,7 @@ class AppThemes {
     return _instance;
   }
   AppThemes._();
-  
+
   static ThemeData themeDataBasedOnColor(Color color) {
     ThemeData theme = ThemeData.light().copyWith(
       scaffoldBackgroundColor: hex("#161616"),
@@ -53,6 +53,9 @@ class AppThemes {
         secondary: color,
       ),
       dialogBackgroundColor: hex("#ecf0f1"),
+      bottomSheetTheme: const BottomSheetThemeData(
+        backgroundColor: Colors.white,
+      ),
     );
 
     return theme;
