@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/category_box_controller/category_box_controller.dart';
+import 'package:public_apis_desktop_client/app/modules/controllers/category_box_controller/mixins/category_box_options_mixin.dart';
 import 'package:public_apis_desktop_client/app/modules/views/categories_view/widgets/category_box/category_box_option_tile.dart';
 
 import 'category_box_close_button.dart';
@@ -21,9 +22,16 @@ class CategoryBoxOptions extends GetView<CategoryBoxController> {
             Column(
               mainAxisSize: MainAxisSize.min,
               children: List.generate(controller.options.length, (index) {
-                return CategoryBoxOptionTile(
-                  index: index,
-                  option: controller.options[index],
+                final current = controller.options[index];
+
+                return GestureDetector(
+                  onTap: () {
+                    current.onTap.call();
+                  },
+                  child: CategoryBoxOptionTile(
+                    index: index,
+                    option: current,
+                  ),
                 );
               }),
             ),

@@ -73,7 +73,7 @@ class CategoryBox extends GetView<CategoryBoxController> {
                   openContainer.call();
                 },
                 onLongPress: () {
-                  controller.onLongPress(context);
+                  controller.onLongPress(data, context);
                 },
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(10)),

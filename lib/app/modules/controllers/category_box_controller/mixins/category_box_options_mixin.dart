@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:public_apis_desktop_client/app/data/models/category_box_option.dart';
+import 'package:public_apis_desktop_client/app/modules/controllers/category_box_controller/extensions/copyCategoryTitle.dart';
 
-mixin CategoryBoxOptionsMixin {
-  final options = <CategoryBoxOption>[
+import '../category_box_controller.dart';
+
+extension CategoryBoxOptionsMixin on CategoryBoxController {
+  List<CategoryBoxOption> get options => <CategoryBoxOption>[
     CategoryBoxOption(
       title: "copy",
       icon: Icons.copy,
-      onTap: () {},
+      onTap: () async {
+        await copyCategoryTitle();
+      },
     ),
     CategoryBoxOption(
       title: "hide category",
