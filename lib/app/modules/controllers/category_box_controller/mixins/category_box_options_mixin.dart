@@ -16,7 +16,9 @@ extension CategoryBoxOptionsMixin on CategoryBoxController {
     CategoryBoxOption(
       title: "hide category",
       icon: Icons.visibility_off,
-      onTap: () {},
+      onTap: () {
+        
+      },
     ),
     CategoryBoxOption(
       title: "add all apis to bookmarks",

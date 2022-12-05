@@ -15,7 +15,7 @@ extension CopyCategoryTitleExtension on CategoryBoxController {
       textToCopy = _generateTextToCopy();
     }
     await _copyToClipBoard(textToCopy);
-    print((await Clipboard.getData(Clipboard.kTextPlain))?.text);
+    print(textToCopy);
   }
 
   Future<void> _copyToClipBoard(String text) async {
