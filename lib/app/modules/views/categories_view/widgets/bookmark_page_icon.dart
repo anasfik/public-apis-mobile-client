@@ -4,6 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../../data/models/favoriteApi.dart';
 import '../../../controllers/home_controller/home_controller.dart';
+import 'fav_badge.dart';
 
 class BookmarkPageIcon extends GetView<HomeController> {
   const BookmarkPageIcon({
@@ -30,33 +31,18 @@ class BookmarkPageIcon extends GetView<HomeController> {
             alignment: Alignment.center,
             children: [
               Positioned(
-                  child: Obx(
-                () => Container(
-                  width: 15,
-                  height: 15,
-                  decoration: BoxDecoration(
-                    color: controller.badgeBackgroundColor.value,
-                    borderRadius: BorderRadius.circular(50),
+                child: Obx(
+                  () => Container(
+                    width: 15,
+                    height: 15,
+                    decoration: BoxDecoration(
+                      color: controller.badgeBackgroundColor.value,
+                      borderRadius: const BorderRadius.all(Radius.circular(50)),
+                    ),
+                    child: const FavoritesCounter(),
                   ),
-                  child: ValueListenableBuilder(
-                      valueListenable:
-                          Hive.box<FavoriteApi>("favorites").listenable(),
-                      builder: (BuildContext context, Box favoritesBox,
-                          Widget? child) {
-                        return Center(
-                          child: Text(
-                            favoritesBox.length.toString(),
-                            style: const TextStyle(
-                                fontFamily: "Roboto",
-                                color: Colors.white,
-                                fontSize: 9,
-                                fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.center,
-                          ),
-                        );
-                      }),
                 ),
-              )),
+              ),
             ],
           ),
         ),

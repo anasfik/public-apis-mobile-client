@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:public_apis_desktop_client/app/services/local_db/hive/favorites_db.dart';
+import 'package:public_apis_desktop_client/app/utils/extensions/getx_controller_extension.dart';
 import 'package:public_apis_desktop_client/app/utils/text_helper_methods.dart';
 
 import '../../../data/models/favoriteApi.dart';
 
 class ResetFavoritesController extends GetxController {
-  ResetFavoritesController({this.context});
-
+  FavoritesDB favorites = FavoritesDB.instance;
   BuildContext? context;
+
+  ResetFavoritesController({this.context});
 
   void openConfirmDialogToDeleteFavorites() {
     showDialog(
@@ -16,31 +19,32 @@ class ResetFavoritesController extends GetxController {
       builder: (context) => AlertDialog(
         title: const Text('Reset Favorites'),
         content: const Text('Are you sure you want to reset your bookmarks?'),
-        actions: [
+        actions: <Widget>[
           TextButton(
             onPressed: () {
               Get.back();
             },
             child: Text(
-              ("cancel").capitalizeAllWordsFirstLetter(),
+              "cancel".capitalizeAllWordsFirstLetter(),
             ),
           ),
           TextButton(
             onPressed: () {
-              clearTheFavoritesBox();
+              clearTheFavorites();
             },
-            child: Text(("reset").capitalizeAllWordsFirstLetter()),
+            child: Text("reset".capitalizeAllWordsFirstLetter()),
           ),
         ],
       ),
     );
   }
 
-  void clearTheFavoritesBox() {
-    Box favoritesBox = Hive.box<FavoriteApi>("favorites");
+  void clearTheFavorites() {
     try {
-      favoritesBox.clear();
+      favorites.clear();
+    } catch (e) {
+    } finally {
       Get.back();
-    } catch (e) {}
+    }
   }
 }
