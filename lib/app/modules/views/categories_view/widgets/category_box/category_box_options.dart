@@ -23,15 +23,15 @@ class CategoryBoxOptions extends GetView<CategoryBoxController> {
             Column(
               mainAxisSize: MainAxisSize.min,
               children: List.generate(controller.options.length, (index) {
-                final current = controller.options[index];
+                final currentOption = controller.options[index];
 
                 return GestureDetector(
                   onTap: () async {
-                    controller.handleOptionOnTap(context, current);
+                    controller.handleOptionOnTap(context, currentOption);
                   },
                   child: CategoryBoxOptionTile(
                     index: index,
-                    option: current,
+                    option: currentOption,
                   ),
                 );
               }),
