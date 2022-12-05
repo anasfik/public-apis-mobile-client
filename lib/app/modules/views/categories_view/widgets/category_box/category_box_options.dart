@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/category_box_controller/category_box_controller.dart';
-import 'package:public_apis_desktop_client/app/modules/controllers/category_box_controller/extensions/a.dart';
-import 'package:public_apis_desktop_client/app/modules/controllers/category_box_controller/mixins/category_box_options_mixin.dart';
+import 'package:public_apis_desktop_client/app/modules/controllers/category_box_controller/extensions/handle_option_on_tap.dart';
+import 'package:public_apis_desktop_client/app/modules/controllers/category_box_controller/extensions/category_box_options_extension.dart';
 import 'package:public_apis_desktop_client/app/modules/views/categories_view/widgets/category_box/category_box_option_tile.dart';
 
 import 'category_box_close_button.dart';

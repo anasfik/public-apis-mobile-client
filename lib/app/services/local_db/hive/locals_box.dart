@@ -1,4 +1,4 @@
-import 'package:public_apis_desktop_client/app/services/local_db/hive/boxes.dart';
+import 'package:public_apis_desktop_client/app/services/local_db/hive/constants/boxes.dart';
 
 import '../impl.dart';
 
@@ -14,8 +14,8 @@ class LocalsDB implements LocalDataImpl {
   }
 
   @override
-  void putWithKey(String key, value) {
-    HiveBoxes.localsBox.put(key, value);
+  Future<void> putWithKey(String key, value) async {
+    return HiveBoxes.localsBox.put(key, value);
   }
 
   @override

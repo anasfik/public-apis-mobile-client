@@ -2,13 +2,13 @@ import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:public_apis_desktop_client/app/data/models/favoriteApi.dart';
 import 'package:public_apis_desktop_client/app/services/fetch_api/failure.dart';
-import 'package:public_apis_desktop_client/app/services/local_db/hive/boxes.dart';
-import 'package:public_apis_desktop_client/app/services/local_db/hive/delete_with_key.dart';
-import 'package:public_apis_desktop_client/app/services/local_db/hive/value_listenable.dart';
+import 'package:public_apis_desktop_client/app/services/local_db/hive/constants/boxes.dart';
+import 'package:public_apis_desktop_client/app/services/local_db/hive/interfaces/delete_with_key.dart';
+import 'package:public_apis_desktop_client/app/services/local_db/hive/interfaces/value_listenable.dart';
 
 import '../impl.dart';
-import 'box_type.dart';
-import 'database_key_existence_checker.dart';
+import 'interfaces/box_type.dart';
+import 'interfaces/database_key_existence_checker.dart';
 
 class FavoritesDB
     implements
@@ -31,8 +31,8 @@ class FavoritesDB
   }
 
   @override
-  void putWithKey(String key, value) {
-    HiveBoxes.favoritesBox.put(key, value);
+  Future<void> putWithKey(String key, value) async {
+    return HiveBoxes.favoritesBox.put(key, value);
   }
 
   @override

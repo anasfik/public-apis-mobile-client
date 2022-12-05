@@ -13,8 +13,11 @@ class FavoritesCounter extends GetView<FavoritesController> {
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
       valueListenable: controller.favorites.listenable(),
-      builder:
-          (BuildContext context, Box<FavoriteApi> favorites, Widget? child) {
+      builder: (
+        BuildContext context,
+        Box<FavoriteApi> favorites,
+        Widget? child,
+      ) {
         return Center(
           child: Text(
             favorites.length.toString(),
