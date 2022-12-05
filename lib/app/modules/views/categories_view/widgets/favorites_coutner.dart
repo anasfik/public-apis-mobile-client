@@ -11,15 +11,13 @@ class FavoritesCounter extends GetView<FavoritesController> {
 
   @override
   Widget build(BuildContext context) {
-    // Type boxType = controller.favorites.boxType;
-
     return ValueListenableBuilder(
       valueListenable: controller.favorites.listenable(),
       builder:
-          (BuildContext context, Box<FavoriteApi> favoritesBox, Widget? child) {
+          (BuildContext context, Box<FavoriteApi> favorites, Widget? child) {
         return Center(
           child: Text(
-            favoritesBox.length.toString(),
+            favorites.length.toString(),
             // Todo: set a style.
             style: const TextStyle(
               fontFamily: "Roboto",

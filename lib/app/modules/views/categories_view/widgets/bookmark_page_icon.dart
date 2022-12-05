@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-
-import '../../../../data/models/favoriteApi.dart';
 import '../../../controllers/home_controller/home_controller.dart';
-import 'fav_badge.dart';
+import 'favorites_coutner.dart';
 
 class BookmarkPageIcon extends GetView<HomeController> {
   const BookmarkPageIcon({
