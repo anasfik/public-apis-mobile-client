@@ -6,6 +6,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import '../../../firebase_options.dart';
 import '../../data/models/favoriteApi.dart';
 import '../crashlytics/crashlytics.dart';
+import '../local_db/hive/boxes.dart';
 
 class MainInit {
   Future<void> init() async {
@@ -38,8 +39,8 @@ class MainInit {
   }
 
   Future<void> _clearHiveBoxesInDebugMode() async {
-    Box favoritesBox = Hive.box<FavoriteApi>("favorites");
-    Box localsBox = Hive.box("locals");
+    Box favoritesBox = HiveBoxes.favoritesBox;
+    Box localsBox = HiveBoxes.localsBox;
 
     if (!kDebugMode) {
       await favoritesBox.clear();

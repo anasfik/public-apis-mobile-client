@@ -10,6 +10,8 @@ extension CategoryBoxOptionsMixin on CategoryBoxController {
           title: "copy",
           icon: Icons.copy,
           onTap: copyCategoryTitle,
+          onErrorText: "cannot copy category, please try again",
+          onSuccessText: "Copied!",
         ),
         CategoryBoxOption(
           title: "hide category",

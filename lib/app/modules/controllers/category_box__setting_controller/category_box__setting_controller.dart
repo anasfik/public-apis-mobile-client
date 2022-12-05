@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
 
 import '../../../data/models/grid_setting_view.dart';
+import '../../../services/local_db/hive/locals_box.dart';
 import '../home_controller/home_controller.dart';
-
 
 class ToggleCategoriesController extends GetxController {
   late List<bool> categoriesViewBool;
 
-  Box localsBox = Hive.box("locals");
+  LocalsDB locals = LocalsDB.instance;
 
   int? temporaryCrossAxisCount;
 
@@ -69,7 +68,7 @@ class ToggleCategoriesController extends GetxController {
 
   void _saveCrossAxisCountValueLocally() {
     temporaryCrossAxisCount = _crossAxisCountValueBasedOnSelectedView();
-    localsBox.put("crossAxisCount", temporaryCrossAxisCount);
+    locals.putWithKey("crossAxisCount", temporaryCrossAxisCount);
   }
 
   int _crossAxisCountValueBasedOnSelectedView() {
@@ -77,7 +76,7 @@ class ToggleCategoriesController extends GetxController {
   }
 
   List<bool> _categoriesViewBoolOrDefault() {
-    return localsBox.get("categoriesViewBool") ?? defaultSettingView;
+    return locals.getWithKey("categoriesViewBool") ?? defaultSettingView;
   }
 
   void _unSelectAllViews() {
@@ -89,6 +88,6 @@ class ToggleCategoriesController extends GetxController {
   }
 
   void _saveViewSettingLocally() {
-    localsBox.put("categoriesViewBool", categoriesViewBool);
+    locals.putWithKey("categoriesViewBool", categoriesViewBool);
   }
 }

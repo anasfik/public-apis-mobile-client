@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive/hive.dart';
+import 'package:public_apis_desktop_client/app/services/local_db/hive/locals_box.dart';
 
 import 'colors/colors_helper.dart';
 import 'colors/colors.dart';
@@ -9,12 +9,12 @@ class AppThemes {
   static final _instance = AppThemes._();
 
   int get defaultThemColorIndex => 2;
-  Box get localsBox => Hive.box("locals");
+  LocalsDB get locals => LocalsDB.instance;
 
   Color get defaultThemeColor => AppColors.themeColors[defaultThemColorIndex];
 
   int get lastSavedThemeColorValue =>
-      localsBox.get("lastSavedThemeColorValue") ?? defaultThemeColor.value;
+      locals.getWithKey("lastSavedThemeColorValue") ?? defaultThemeColor.value;
 
   Color get lastSavedThemeColor => Color(lastSavedThemeColorValue);
 
@@ -26,12 +26,13 @@ class AppThemes {
   AppThemes._();
 
   static ThemeData themeDataBasedOnColor(Color color) {
+    final darkPrimaryColor = hex("#161616");
     ThemeData theme = ThemeData.light().copyWith(
-      scaffoldBackgroundColor: hex("#161616"),
+      scaffoldBackgroundColor: darkPrimaryColor,
       primaryColor: color,
       textTheme: GoogleFonts.poppinsTextTheme().copyWith(
         headline2: TextStyle(
-          color: hex("#161616"),
+          color: darkPrimaryColor,
           fontSize: 24,
         ),
         headline3: const TextStyle(
