@@ -50,6 +50,7 @@ class CustomSliverGrid extends GetView<HomeController> {
                       String currentCategoryTitle = resultList[index].title;
 
                       return CategoryBox(
+                        key: ValueKey(index),
                         index: index,
                         data: CategoryBoxData(
                           title: currentCategoryTitle,

@@ -38,11 +38,13 @@ class CustomSliverAppBar extends GetView<HomeController> {
                 letterSpacing: 1.25,
               ),
             ),
-            Obx(
-              () => Opacity(
-                opacity: controller.opacityValue.value,
+            Obx(() {
+              final currentOpacityValue = controller.opacityValue.value;
+
+              return Opacity(
+                opacity: currentOpacityValue,
                 child: Transform.scale(
-                  scale: 0.25 + controller.opacityValue.value,
+                  scale: 0.25 + currentOpacityValue,
                   child: ValueListenableBuilder(
                     valueListenable: HiddenCategoriesDB.instance.listenable(),
                     builder: (BuildContext context, Box box, Widget? child) {
@@ -56,8 +58,8 @@ class CustomSliverAppBar extends GetView<HomeController> {
                     },
                   ),
                 ),
-              ),
-            ),
+              );
+            }),
           ],
         ),
         background: Container(
