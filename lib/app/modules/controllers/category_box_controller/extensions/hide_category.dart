@@ -11,7 +11,18 @@ extension HideCategoryExtension on CategoryBoxController {
     updateHomeCategoriesGrid();
   }
 
-  void _addToHiddenCategoriesDatabase(String category) {
+  Future<void> showCategory() async {
+    final currentCategoryData = CategoryBoxController.currentCategoryData;
+    final categoryTitle = currentCategoryData!.title;
+    _removeFromHiddenCategoriesDatabase(categoryTitle);
+    updateHomeCategoriesGrid();
+  }
+
+  void _removeFromHiddenCategoriesDatabase(String category) {
     HiddenCategoriesDB.instance.addWithoutKey(category);
+  }
+
+  void _addToHiddenCategoriesDatabase(String category) {
+    HiddenCategoriesDB.instance.deleteWithKey(category);
   }
 }

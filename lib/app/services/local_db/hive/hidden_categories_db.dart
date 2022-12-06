@@ -1,6 +1,8 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:public_apis_desktop_client/app/services/local_db/interfaces/add_to_db_like_list.dart';
 import 'package:public_apis_desktop_client/app/services/local_db/interfaces/database_key_existence_checker.dart';
+import 'package:public_apis_desktop_client/app/services/local_db/interfaces/delete_with_key.dart';
+import 'package:public_apis_desktop_client/app/services/local_db/interfaces/put_with_key.dart';
 import 'package:public_apis_desktop_client/app/services/local_db/interfaces/value_listenable.dart';
 import '../interfaces/clear.dart';
 import '../interfaces/database_elements_length.dart';
@@ -14,7 +16,8 @@ class HiddenCategoriesDB
         KeyExistenceChecker,
         EmptyChecker,
         DatabaseElementsLength,
-        ListenableHive {
+        ListenableHive,
+        DeleteWithKey {
   static final _instance = HiddenCategoriesDB._();
   static HiddenCategoriesDB get instance => _instance;
 
@@ -31,11 +34,6 @@ class HiddenCategoriesDB
   }
 
   @override
-  Future<void> addWithoutKey(String value) {
-    return HiveBoxes.hiddenCategoriesBox.add(value.toLowerCase());
-  }
-
-  @override
   bool doesKeyExist(String value) {
     return HiveBoxes.hiddenCategoriesBox.values.contains(value.toLowerCase());
   }
@@ -43,5 +41,17 @@ class HiddenCategoriesDB
   @override
   listenable() {
     return HiveBoxes.hiddenCategoriesBox.listenable();
+  }
+
+  @override
+  Future<void> deleteWithKey(String key) {
+    return HiveBoxes.hiddenCategoriesBox.delete(key);
+  }
+
+  @override
+  Future<void> addWithoutKey(String value) {
+    final keyAndValue = value.toLowerCase();
+
+    return HiveBoxes.hiddenCategoriesBox.put(keyAndValue, keyAndValue);
   }
 }
