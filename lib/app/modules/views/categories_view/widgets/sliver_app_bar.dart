@@ -31,7 +31,7 @@ class CustomSliverAppBar extends GetView<HomeController> {
         expandedTitleScale: 1.4,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
+          children: <Widget>[
             Text(
               "categories".capitalizeAllWordsFirstLetter(),
               style: const TextStyle(

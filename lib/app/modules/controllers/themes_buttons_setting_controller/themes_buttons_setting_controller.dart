@@ -25,7 +25,7 @@ class ThemesButtonsSettingController extends GetxController {
       return Get.find<HomeController>();
     }
 
-    return Get.put(HomeController());
+    return Get.put(HomeController(context: Get.context!));
   }
 
   @override

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:animations/animations.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -67,14 +69,15 @@ class CategoryBox extends GetView<CategoryBoxController> {
                   controller.onPanEnd(categoryBoxId ?? "");
                 },
                 onPanDown: (DragDownDetails details) {
-                  controller.onPanDown(categoryBoxId ?? "");
+                  controller.onPanDown(categoryBoxId ?? "", data, context);
+                  
                 },
                 onTap: () {
                   openContainer.call();
                 },
-                onLongPress: () {
-                  controller.onLongPress(data, context);
-                },
+                // onLongPress: () {
+                //   controller.onLongPress(data, context);
+                // },
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                   child: Stack(

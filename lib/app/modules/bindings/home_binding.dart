@@ -9,7 +9,7 @@ import '../controllers/home_controller/home_controller.dart';
 class HomeCategoriesPageBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put<HomeController>(HomeController(context: Get.context));
+    Get.put<HomeController>(HomeController(context: Get.context!));
     Get.put<FavoritesController>(FavoritesController());
     Get.lazyPut(() => CategoryBoxController(), fenix: true);
     Get.lazyPut(() => CloseButtonController());
