@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:public_apis_desktop_client/app/data/models/category_box_option.dart';
+import 'package:public_apis_desktop_client/app/modules/controllers/category_box_controller/extensions/add_category_apis_to_bookmarks.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/category_box_controller/extensions/copyCategoryTitle.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/category_box_controller/extensions/hide_category.dart';
 
@@ -25,9 +26,7 @@ extension CategoryBoxOptionsMixin on CategoryBoxController {
         CategoryBoxOption(
           title: "add all apis to bookmarks",
           icon: Icons.bookmark_add,
-          onTap: () {
-            return Future.value();
-          },
+          onTap: addAllApisToBookmarks,
         ),
         CategoryBoxOption(
           title: "remove all apis from bookmarks",

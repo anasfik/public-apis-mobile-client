@@ -9,7 +9,7 @@ extension HideCategoryExtension on CategoryBoxController {
     final categoryTitle = currentCategoryData!.title;
     _addToHiddenCategoriesDatabase(categoryTitle);
     updateHomeCategoriesGrid();
-  }
+    }
 
   Future<void> showCategory() async {
     final currentCategoryData = CategoryBoxController.currentCategoryData;

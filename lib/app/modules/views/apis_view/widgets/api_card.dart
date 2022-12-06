@@ -2,8 +2,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:public_apis_desktop_client/app/data/models/favoriteApi.dart';
+import 'package:public_apis_desktop_client/app/modules/controllers/favorites_controller/extensions/generate_api_key.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/favorites_controller/extensions/toggle_favorite_status.dart';
-import 'package:public_apis_desktop_client/app/services/crashlytics/crashlytics.dart';
 import 'package:public_apis_desktop_client/app/utils/extensions/api_model_extension.dart';
 
 import '../../../../data/models/AllApis.dart';
@@ -14,12 +14,12 @@ import 'api_open_link_button.dart';
 class ApiCard extends GetView<FavoritesController> {
   ApiCard({
     Key? key,
-    required this.apiInformation,
+    required this.api,
     required this.category,
     this.isFavorite = false,
   }) : super(key: key);
 
-  final Api apiInformation;
+  final Api api;
   bool isFavorite;
   final String category;
   @override
@@ -40,7 +40,7 @@ class ApiCard extends GetView<FavoritesController> {
             children: <Widget>[
               Expanded(
                 child: AutoSizeText(
-                  apiInformation.name,
+                  api.name,
                   style: Theme.of(context).textTheme.headline3!.copyWith(
                         fontSize: 20,
                       ),
@@ -53,60 +53,67 @@ class ApiCard extends GetView<FavoritesController> {
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  GetBuilder<FavoritesController>(
-                    init: FavoritesController(),
-                    global: false,
-                    id: apiInformation.name,
-                    builder: (controller) {
-                      return GestureDetector(
-                        onTap: () {
-                          isFavorite = !isFavorite;
-                          final currentFav =
-                              FavoriteApi.from(apiInformation, category);
-                          controller.toggleFavoriteStatus(
-                            currentFav,
-                            isFavorite,
-                          );
-                        },
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(100),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(200),
-                            ),
-                            height: 30,
-                            width: 30,
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                AnimatedContainer(
-                                  decoration: BoxDecoration(
-                                    color: Colors.white.withOpacity(.7),
-                                    borderRadius: BorderRadius.circular(100),
+                  Builder(builder: (context) {
+                    final key = Get.find<FavoritesController>().consistentKey(
+                      category,
+                      api.name,
+                    );
+
+                    return GetBuilder<FavoritesController>(
+                      init: FavoritesController(),
+                      global: false,
+                      id: key,
+                      builder: (controller) {
+                        return GestureDetector(
+                          onTap: () {
+                            isFavorite = !isFavorite;
+                            final currentFav = FavoriteApi.from(api, category);
+                            controller.toggleFavoriteStatus(
+                              currentFav,
+                              isFavorite,
+                              key,
+                            );
+                          },
+                          child: ClipRRect(
+                            borderRadius: const BorderRadius.all(Radius.circular(100)),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(200),
+                              ),
+                              height: 30,
+                              width: 30,
+                              child: Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  AnimatedContainer(
+                                    decoration: BoxDecoration(
+                                      color: Colors.white.withOpacity(.7),
+                                      borderRadius: BorderRadius.circular(100),
+                                    ),
+                                    duration: const Duration(milliseconds: 50),
+                                    height: isFavorite ? 30 : 0,
+                                    width: isFavorite ? 30 : 0,
                                   ),
-                                  duration: const Duration(milliseconds: 50),
-                                  height: isFavorite ? 30 : 0,
-                                  width: isFavorite ? 30 : 0,
-                                ),
-                                Icon(
-                                  Icons.bookmark,
-                                  color: isFavorite
-                                      ? Theme.of(context).primaryColor
-                                      : Colors.grey,
-                                  size: 22,
-                                ),
-                              ],
+                                  Icon(
+                                    Icons.bookmark,
+                                    color: isFavorite
+                                        ? Theme.of(context).primaryColor
+                                        : Colors.grey,
+                                    size: 22,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    },
-                  ),
+                        );
+                      },
+                    );
+                  }),
                   const SizedBox(
                     width: 5,
                   ),
                   ApiButton(
-                    link: apiInformation.link,
+                    link: api.link,
                   ),
                 ],
               ),
@@ -116,7 +123,7 @@ class ApiCard extends GetView<FavoritesController> {
             height: 10,
           ),
           Text(
-            apiInformation.description,
+            api.description,
             style: Theme.of(context).textTheme.headline3!.copyWith(
                   fontSize: 15,
                   fontWeight: FontWeight.w300,
@@ -129,11 +136,11 @@ class ApiCard extends GetView<FavoritesController> {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-              if (apiInformation.hasAuthWithApiKey()) ...[
+              if (api.hasAuthWithApiKey()) ...[
                 const ApiChip(
                   text: "apiKey",
                 ),
-              ] else if (apiInformation.hasAuth()) ...[
+              ] else if (api.hasAuth()) ...[
                 const ApiChip(
                   text: "auth",
                 ),
@@ -141,12 +148,12 @@ class ApiCard extends GetView<FavoritesController> {
               const SizedBox(
                 width: 5,
               ),
-              if (apiInformation.isHttps()) ...[
+              if (api.isHttps()) ...[
                 const ApiChip(
                   text: "https",
                 ),
               ],
-              if (apiInformation.isHttp()) ...[
+              if (api.isHttp()) ...[
                 const ApiChip(
                   text: "http",
                 ),
@@ -154,8 +161,7 @@ class ApiCard extends GetView<FavoritesController> {
               const SizedBox(
                 width: 5,
               ),
-              if (apiInformation.hasCors() ||
-                  apiInformation.hasUnknownCors()) ...[
+              if (api.hasCors() || api.hasUnknownCors()) ...[
                 const ApiChip(
                   text: "cors",
                 ),

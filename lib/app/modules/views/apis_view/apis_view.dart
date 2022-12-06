@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/apis_view_controller/extensions/filter_apis_view_extension.dart';
+import 'package:public_apis_desktop_client/app/modules/controllers/favorites_controller/extensions/is_api_bookmarked.dart';
+import 'package:public_apis_desktop_client/app/modules/controllers/favorites_controller/favorites_controller.dart';
 import 'package:public_apis_desktop_client/app/modules/views/apis_view/widgets/api_card.dart';
 import 'package:public_apis_desktop_client/app/utils/text_helper_methods.dart';
 
@@ -57,19 +59,15 @@ class ApisView extends StatelessWidget {
                       children: List<Widget>.generate(
                         processedApis.length,
                         (index) => ApiCard(
+                          api: processedApis[index],
                           key: ValueKey(
                             "${processedApis[index].name} $index",
                           ),
-                          apiInformation: processedApis[index],
                           category: category,
-                          isFavorite: Hive.box<FavoriteApi>("favorites")
-                              .values
-                              .toList()
-                              .any(
-                                (favoriteApi) =>
-                                    favoriteApi.name ==
-                                    processedApis[index].name,
-                              ),
+                          isFavorite:
+                              Get.find<FavoritesController>().isApiBookmarked(
+                            FavoriteApi.from(processedApis[index], category),
+                          ),
                         ),
                       ),
                     ),
