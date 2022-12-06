@@ -13,7 +13,6 @@ class CustomSliverAppBar extends GetView<HomeController> {
     final theme = Theme.of(context);
 
     return SliverAppBar(
-      
       toolbarHeight: kToolbarHeight + 5,
       pinned: true,
       floating: false,
@@ -27,11 +26,31 @@ class CustomSliverAppBar extends GetView<HomeController> {
       flexibleSpace: FlexibleSpaceBar(
         titlePadding: const EdgeInsets.all(20),
         expandedTitleScale: 1.4,
-        title: Text(
-          "categories".capitalizeAllWordsFirstLetter(),
-          style: const TextStyle(
-            letterSpacing: 1.25,
-          ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              "categories".capitalizeAllWordsFirstLetter(),
+              style: const TextStyle(
+                letterSpacing: 1.25,
+              ),
+            ),
+            Obx(
+              () => Opacity(
+                opacity: controller.opacityValue.value,
+                child: Transform.scale(
+                  scale: 0.25 + controller.opacityValue.value,
+                  child: Text(
+                    "2 Hidden",
+                    style: theme.textTheme.caption?.copyWith(
+                      color: Colors.white,
+                      fontSize: 9.5,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
         background: Container(
           color: theme.scaffoldBackgroundColor,

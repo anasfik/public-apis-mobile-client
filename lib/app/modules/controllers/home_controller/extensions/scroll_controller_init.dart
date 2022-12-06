@@ -14,13 +14,15 @@ extension ScrollControllerInitExtension on HomeController {
         if (_shouldChangeBadgeBgColor(scrollController)) {
           _handleBadgeBgColor(scrollController, context);
         }
+        if (_isOpacityValueAtPossibleRange(scrollController)) {
+          _handleOPacityValue(scrollController);
+        }
 
         if (_isScrollingDown(scrollController)) {
           switchAndUpdateFabDataTo(FabDirectionOption.up);
         } else if (_isScrollingUp(scrollController)) {
           switchAndUpdateFabDataTo(FabDirectionOption.down);
         }
-
 
         final isAtScreenLimits = _hasReachedEndOfScreen(scrollController) ||
             _hasReachedStartOfScreen(scrollController);
@@ -78,5 +80,30 @@ extension ScrollControllerInitExtension on HomeController {
   bool _isScrollingUp(ScrollController scrollController) {
     return scrollController.position.userScrollDirection ==
         ScrollDirection.reverse;
+  }
+
+  void _handleOPacityValue(ScrollController scrollController) {
+    final onCurrentScrollPositionValue =
+        _calculatePossibleOpacityValue(scrollController);
+
+    if (onCurrentScrollPositionValue < 0) {
+      opacityValue.value = 0;
+    } else if (onCurrentScrollPositionValue > 1) {
+      opacityValue.value = 1;
+    } else {
+      opacityValue.value = onCurrentScrollPositionValue;
+    }
+  }
+
+  bool _isOpacityValueAtPossibleRange(ScrollController scrollController) {
+    final onCurrentScrollPositionValue =
+        _calculatePossibleOpacityValue(scrollController);
+
+    return onCurrentScrollPositionValue >= 0 &&
+        onCurrentScrollPositionValue <= 1;
+  }
+
+  double _calculatePossibleOpacityValue(ScrollController scrollController) {
+    return 1 - (scrollController.position.pixels / expandedHeight * 2);
   }
 }

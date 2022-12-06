@@ -27,6 +27,8 @@ class HomeController extends GetxController {
   final double searchBarHeight = 50;
   bool shouldFabShows = false;
 
+  Rx<double> opacityValue = 1.0.obs;
+
   final _hiveService = InAppReview();
   static BuildContext? _context;
 
