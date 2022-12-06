@@ -1,8 +1,10 @@
 import 'package:public_apis_desktop_client/app/services/local_db/hive/constants/boxes.dart';
 
-import '../impl.dart';
+import '../interfaces/clear.dart';
+import '../interfaces/get_with_key.dart';
+import '../interfaces/put_with_key.dart';
 
-class LocalsDB implements LocalDataImpl {
+class LocalsDB implements PutWithKey, GetWithKey, ClearDatabase {
   static final LocalsDB _instance = LocalsDB._();
   static LocalsDB get instance => _instance;
 

@@ -11,7 +11,7 @@ class LocalDatabase {
   LocalDatabase._();
 
   Future<void> initDatabases() async {
-    Hive.initFlutter();
+    await Hive.initFlutter();
     Hive.registerAdapter(FavoriteApiAdapter());
     final ignore = await Future.wait(
       <Future>[
