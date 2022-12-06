@@ -96,7 +96,11 @@ class HomeController extends GetxController {
   void retryGetData() {
     Get.back();
     getAllApisData = RemoteService.getData();
-    update(["categoriesGridViewId"]);
+    updateHomeCategoriesGrid();
+  }
+
+  void updateHomeCategoriesGrid() {
+    update([categoriesGridViewId]);
   }
 
   void showErrorDialog(Object error, BuildContext context) {

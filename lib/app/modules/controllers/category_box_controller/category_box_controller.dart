@@ -26,4 +26,6 @@ class CategoryBoxController extends GetxController {
     showBottomSheetOptions(context);
     currentCategoryData = data;
     }
+
+
 }

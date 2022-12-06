@@ -1,14 +1,17 @@
+import 'package:public_apis_desktop_client/app/modules/controllers/category_box_controller/extensions/update_home_categories_grid.dart';
+
 import '../../../../services/local_db/hive/hidden_categories_db.dart';
 import '../category_box_controller.dart';
 
 extension HideCategoryExtension on CategoryBoxController {
   Future<void> hideCategory() async {
-    if (CategoryBoxController.currentCategoryData == null) {
-      return;
-    }
+    final currentCategoryData = CategoryBoxController.currentCategoryData;
+    final categoryTitle = currentCategoryData!.title;
+    _addToHiddenCategoriesDatabase(categoryTitle);
+    updateHomeCategoriesGrid();
   }
 
-  void _addToHiddednDatabase() {
-// HiddenCategoriesDB.instance.add
+  void _addToHiddenCategoriesDatabase(String category) {
+    HiddenCategoriesDB.instance.addWithoutKey(category);
   }
 }

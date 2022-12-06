@@ -1,14 +1,15 @@
-import 'package:public_apis_desktop_client/app/services/local_db/interfaces/delete_with_key.dart';
-import 'package:public_apis_desktop_client/app/services/local_db/interfaces/put_with_key.dart';
-
+import 'package:public_apis_desktop_client/app/services/local_db/interfaces/add_to_db_like_list.dart';
+import 'package:public_apis_desktop_client/app/services/local_db/interfaces/database_key_existence_checker.dart';
 import '../interfaces/clear.dart';
-import '../interfaces/get_with_key.dart';
+import '../interfaces/empty_checker.dart';
 import 'constants/boxes.dart';
 
 class HiddenCategoriesDB
-    implements ClearDatabase, DeleteWithKey, PutWithKey, GetWithKey {
+    implements ClearDatabase, AddWithoutKey, KeyExistenceChecker, EmptyChecker {
   static final _instance = HiddenCategoriesDB._();
   static HiddenCategoriesDB get instance => _instance;
+  @override
+  bool get isEmpty => HiveBoxes.hiddenCategoriesBox.isEmpty;
   HiddenCategoriesDB._();
 
   @override
@@ -17,17 +18,12 @@ class HiddenCategoriesDB
   }
 
   @override
-  dynamic getWithKey(String key) {
-    return HiveBoxes.hiddenCategoriesBox.get(key);
+  Future<void> addWithoutKey(String value) {
+    return HiveBoxes.hiddenCategoriesBox.add(value.toLowerCase());
   }
 
   @override
-  Future<void> putWithKey(String key, value) {
-    return HiveBoxes.hiddenCategoriesBox.put(key, value);
-  }
-
-  @override
-  Future<void> deleteWithKey(String key) {
-    return HiveBoxes.hiddenCategoriesBox.delete(key);
+  bool doesKeyExist(String value) {
+    return HiveBoxes.hiddenCategoriesBox.values.contains(value.toLowerCase());
   }
 }
