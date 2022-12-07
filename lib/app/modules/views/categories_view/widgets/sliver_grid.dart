@@ -34,6 +34,7 @@ class CustomSliverGrid extends GetView<HomeController> {
             return GetBuilder<HomeController>(
               id: controller.categoriesGridViewId,
               builder: (controller) {
+                
                 final resultList = controller.filteredList(
                   snapshot.data ?? [],
                 );

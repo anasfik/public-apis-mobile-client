@@ -19,10 +19,10 @@ extension HideCategoryExtension on CategoryBoxController {
   }
 
   void _removeFromHiddenCategoriesDatabase(String category) {
-    HiddenCategoriesDB.instance.addWithoutKey(category);
+    HiddenCategoriesDB.instance.deleteWithKey(category);
   }
 
   void _addToHiddenCategoriesDatabase(String category) {
-    HiddenCategoriesDB.instance.deleteWithKey(category);
+    HiddenCategoriesDB.instance.addWithoutKey(category);
   }
 }
