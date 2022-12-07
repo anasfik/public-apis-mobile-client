@@ -75,10 +75,12 @@ class ApiCard extends GetView<FavoritesController> {
                             );
                           },
                           child: ClipRRect(
-                            borderRadius: const BorderRadius.all(Radius.circular(100)),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(100)),
                             child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(200),
+                              decoration: const BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(200)),
                               ),
                               height: 30,
                               width: 30,

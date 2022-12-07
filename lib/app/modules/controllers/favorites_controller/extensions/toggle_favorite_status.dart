@@ -12,7 +12,7 @@ extension ToggleFavoriteStatusExtension on FavoritesController {
     bool isFavorite,
     String id,
   ) {
-        String key = consistentKey(
+    String key = consistentKey(
       favoriteApi.category,
       favoriteApi.name,
     );
@@ -24,7 +24,6 @@ extension ToggleFavoriteStatusExtension on FavoritesController {
         isFavorite: isFavorite,
         key: key,
       );
-
     } else {
       // Else (isFavorite = false), then add it to the box.
       addToFavorites(

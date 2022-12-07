@@ -1,5 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/category_box_controller/category_box_controller.dart';
+import 'package:public_apis_desktop_client/app/modules/controllers/category_box_controller/extensions/a.dart';
 
 import '../../../../data/config/constants.dart';
 
@@ -10,9 +11,9 @@ extension CopyCategoryTitleExtension on CategoryBoxController {
 
     if (data != null) {
       final category = data.title;
-      textToCopy = _generateTextToCopy(category);
+      textToCopy = generateTextAboutCategory(category);
     } else {
-      textToCopy = _generateTextToCopy();
+      textToCopy = generateTextAboutCategory();
     }
     await _copyToClipBoard(textToCopy);
   }
@@ -22,11 +23,5 @@ extension CopyCategoryTitleExtension on CategoryBoxController {
     await Clipboard.setData(clipboardData);
   }
 
-  String _generateTextToCopy([String? category]) {
-    const googlePlayLink = Config.googlePlayLink;
 
-    return category != null
-        ? "Check out those $category APIs from the Public APIs app, you can download it from here: $googlePlayLink"
-        : "Check out multiple APIs to use from the Public APIs app, you can download it from here: $googlePlayLink";
-  }
 }

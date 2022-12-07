@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/category_box_controller/category_box_controller.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/favorites_controller/extensions/add_all_apis_list_to_bookmarks.dart';
+import 'package:public_apis_desktop_client/app/modules/controllers/favorites_controller/extensions/remove_all_apis_from_bookmarks.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/favorites_controller/favorites_controller.dart';
 import 'package:public_apis_desktop_client/app/services/local_db/hive/favorites_db.dart';
 
@@ -13,6 +14,12 @@ extension AddCategoryApisToBookmark on CategoryBoxController {
   Future<void> addAllApisToBookmarks() async {
     final data = CategoryBoxController.currentCategoryData;
     final category = data!.title;
-    _favoritesController.addAllApisToBookmarks(data!.apis, category);
+    _favoritesController.addAllApisOfCategoryToBookmarks(data!.apis, category);
+  }
+
+  Future<void> removeAllApisFromBookmarks() async {
+    final data = CategoryBoxController.currentCategoryData;
+    final category = data!.title;
+    _favoritesController.removeAllApisOfCategoryFromBookmarks(category);
   }
 }

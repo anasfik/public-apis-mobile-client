@@ -7,9 +7,15 @@ import 'package:public_apis_desktop_client/app/services/local_db/interfaces/valu
 
 import '../interfaces/box_type.dart';
 import '../interfaces/database_key_existence_checker.dart';
+import '../interfaces/remove_keys_starting_with_string.dart';
 
 class FavoritesDB
-    implements KeyExistenceChecker, DeleteWithKey, ListenableHive, BoxType {
+    implements
+        KeyExistenceChecker,
+        DeleteWithKey,
+        ListenableHive,
+        BoxType,
+        DeleteKeysWithStringStart {
   @override
   Type boxType = Box<FavoriteApi>;
 
@@ -46,5 +52,15 @@ class FavoritesDB
   @override
   ValueListenable<Box<FavoriteApi>> listenable() {
     return HiveBoxes.favoritesBox.listenable();
+  }
+
+  @override
+  Future<void> deleteKeysStartingWithString(String startingText) {
+
+    final keysToDelete = HiveBoxes.favoritesBox.keys.where(
+      (key) => key.toString().startsWith(startingText),
+    );
+
+    return HiveBoxes.favoritesBox.deleteAll(keysToDelete);
   }
 }

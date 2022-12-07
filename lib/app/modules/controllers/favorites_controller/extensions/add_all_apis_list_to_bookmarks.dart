@@ -6,7 +6,7 @@ import 'package:public_apis_desktop_client/app/modules/controllers/favorites_con
 import '../../../../data/models/AllApis.dart';
 
 extension AddApisListToBookmarks on FavoritesController {
-  Future<void> addAllApisToBookmarks(List<Api> apis, String category) async {
+  Future<void> addAllApisOfCategoryToBookmarks(List<Api> apis, String category) async {
     for (int index = 0; index < apis.length; index++) {
       final currentApi = apis[index];
       final apiName = currentApi.name;
