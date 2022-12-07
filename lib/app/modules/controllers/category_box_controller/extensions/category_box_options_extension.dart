@@ -20,7 +20,7 @@ extension CategoryBoxOptionsMixin on CategoryBoxController {
         onSuccessText: "Copied!",
       ),
       CategoryBoxOption(
-        title: "add all apis to bookmarks",
+        title: "bookmark all apis",
         icon: Icons.bookmark_add,
         onTap: addAllApisToBookmarks,
         onErrorText: "cannot add apis to bookmarks, please try again",
@@ -34,7 +34,7 @@ extension CategoryBoxOptionsMixin on CategoryBoxController {
         onSuccessText: "$category apis removed from bookmarks",
       ),
       CategoryBoxOption(
-        title: "hide category",
+        title: "hide this category",
         icon: Icons.visibility_off,
         onTap: hideCategory,
         onErrorText: "cannot hide category, please try again",
