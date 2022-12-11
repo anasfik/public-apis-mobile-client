@@ -6,12 +6,19 @@ import 'package:public_apis_desktop_client/app/modules/controllers/favorites_con
 import '../../../../data/models/AllApis.dart';
 
 extension AddApisListToBookmarks on FavoritesController {
-  Future<void> addAllApisOfCategoryToBookmarks(List<Api> apis, String category) async {
-    for (int index = 0; index < apis.length; index++) {
+  Future<void> addAllApisOfCategoryToBookmarks(
+    List<Api> apis,
+    String category,
+  ) async {
+    for (int index = 0; index < apis.length; index += 1) {
       final currentApi = apis[index];
       final apiName = currentApi.name;
       final apiConsistentKey = consistentKey(category, apiName);
-
+      await Future.delayed(
+        const Duration(
+          milliseconds: 30,
+        ),
+      );
       addToFavorites(
         key: apiConsistentKey,
         isFavorite: true,

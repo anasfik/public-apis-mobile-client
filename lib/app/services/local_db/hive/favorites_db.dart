@@ -7,6 +7,7 @@ import 'package:public_apis_desktop_client/app/services/local_db/interfaces/valu
 
 import '../interfaces/box_type.dart';
 import '../interfaces/database_key_existence_checker.dart';
+import '../interfaces/keys_starting_with_string.dart';
 import '../interfaces/remove_keys_starting_with_string.dart';
 
 class FavoritesDB
@@ -15,7 +16,8 @@ class FavoritesDB
         DeleteWithKey,
         ListenableHive,
         BoxType,
-        DeleteKeysWithStringStart {
+        DeleteKeysWithStringStart,
+        KeysStartingWithString {
   @override
   Type boxType = Box<FavoriteApi>;
 
@@ -56,11 +58,20 @@ class FavoritesDB
 
   @override
   Future<void> deleteKeysStartingWithString(String startingText) {
-
     final keysToDelete = HiveBoxes.favoritesBox.keys.where(
       (key) => key.toString().startsWith(startingText),
     );
 
     return HiveBoxes.favoritesBox.deleteAll(keysToDelete);
+  }
+
+  @override
+  List<String> keysStartingWith(String staringText) {
+    return HiveBoxes.favoritesBox.keys
+        .where(
+          (key) => key.toString().toLowerCase().startsWith(staringText.toLowerCase()),
+        )
+        .toList()
+        .cast<String>();
   }
 }

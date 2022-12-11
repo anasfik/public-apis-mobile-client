@@ -20,6 +20,9 @@ extension AddCategoryApisToBookmark on CategoryBoxController {
   Future<void> removeAllApisFromBookmarks() async {
     final data = CategoryBoxController.currentCategoryData;
     final category = data!.title;
-    _favoritesController.removeAllApisOfCategoryFromBookmarks(category);
+    _favoritesController.removeAllApisOfCategoryFromBookmarks(
+    data!.apis,
+      category,
+    );
   }
 }
