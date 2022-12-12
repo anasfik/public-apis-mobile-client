@@ -7,8 +7,8 @@ import 'package:public_apis_desktop_client/app/modules/views/categories_view/wid
 
 import 'category_box_close_button.dart';
 
-class CategoryBoxOptions extends GetView<CategoryBoxController> {
-  const CategoryBoxOptions({super.key});
+class NormalCategoryBoxOptions extends GetView<CategoryBoxController> {
+  const NormalCategoryBoxOptions({super.key});
 
   @override
   Widget build(BuildContext context) {

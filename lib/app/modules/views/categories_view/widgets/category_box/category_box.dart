@@ -17,6 +17,7 @@ class CategoryBox extends GetView<CategoryBoxController> {
   final CategoryBoxData data;
   final int index;
   final ApisViewBinding binding = ApisViewBinding();
+  final BottomSheetMode bottomSheetMode;
 
   late final String? categoryBoxId =
       controller.generateCategoryBoxId(data, index);
@@ -25,6 +26,7 @@ class CategoryBox extends GetView<CategoryBoxController> {
     super.key,
     required this.data,
     required this.index,
+    required this.bottomSheetMode,
   });
 
   @override
@@ -69,8 +71,12 @@ class CategoryBox extends GetView<CategoryBoxController> {
                   controller.onPanEnd(categoryBoxId ?? "");
                 },
                 onPanDown: (DragDownDetails details) {
-                  controller.onPanDown(categoryBoxId ?? "", data, context);
-                  
+                  controller.onPanDown(
+                    categoryBoxId ?? "",
+                    data,
+                    context,
+                    bottomSheetMode: bottomSheetMode,
+                  );
                 },
                 onTap: () {
                   openContainer.call();

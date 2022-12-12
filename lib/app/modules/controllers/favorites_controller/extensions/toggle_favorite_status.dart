@@ -5,6 +5,8 @@ import 'package:public_apis_desktop_client/app/modules/controllers/favorites_con
 import 'package:public_apis_desktop_client/app/modules/controllers/favorites_controller/extensions/remove_from_favorites.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/favorites_controller/favorites_controller.dart';
 
+import '../../../../services/key_generators/keys_generators.dart';
+
 extension ToggleFavoriteStatusExtension on FavoritesController {
   /// Add / Remove favorite api from favorites box.
   void toggleFavoriteStatus(
@@ -12,7 +14,7 @@ extension ToggleFavoriteStatusExtension on FavoritesController {
     bool isFavorite,
     String id,
   ) {
-    String key = consistentKey(
+    String key = KeyGenerator.consistentKey(
       favoriteApi.category,
       favoriteApi.name,
     );

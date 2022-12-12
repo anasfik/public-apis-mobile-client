@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:public_apis_desktop_client/app/data/models/favoriteApi.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/favorites_controller/extensions/generate_api_key.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/favorites_controller/extensions/toggle_favorite_status.dart';
+import 'package:public_apis_desktop_client/app/services/key_generators/keys_generators.dart';
 import 'package:public_apis_desktop_client/app/utils/extensions/api_model_extension.dart';
 
 import '../../../../data/models/AllApis.dart';
@@ -54,7 +55,7 @@ class ApiCard extends GetView<FavoritesController> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Builder(builder: (context) {
-                    final key = Get.find<FavoritesController>().consistentKey(
+                    final key = KeyGenerator.consistentKey(
                       category,
                       api.name,
                     );

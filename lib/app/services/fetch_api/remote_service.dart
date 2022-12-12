@@ -1,9 +1,8 @@
 import 'dart:io';
-
-import 'package:get/get_connect/http/src/response/response.dart';
 import "package:http/http.dart" as http;
 import 'package:public_apis_desktop_client/app/services/crashlytics/crashlytics.dart';
 import '../../data/models/AllApis.dart';
+import '../../utils/singelton/categories_apis.dart';
 import 'failure.dart';
 
 class RemoteService {
@@ -15,8 +14,10 @@ class RemoteService {
 
     try {
       final response = await http.get(Uri.parse(_url));
+      final categoriesApis = categoriesApisFromJson(response.body);
+      CategoriesApisSingleton.all = categoriesApis;
 
-      return categoriesApisFromJson(response.body);
+      return categoriesApis;
     } on SocketException {
       throw Failure(
         "no internet connection",

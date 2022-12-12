@@ -12,42 +12,17 @@ extension CategoryBoxOptionsMixin on CategoryBoxController {
     final category = CategoryBoxController.currentCategoryData!.title;
 
     return <CategoryBoxOption>[
-      CategoryBoxOption(
-        title: "copy",
-        icon: Icons.copy,
-        onTap: copyCategoryTitle,
-        onErrorText: "cannot copy category, please try again",
-        onSuccessText: "Copied!",
-      ),
-      CategoryBoxOption(
-        title: "bookmark all apis",
-        icon: Icons.bookmark_add,
+      CategoryBoxOption.copy(onTap: copyCategoryTitle),
+      CategoryBoxOption.bookmarkAllApis(
         onTap: addAllApisToBookmarks,
-        onErrorText: "cannot add apis to bookmarks, please try again",
-        onSuccessText: "$category apis added to bookmarks",
+        category: category,
       ),
-      CategoryBoxOption(
-        title: "remove all apis from bookmarks",
-        icon: Icons.bookmark_remove,
+      CategoryBoxOption.removeAllCategoryApis(
         onTap: removeAllApisFromBookmarks,
-        onErrorText: "cannot remove apis from bookmarks, please try again",
-        onSuccessText: "$category apis removed from bookmarks",
+        category: category,
       ),
-      CategoryBoxOption(
-        title: "hide this category",
-        icon: Icons.visibility_off,
-        onTap: hideCategory,
-        onErrorText: "cannot hide category, please try again",
-        onSuccessText:
-            "Category hidden successfully, you can show it again from the settings",
-      ),
-      CategoryBoxOption(
-        title: "share",
-        icon: Icons.share,
-        onTap: shareCategory,
-        onErrorText: "cannot share, please try again",
-        onSuccessText: "Shared!",
-      ),
+      CategoryBoxOption.hideCategory(onTap: hideCategory),
+      CategoryBoxOption.share(onTap: shareCategory),
     ];
   }
 }

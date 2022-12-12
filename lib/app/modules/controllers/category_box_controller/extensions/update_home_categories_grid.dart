@@ -5,7 +5,8 @@ import '../category_box_controller.dart';
 
 extension UpdateHomeCategoriesGrid on CategoryBoxController {
   Future<void> updateHomeCategoriesGrid() async {
-    final homeCategoriesGrid = Get.find<HomeController>();
-    homeCategoriesGrid.updateHomeCategoriesGrid();
+    final homeCategoriesController = Get.find<HomeController>();
+
+    homeCategoriesController.updateHomeCategoriesGrid();
   }
 }

@@ -4,6 +4,7 @@ import 'package:public_apis_desktop_client/app/modules/controllers/favorites_con
 import 'package:public_apis_desktop_client/app/modules/controllers/favorites_controller/favorites_controller.dart';
 
 import '../../../../data/models/AllApis.dart';
+import '../../../../services/key_generators/keys_generators.dart';
 
 extension AddApisListToBookmarks on FavoritesController {
   Future<void> addAllApisOfCategoryToBookmarks(
@@ -13,7 +14,7 @@ extension AddApisListToBookmarks on FavoritesController {
     for (int index = 0; index < apis.length; index += 1) {
       final currentApi = apis[index];
       final apiName = currentApi.name;
-      final apiConsistentKey = consistentKey(category, apiName);
+      final apiConsistentKey = KeyGenerator.consistentKey(category, apiName);
       await Future.delayed(
         const Duration(
           milliseconds: 30,
