@@ -1,5 +1,5 @@
 import 'package:public_apis_desktop_client/app/modules/controllers/category_box_controller/category_box_controller.dart';
-import 'package:public_apis_desktop_client/app/modules/controllers/category_box_controller/extensions/a.dart';
+import 'package:public_apis_desktop_client/app/modules/controllers/category_box_controller/extensions/generate_text_about_category.dart';
 
 import '../../../../services/share/share_plus/share_plus.dart';
 

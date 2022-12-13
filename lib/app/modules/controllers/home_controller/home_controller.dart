@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:public_apis_desktop_client/app/data/models/dialog_data.dart';
 import 'package:public_apis_desktop_client/app/data/models/fab_model.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/init_axis_count.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/init_fab_options_data.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/new_update_extension.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/scroll_controller_init.dart';
+import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/update.dart';
 
 import '../../../data/models/AllApis.dart';
-import '../../../services/fetch_api/failure.dart';
 import '../../../services/fetch_api/remote_service.dart';
 import '../../../services/in_app_review/in_app_review.dart';
 import '../../../services/local_db/hive/locals_box.dart';
-import '../../../utils/dialog_helper.dart';
 
 class HomeController extends GetxController {
   BuildContext? context;
@@ -38,6 +36,7 @@ class HomeController extends GetxController {
   late Map<String, FabData> fabOptionsData;
   late ScrollController scrollController;
   late FabData currentFabData = fabOptionsData["down"]!;
+  final categoriesGridViewId = "categoriesGridViewId";
 
   final _hiveService = InAppReview();
   static BuildContext? _context;
@@ -73,52 +72,5 @@ class HomeController extends GetxController {
       showNewAppUpdateDialog(_context!);
     }
     _hiveService.handleShowingTheReviewRequest();
-  }
-
-  final categoriesGridViewId = "categoriesGridViewId";
-
-  updateColor(ColorTween clr) {
-    badgeBackgroundColor.value = badgeBackgroundColorTween.value.begin;
-  }
-
-  double calculateReminderHeight(BuildContext context) {
-    final mq = MediaQuery.of(context);
-    final statusBatHeight = mq.padding.top;
-    final screenSize = mq.size.height;
-
-    return screenSize -
-        statusBatHeight * 2 -
-        expandedHeight -
-        (sizedBoxHeight * 5) -
-        searchBarHeight;
-  }
-
-  void retryGetData() {
-    Get.back();
-    getAllApisData = RemoteService.getData();
-    updateHomeCategoriesGrid();
-  }
-
-  void updateHomeCategoriesGrid() {
-    update([categoriesGridViewId]);
-  }
-
-  void showErrorDialog(Object error, BuildContext context) {
-    const onWrongString = "something went wrong";
-    final content = error is Failure ? error.content : onWrongString;
-    final title = error is Failure ? error.title : onWrongString;
-
-    final dialogData = DialogData(
-      title: title,
-      content: content,
-      retryButtonMethod: () async {
-        retryGetData();
-      },
-    );
-
-    DialogHelper.showInfoDialog(
-      dialogData,
-      context,
-    );
   }
 }

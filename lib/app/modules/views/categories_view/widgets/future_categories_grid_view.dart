@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/calculate_height_reminder.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/generate_asset_path_with_title.dart';
+import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/retry_fetch.dart';
 import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/search_bar_change.dart';
+import 'package:public_apis_desktop_client/app/modules/controllers/home_controller/extensions/show_error.dart';
 import 'package:public_apis_desktop_client/app/modules/views/categories_view/widgets/retry_manually_widget.dart';
 
 import '../../../../data/models/AllApis.dart';

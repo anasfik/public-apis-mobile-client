@@ -1,5 +1,5 @@
 import 'package:public_apis_desktop_client/app/modules/controllers/category_box_controller/extensions/update_home_categories_grid.dart';
-import 'package:public_apis_desktop_client/app/modules/controllers/category_box_controller/extensions/v.dart';
+import 'package:public_apis_desktop_client/app/modules/controllers/category_box_controller/extensions/update_hidden_categories_grid.dart';
 
 import '../../../../services/local_db/hive/hidden_categories_db.dart';
 import '../category_box_controller.dart';

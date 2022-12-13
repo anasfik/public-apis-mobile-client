@@ -4,6 +4,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:public_apis_desktop_client/app/data/models/dialog_data.dart';
 
 import '../modules/views/general/update_general_alert_dialog/alert_dialog_widget.dart';
+import '../services/fetch_api/failure.dart';
 
 class DialogHelper {
   static void showInfoDialog(
@@ -19,6 +20,29 @@ class DialogHelper {
           },
         );
       },
+    );
+  }
+
+  static void showErrorDialog(
+    Object error,
+    BuildContext context, {
+    required void Function() retryMethod,
+  }) {
+    const onWrongString = "something went wrong";
+    final content = error is Failure ? error.content : onWrongString;
+    final title = error is Failure ? error.title : onWrongString;
+
+    final dialogData = DialogData(
+      title: title,
+      content: content,
+      retryButtonMethod: () async {
+        retryMethod();
+      },
+    );
+
+    DialogHelper.showInfoDialog(
+      dialogData,
+      context,
     );
   }
 }
