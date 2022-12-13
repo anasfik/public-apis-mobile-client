@@ -42,6 +42,7 @@ class ApisView extends StatelessWidget {
                 context,
                 AsyncSnapshot<List<Api>> snapshot,
               ) {
+                Get.put(FavoritesController());
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return LinearProgressIndicator(
                     minHeight: 3,
@@ -66,7 +67,10 @@ class ApisView extends StatelessWidget {
                           category: category,
                           isFavorite:
                               Get.find<FavoritesController>().isApiBookmarked(
-                            FavoriteApi.from(processedApis[index], category),
+                            FavoriteApi.from(
+                              processedApis[index],
+                              category,
+                            ),
                           ),
                         ),
                       ),

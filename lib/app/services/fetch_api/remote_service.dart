@@ -9,11 +9,13 @@ class RemoteService {
   static const _url =
       "https://raw.githubusercontent.com/anasfik/public-apis-json-api/main/result/apis.json";
 
-  static Future<List<CategoryApis>> getData() async {
+  static String get url => _url;
+
+  static Future<List<CategoryApis>> getData({String? apiUrl}) async {
     await Future.delayed(const Duration(seconds: 2));
 
     try {
-      final response = await http.get(Uri.parse(_url));
+      final response = await http.get(Uri.parse(apiUrl ?? _url));
       final categoriesApis = categoriesApisFromJson(response.body);
       CategoriesApisSingleton.all = categoriesApis;
 

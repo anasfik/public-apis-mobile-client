@@ -6,9 +6,11 @@ import '../crashlytics/crashlytics.dart';
 import '../local_db/hive/initializer.dart';
 
 class MainInit {
-  Future<void> init() async {
+  Future<void> init({bool testMode = false}) async {
     WidgetsFlutterBinding.ensureInitialized();
-    await _initAppServices();
+    Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
     await LocalDatabase.instance.initDatabases();
     await LocalDatabase.instance.clearDatabasesWhile(kDebugMode);
     _configureCrashlytics();
@@ -16,13 +18,5 @@ class MainInit {
 
   void _configureCrashlytics() {
     FlutterError.onError = Crashlytics().crashlyticsInstance.recordFlutterError;
-  }
-
-  Future<void> _initAppServices() async {
-    await Future.wait([
-      Firebase.initializeApp(
-        options: DefaultFirebaseOptions.currentPlatform,
-      ),
-    ]);
   }
 }
