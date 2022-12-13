@@ -54,15 +54,23 @@ class FutureSliverCategoriesGridView extends GetView<HomeController> {
                   (index) {
                     String currentCategoryTitle = resultList[index].title;
 
-                    return CategoryBox(
-                      bottomSheetMode: BottomSheetMode.normalBottomSheet,
-                      key: ValueKey(index),
-                      index: index,
-                      data: CategoryBoxData(
-                        title: currentCategoryTitle,
-                        assetPath: controller
-                            .assetPathBasedInTitle(currentCategoryTitle),
-                        apis: resultList[index].apis,
+                    return AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 300),
+                      transitionBuilder: (child, animation) => ScaleTransition(
+                        scale: animation,
+                        child: child,
+                      ),
+                      child: CategoryBox(
+                        
+                        bottomSheetMode: BottomSheetMode.normalBottomSheet,
+                        key: ValueKey(index),
+                        index: index,
+                        data: CategoryBoxData(
+                          title: currentCategoryTitle,
+                          assetPath: controller
+                              .assetPathBasedInTitle(currentCategoryTitle),
+                          apis: resultList[index].apis,
+                        ),
                       ),
                     );
                   },

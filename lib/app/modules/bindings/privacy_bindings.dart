@@ -7,6 +7,7 @@ class PrivacyBinding implements Bindings {
   void dependencies() {
     Get.put<PrivacyController>(
       PrivacyController(),
+    permanent: true
     );
   }
 }

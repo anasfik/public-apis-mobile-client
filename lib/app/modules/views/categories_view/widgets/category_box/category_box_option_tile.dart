@@ -41,7 +41,6 @@ class CategoryBoxOptionTile extends GetView<CategoryBoxOptionTileController> {
           onPanStart: (DragStartDetails details) {
             controller.onPanStart(id);
           },
-        
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -56,10 +55,13 @@ class CategoryBoxOptionTile extends GetView<CategoryBoxOptionTileController> {
                 const SizedBox(
                   width: 20,
                 ),
-                AutoSizeText(
-                  option.title.capitalizeAllWordsFirstLetter(),
-                  style: theme.textTheme.button?.copyWith(
-                    fontSize: 18,
+                Expanded(
+                  child: AutoSizeText(
+                    option.title.capitalizeAllWordsFirstLetter(),
+                    style: theme.textTheme.button?.copyWith(
+                      fontSize: 18,
+                    ),
+                    maxLines: 1,
                   ),
                 ),
               ],

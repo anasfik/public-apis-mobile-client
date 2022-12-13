@@ -5,6 +5,7 @@ import 'package:public_apis_desktop_client/app/utils/text_helper_methods.dart';
 
 import '../../../data/models/setting_option_model.dart';
 import '../../controllers/settings_controllers/settings_controller.dart';
+import '../widgets/nil.dart';
 import 'widgets/setting_card.dart';
 
 class SettingsView extends GetView<SettingsController> {

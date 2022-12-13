@@ -27,6 +27,13 @@ mixin SettingsOptionModelsListExtension {
         settingsWidget: const ToggleCategoriesView(),
       ),
       SettingOptionModel(
+        title: "hidden categories".capitalizeAllWordsFirstLetter(),
+        icon: Icons.visibility_off,
+        optionFunction: () {
+          Get.toNamed("/hiddenCategories");
+        },
+      ),
+      SettingOptionModel(
         title: "reset favorites".capitalizeAllWordsFirstLetter(),
         icon: Icons.bookmark_remove_outlined,
         optionFunction: () {
