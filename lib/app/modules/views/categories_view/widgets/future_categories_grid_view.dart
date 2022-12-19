@@ -54,14 +54,8 @@ class FutureSliverCategoriesGridView extends GetView<HomeController> {
                   (index) {
                     String currentCategoryTitle = resultList[index].title;
 
-                    return AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 300),
-                      transitionBuilder: (child, animation) => ScaleTransition(
-                        scale: animation,
-                        child: child,
-                      ),
+                    return CustomTransition(
                       child: CategoryBox(
-                        
                         bottomSheetMode: BottomSheetMode.normalBottomSheet,
                         key: ValueKey(index),
                         index: index,
@@ -93,6 +87,54 @@ class FutureSliverCategoriesGridView extends GetView<HomeController> {
 
         return const SliverToBoxAdapter(child: Nil());
       },
+    );
+  }
+}
+
+class CustomTransition extends StatefulWidget {
+  final Widget child;
+
+  const CustomTransition({
+    super.key,
+    required this.child,
+  });
+  @override
+  State<CustomTransition> createState() => _CustomTransitionState();
+}
+
+class _CustomTransitionState extends State<CustomTransition>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 200),
+    )..addListener(() {
+        setState(() {});
+      });
+    _animationController.forward();
+  }
+
+  @override
+  void didUpdateWidget(covariant CustomTransition oldWidget) {
+    _animationController.forward(from: 0);
+
+    super.didUpdateWidget(oldWidget);
+  }
+
+  dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FadeTransition(
+      opacity: _animationController,
+      child: widget.child,
     );
   }
 }

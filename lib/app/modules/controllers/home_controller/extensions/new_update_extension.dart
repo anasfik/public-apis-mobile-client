@@ -8,10 +8,10 @@ import '../../../../data/models/update_feature.dart';
 import '../home_controller.dart';
 
 extension NewUpdateExtension on HomeController {
-  String get appVersion => "1.3.1";
+  String get appVersion => "2.0.0";
 
   static bool isFirstTimeOpenedTheAppAfterUpdate =
-      Hive.box("locals").get("isFirstTimeOpenedTheAppAfterUpdate2") ?? true;
+      Hive.box("locals").get("isFirstTimeOpenedTheAppAfterUpdate") ?? true;
   static final List<UpdateFeature> _featuresList = [
     UpdateFeature(
       type: UpdateType.fix,
@@ -21,11 +21,31 @@ extension NewUpdateExtension on HomeController {
       type: UpdateType.edit,
       feature: "Added new Theme",
     ),
+    UpdateFeature(
+      type: UpdateType.add,
+      feature: "Added copy feature for categories",
+    ),
+    UpdateFeature(
+      type: UpdateType.add,
+      feature:
+          "Added possibility to bookmark all category APIs at once, and to remove all bookmarks at once also",
+    ),
+    UpdateFeature(
+      type: UpdateType.add,
+      feature: "Added possibility to hide/show categories on your choice",
+    ),
+    UpdateFeature(
+      type: UpdateType.add,
+      feature: "Added share feature for categories",
+    ),
+    UpdateFeature(
+      type: UpdateType.fix,
+      feature: "Improved the performance of the app",
+    ),
   ];
   List<UpdateFeature> get featuresList => _featuresList;
 
   void showNewAppUpdateDialog(BuildContext context) {
-
     showDialog(
       context: context,
       builder: (context) {
@@ -35,7 +55,7 @@ extension NewUpdateExtension on HomeController {
 
     Box locals = Hive.box("locals");
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      locals.put("isFirstTimeOpenedTheAppAfterUpdate2", false);
+      locals.put("isFirstTimeOpenedTheAppAfterUpdate", false);
     });
   }
 }
