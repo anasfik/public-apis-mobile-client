@@ -1,7 +1,7 @@
 # Public APIs mobile app
 Your assistant app that will help you discover and pick the next API for your next development project
 
-<a href="https://play.google.com/store/apps/details?id=com.gwhyyy.publicApis"><img src="assets/logo.png" width="100"/>
+<a href="https://play.google.com/store/apps/details?id=com.gwhyyy.publicApis"><img src="assets/logo_play_store.png" width="100"/>
 </a>
 
 <a href="https://play.google.com/store/apps/details?id=com.gwhyyy.publicApis"><img src="assets/google_play.png" width='250' /></a>
